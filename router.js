@@ -3,7 +3,7 @@ var express = require('express');
 
 var router = express.Router();
 
-router.get("/",function(req,res){
-    res.render("index",{name:'alichen'})
-});
+let mainCtrl = require("./src/ctrl/main.js");
+router.get("/",mainCtrl.index);
+
 module.exports = router;

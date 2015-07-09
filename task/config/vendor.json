@@ -1,0 +1,14 @@
+{
+    "react": {
+        "js": [{
+            "path":"react"
+        }, {
+            "path": "reflux"
+        }, {
+            "path": "lodash"
+        }],
+        "css": [
+            "./bower_components/swiper/dist/css/swiper.min.css"
+        ]
+    }
+}

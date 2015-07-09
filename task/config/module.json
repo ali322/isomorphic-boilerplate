@@ -1,0 +1,12 @@
+{
+    "index": {
+        "html": ["./view/index.html"],
+        "path": "./public/index/",
+        "entyJs": "./public/index/index.jsx",
+        "sourceCompiler": {
+            "js": "react",
+            "css": "scss"
+        },
+        "libBundle": "react"
+    }
+}

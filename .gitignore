@@ -1,0 +1,9 @@
+node_modules/
+discards/
+.git/
+.settings/
+.project
+# /public/**/build/
+# /public/**/stylesheet/
+# /public/**/*.jsx
+# /public/**/test/

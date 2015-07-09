@@ -2,6 +2,9 @@ var gulp = require("gulp"),
     nodemon = require("nodemon"),
     livereload = require("gulp-livereload");
 
+var env = require("./task/environment.js")(__dirname);
+require("./task/webpack-inject.js")(env);
+
 gulp.task("nodemon", function() {
     livereload.listen();
     nodemon({
@@ -10,11 +13,11 @@ gulp.task("nodemon", function() {
             ".git",
             "node_modules",
             ".idea",
-            "src",
+            // "src",
             "test",
             "public"
         ],
-        ext: "js html"
+        ext: "js html jsx"
     }).on("restart", function() {
         setTimeout(function() {
             livereload.changed('/');
