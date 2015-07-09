@@ -12,50 +12,50 @@ webpackJsonp([0],{
 /***/ 1:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(2);
 
-	__webpack_require__(158);
+	// require("./stylesheet/index.scss");
 	var User = React.createClass({
-	    displayName: "User",
+	    displayName: 'User',
 
 	    render: function render() {
 	        console.log(this.props);
 	        return React.createElement(
-	            "div",
+	            'div',
 	            null,
 	            React.createElement(UserButton, { name: this.props.name })
 	        );
 	    }
 	});
 	var UserButton = React.createClass({
-	    displayName: "UserButton",
+	    displayName: 'UserButton',
 
 	    handleClick: function handleClick() {
-	        alert("clicked3!");
+	        alert('clicked3!');
 	    },
 	    render: function render() {
 	        // console.log(this.props);
 	        return React.createElement(
-	            "div",
+	            'div',
 	            null,
 	            React.createElement(
-	                "p",
+	                'p',
 	                null,
 	                this.props.name
 	            ),
 	            React.createElement(
-	                "button",
+	                'button',
 	                { onClick: this.handleClick },
-	                "button"
+	                'button553'
 	            )
 	        );
 	    }
 	});
 	module.exports = User;
 
-	if (typeof window !== "undefined") {
+	if (typeof window !== 'undefined') {
 	    window.onload = function () {
 	        React.render(React.createElement(User, null), document.body);
 	    };

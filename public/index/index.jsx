@@ -1,6 +1,6 @@
 var React = require("react");
 
-require("./stylesheet/index.scss");
+// require("./stylesheet/index.scss");
 var User = React.createClass({
     render() {
         console.log(this.props);
@@ -20,11 +20,11 @@ var UserButton = React.createClass({
         return (
             <div>
                 <p>{this.props.name}</p>
-                <button onClick={this.handleClick}>button</button>
+                <button onClick={this.handleClick}>button553</button>
             </div>
         )
     }
-})
+});
 module.exports = User;
 
 if(typeof window !== 'undefined'){

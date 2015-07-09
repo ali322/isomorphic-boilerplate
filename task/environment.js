@@ -13,7 +13,8 @@ var env = function(rootPath) {
             path: './public/vendor/',
             buildFolder: 'build/',
             distFolder: 'dist/'
-        }
+        },
+        hmrPublicPath:"http://localhost:9527/hmr/"
     };
 
     var moduleConfig = require(env.config.moduleConfig),

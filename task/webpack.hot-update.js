@@ -10,7 +10,7 @@ var env = require('./environment.js')(path.join(__dirname, '../'));
 var buildFolder = 'build',
     // sourcePath = [],
     vendorChunkName = 'react',
-    vendorFile = './vendor/build/' + vendorChunkName + '.js';
+    vendorFile = env.vendor.path+ env.vendor.buildFolder + vendorChunkName + '.js';
 
 /*build modules*/
 var entry = {};
@@ -26,7 +26,7 @@ _.each(env.modules, function(module) {
     ];
     _.extend(entry, moduleEntry);
 });
-console.log(entry);
+// console.log(entry);
 
 module.exports = {
     entry: entry,
@@ -68,7 +68,7 @@ module.exports = {
         path: path.join(__dirname, "../public"),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
-        publicPath: "/hmr/"
+        publicPath: env.hmrPublicPath
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

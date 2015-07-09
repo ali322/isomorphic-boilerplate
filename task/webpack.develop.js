@@ -8,10 +8,8 @@ var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment.js')(path.join(__dirname, '../'));
 
 /*build const*/
-var buildFolder = 'build',
-    // sourcePath = [],
-    vendorChunkName = 'react',
-    vendorFile = env.vendor.path+ env.vendor.buildFolder + vendorChunkName + '.js';
+var vendorChunkName = 'react',
+    vendorFile = env.vendor.path + env.vendor.buildFolder + vendorChunkName + '.js';
 
 /*build modules*/
 var moduleEntries = {};
@@ -38,7 +36,7 @@ _.each(vendorConfig[vendorChunkName].js, function(vendorJs) {
 var entry = {};
 entry[vendorChunkName] = vendors;
 _.extend(entry, moduleEntries)
-console.log(moduleEntries,vendors);
+console.log(moduleEntries, vendors);
 module.exports = {
     entry: entry,
     module: {

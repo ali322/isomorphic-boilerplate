@@ -6,6 +6,11 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   noInfo:true,
+  inline:true,
+  //contentBase:"http://localhost:3000/",
+  watchOptions:{
+      aggregateTimeout:800
+  },
   historyApiFallback: true
 }).listen(9527, 'localhost', function (err, result) {
   if (err) {

@@ -37,8 +37,9 @@ module.exports = function(env) {
             gulp.src(injectTarget).pipe(inject(sources, {
                 relative: true,
                 transform: function(filepath) {
-                    if (/^build\/\w+.js/.test(filepath) === true) {
-                        filepath = filepath.replace('build', '/hmr');
+                    filepath = filepath.replace(/(\S)+public\//g,'./');
+                    if (/vendor\/\S+.js/.test(filepath) === false && path.extname(filepath) === ".js") {
+                        filepath = filepath.replace(/\S+build\//, env.hmrPublicPath);
                     }
                     return inject.transform.apply(inject.transform, arguments);
                 }

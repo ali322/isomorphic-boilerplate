@@ -9,8 +9,7 @@ var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment.js')(path.join(__dirname, '../'));
 
 /*build const*/
-var buildFolder = 'build',
-    vendorChunkName = 'react',
+var vendorChunkName = 'react',
     vendorFile = env.vendor.path + env.vendor.distFolder + vendorChunkName + '-[hash].js';
 
 /*build modules*/

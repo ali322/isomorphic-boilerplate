@@ -3,6 +3,8 @@ PATH := node_modules/.bin:$(PATH)
 
 start:
 	@gulp nodemon
+start-public:
+	@node task/server.js
 develop-webpack:
 	@make webpack && gulp develop-webpack
 deploy-webpack:
