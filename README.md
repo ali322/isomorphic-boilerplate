@@ -1,13 +1,17 @@
-#特品汇H5版
+#Hyena
 
-开发
+isomorphic webapp boilerplate
+
+Quick start develop with express and react as isomorphic webapp
 ===
-- 运行`npm install`
-- 运行`make start`
+- run`npm install`
+- run`make start` to get backend server start(eg:express)
+- run`make develop-webpack` to inject necessary files to the template file
+- run`make start-public` to get webpack HMR service start
 
-部署
+deploy
 ===
 
-- 运行`npm install`
-- 运行`npm install pm2 -g`(文档见[pm2 documention](https://github.com/Unitech/PM2))
-- 开始部署`pm2 start app.js --next-gen-js`(需要io.js)
+- run`npm install`
+- run`npm install pm2 -g`(more instructions in [pm2 documention](https://github.com/Unitech/PM2))
+- run`pm2 start app.js --next-gen-js` to deploy(io.js needed)
