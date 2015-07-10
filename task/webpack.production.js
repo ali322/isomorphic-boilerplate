@@ -78,8 +78,8 @@ module.exports = {
     },
     output: {
         path: "./",
-        filename: "public/[name]/dist/[name]-[hash].js",
-        chunkFilename: "public/[name]/dist/[id]-[hash].chunk.js"
+        filename: env.staticFolder + "/[name]/dist/[name]-[hash].js",
+        chunkFilename: env.staticFolder + "/[name]/dist/[id]-[hash].chunk.js"
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
@@ -88,6 +88,6 @@ module.exports = {
             }
         }),
         new webpack.optimize.CommonsChunkPlugin( /* chunkName= */ vendorChunkName, /* filename= */ vendorFile),
-        new ExtractTextPlugin("public/[name]/dist/[name]-[hash].css")
+        new ExtractTextPlugin(env.staticFolder + "/[name]/dist/[name]-[hash].css")
     ]
 }

@@ -36,7 +36,7 @@ _.each(vendorConfig[vendorChunkName].js, function(vendorJs) {
 var entry = {};
 entry[vendorChunkName] = vendors;
 _.extend(entry, moduleEntries)
-console.log(moduleEntries, vendors);
+    // console.log(moduleEntries, vendors);
 module.exports = {
     entry: entry,
     module: {
@@ -75,11 +75,11 @@ module.exports = {
     },
     output: {
         path: "./",
-        filename: "public/[name]/build/[name].js",
-        chunkFilename: "public/[name]/build/[id].chunk.js",
+        filename: env.staticFolder + "/[name]/build/[name].js",
+        chunkFilename: env.staticFolder + "/[name]/build/[id].chunk.js",
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin( /* chunkName= */ vendorChunkName, /* filename= */ vendorFile),
-        new ExtractTextPlugin("public/[name]/build/[name].css")
+        new ExtractTextPlugin(env.staticFolder + "/[name]/build/[name].css")
     ]
 }

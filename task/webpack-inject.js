@@ -37,9 +37,12 @@ module.exports = function(env) {
             gulp.src(injectTarget).pipe(inject(sources, {
                 relative: true,
                 transform: function(filepath) {
-                    filepath = filepath.replace(/(\S)+public\//g,'./');
-                    if (/vendor\/\S+.js/.test(filepath) === false && path.extname(filepath) === ".js") {
-                        filepath = filepath.replace(/\S+build\//, env.hmrPublicPath);
+                    var prefixPattern = new RegExp(".+"+env.staticFolder+"\/"),
+                        vendorPattern = new RegExp(env.vendorFolder+"\/.+js"),
+                        buildPattern = new RegExp(".+"+module.buildFolder+"\/");
+                    filepath = filepath.replace(prefixPattern,'./');
+                    if (vendorPattern.test(filepath) === false && path.extname(filepath) === ".js") {
+                        filepath = filepath.replace(buildPattern, env.hmrPublicPath);
                     }
                     return inject.transform.apply(inject.transform, arguments);
                 }
