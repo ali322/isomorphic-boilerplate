@@ -3,6 +3,7 @@ MAINTAINER "alichen" <ali322@gmail.com>
 
 RUN apt-get update
 RUN apt-get -y install wget python gcc build-essential
+RUN apt-get clean && apt-get autoclean
 
 # Install iojs
 RUN cd /opt && \
@@ -12,4 +13,11 @@ RUN cd /opt && \
     ./configure && \
     make && make install && \
     rm -f /opt/iojs-v2.3.4-linux-x64.tar.gz
+RUN npm install pm2 -g && \
+    npm install && \
+RUN mkdir -p /opt/src
+ADD . /opt/src
 WORKDIR   /opt/src
+
+EXPOSE 3000
+CMD ["pm2 start /opt/src/app.js --next-gen-js"]
