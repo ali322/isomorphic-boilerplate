@@ -16,7 +16,7 @@ RUN cd /opt && \
 RUN npm install pm2 -g && \
     npm install && \
 RUN mkdir -p /opt/src
-ADD . /opt/src
+# ADD . /opt/src
 WORKDIR   /opt/src
 
 EXPOSE 3000
