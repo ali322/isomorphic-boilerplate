@@ -2,7 +2,7 @@ FROM library/ubuntu
 MAINTAINER "alichen" <ali322@gmail.com>
 
 RUN apt-get update
-RUN apt-get -y install wget zip gcc build-essential
+RUN apt-get -y install wget python gcc build-essential
 
 # Install iojs
 RUN cd /opt && \
