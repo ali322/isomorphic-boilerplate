@@ -13,13 +13,13 @@ RUN cd /opt && \
     cd /usr/local/bin && \
      ln -s /opt/node/bin/* . && \
     rm -f /opt/iojs-v2.3.4-linux-x64.tar.gz
+RUN mkdir -p /opt/src
 ADD . /opt/src
 
 RUN cd /opt/src && npm install pm2 -g && \
    npm install --production && \
-RUN mkdir -p /opt/src
 
 WORKDIR   /opt/src
 
 EXPOSE 3000
-CMD ["pm2 start /opt/src/app.js --next-gen-js"]
+CMD ["pm2 start app.js --next-gen-js"]
