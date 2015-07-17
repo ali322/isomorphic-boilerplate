@@ -2,7 +2,7 @@ FROM library/ubuntu
 MAINTAINER "alichen" <ali322@gmail.com>
 
 RUN apt-get update
-RUN apt-get -y install wget python gcc build-essential
+RUN apt-get -y install wget gcc
 RUN apt-get clean && apt-get autoclean
 
 # Install iojs
@@ -14,7 +14,7 @@ RUN cd /opt && \
     make && make install && \
     rm -f /opt/iojs-v2.3.4-linux-x64.tar.gz
 RUN npm install pm2 -g && \
-    npm install && \
+    npm install --production && \
 RUN mkdir -p /opt/src
 # ADD . /opt/src
 WORKDIR   /opt/src
