@@ -6,9 +6,9 @@ RUN apt-get -y install wget zip gcc build-essential
 
 # Install iojs
 RUN cd /opt && \
-    wget http://npm.taobao.org/mirrors/iojs/v2.3.4/iojs-v2.3.4-linux-x64.tar.gz && \
-    tar -xzvf iojs-v2.3.4-linux-x64.tar.gz && \
-    cd iojs-v2.3.4-linux-x64 && \
+    wget http://npm.taobao.org/mirrors/iojs/v2.3.4/iojs-v2.3.4.tar.gz && \
+    tar -xzvf iojs-v2.3.4.tar.gz && \
+    cd iojs-v2.3.4 && \
     ./configure && \
     make && make install && \
     rm -f /opt/iojs-v2.3.4-linux-x64.tar.gz
