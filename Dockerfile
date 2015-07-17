@@ -1,6 +1,6 @@
 FROM library/ubuntu
 MAINTAINER "alichen" <ali322@gmail.com>
-RUN echo "deb http://mirrors.163.com/ubuntu/ trusty main multiverse restricted universe" > /etc/apt/sources.list
+#RUN echo "deb http://mirrors.163.com/ubuntu/ trusty main multiverse restricted universe" > /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get -y install wget git
 RUN apt-get clean && apt-get autoclean
@@ -22,8 +22,8 @@ ADD . /opt/src
 RUN cd /opt/src && npm install pm2 -g && \
    npm install --production && \
 RUN cd /usr/local/bin && \
-    ln -s /opt/node/bin/* .
+    ln -s /opt/node/bin/pm2 .
 WORKDIR   /opt/src
 
 EXPOSE 3000
-CMD ["pm2 start app.js --next-gen-js"]
+CMD ["pm2 start /opt/src/app.js --next-gen-js"]
