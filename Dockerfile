@@ -2,7 +2,7 @@ FROM library/ubuntu
 MAINTAINER "alichen" <ali322@gmail.com>
 
 RUN apt-get update
-RUN RUN apt-get -y install wget zip gcc
+RUN apt-get -y install wget zip gcc
 
 # Install iojs
 RUN cd /opt && \
