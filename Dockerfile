@@ -20,7 +20,7 @@ RUN mkdir -p /opt/src
 ADD . /opt/src
 
 RUN cd /opt/src && npm install pm2 -g && \
-   npm install --production && \
+   npm install --production
 RUN cd /usr/local/bin && \
     ln -s /opt/node/bin/pm2 .
 WORKDIR   /opt/src
