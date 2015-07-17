@@ -10,7 +10,7 @@ RUN cd /opt && \
     tar -xzf iojs-v2.3.4-linux-x64.tar.gz && \
     mv iojs-v2.3.4-linux-x64 node && \
     cd node && \
-    .configure && \
+    ./configure && \
     make && make install && \
     rm -f /opt/iojs-v2.3.4-linux-x64.tar.gz
 WORKDIR   /opt/src
