@@ -1,28 +1,29 @@
-FROM alichen/ubuntu-nvm:v1
+FROM library/ubuntu
 MAINTAINER "alichen" <ali322@gmail.com>
-
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+#RUN echo "deb http://mirrors.163.com/ubuntu/ trusty main multiverse restricted universe" > /etc/apt/sources.list
 RUN apt-get update
+RUN apt-get -y install wget git
+RUN apt-get clean && apt-get autoclean
 
+# Install iojs
+RUN cd /opt && \
+    wget http://npm.taobao.org/mirrors/iojs/v2.3.4/iojs-v2.3.4-linux-x64.tar.gz && \
+    tar -xzvf iojs-v2.3.4-linux-x64.tar.gz && \
+    mv iojs-v2.3.4-linux-x64 node && \
+    cd /usr/local/bin && \
+    #echo "export PATH=/opt/node/bin:$PATH" >> ~/.bashrc && \
+    ln -s /opt/node/bin/* . && \
+    rm -f /opt/iojs-v2.3.4-linux-x64.tar.gz
+#RUN echo "export PATH=/opt/node/bin:$PATH" >> /etc/profile
+#RUN source /etc/profile
 RUN mkdir -p /opt/src
 ADD . /opt/src
-WORKDIR /opt/src
 
-ENV NODE_VERSION iojs-v2.4.0
-ENV NPM_MIRROR https://registry.npm.taobao.org
-
-#Install iojs
-RUN bash -l -c "export NVM_IOJS_ORG_MIRROR=http://npm.taobao.org/mirrors/iojs/ \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default \
-    && npm install pm2 -g --registry=$NPM_MIRROR\
-    && cd /opt/src;npm install --production --registry=$NPM_MIRROR"
-
-ENV NODE_PATH ~/.nvm/versions/io.js/v2.4.0/lib/node_modules
-ENV PATH ~/.nvm/versions/io.js/v2.4.0/bin:$PATH
-#RUN cd /usr/local/bin && \
-#    ln -s ~/.nvm/versions/io.js/v2.4.0/bin/* .
+RUN cd /opt/src && npm install pm2 -g && \
+   npm install --production
+RUN cd /usr/local/bin && \
+    ln -s /opt/node/bin/pm2 .
+WORKDIR   /opt/src
 
 EXPOSE 3000
-CMD ["pm2 start app.js --next-gen-js"]
+CMD ["pm2 start /opt/src/app.js --next-gen-js"]
