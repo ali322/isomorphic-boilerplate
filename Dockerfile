@@ -19,5 +19,4 @@ RUN bash -l -c "nvm install $NODE_VERSION \
 ENV PATH ~/.nvm/versions/io.js/v2.4.0/bin:$PATH
 
 EXPOSE 3000
-CMD ["bash","-c","-l",
-    "pm2 start /opt/src/app.js --next-gen-js"]
+CMD ["pm2 start /opt/src/app.js --next-gen-js"]
