@@ -4,9 +4,8 @@ MAINTAINER "alichen" <ali322@gmail.com>
 RUN apt-get update
 
 #Install iojs
-RUN nvm install iojs-v2.4.0 && \
+RUN bash && nvm install iojs-v2.4.0 && \
     mkdir -p /opt/src && \
-    bash && \
     npm install pm2 -g && \
     npm install --production
 
