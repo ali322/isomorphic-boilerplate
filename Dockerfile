@@ -1,4 +1,4 @@
-FROM alichen/ubuntu-nvm
+FROM alichen/ubuntu-nvm:v1
 MAINTAINER "alichen" <ali322@gmail.com>
 
 RUN apt-get update
