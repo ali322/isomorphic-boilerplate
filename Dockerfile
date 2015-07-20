@@ -1,17 +1,17 @@
 FROM alichen/ubuntu-nvm:v1
 MAINTAINER "alichen" <ali322@gmail.com>
 
-RUN apt-get update
+#RUN apt-get update
 
 #Install iojs
-RUN nvm install iojs-v2.4.0 && \
-    mkdir -p /opt/src && \
-    npm install pm2 -g && \
-    npm install --production
+RUN bash -l -c "nvm install iojs-v2.4.0"
+RUN bash -l -c "npm install pm2 -g" && \
+    bash -l -c "npm install --production"
 
+RUN mkdir -p /opt/src
 ADD . /opt/src
 WORKDIR /opt/src
 
 EXPOSE 3000
-ENTRYPOINT ["/bin/bash","-l","-c"]
-CMD ["pm2 start /opt/src/app.js --next-gen-js"]
+CMD ["bash","-c","-l",
+    "pm2 start /opt/src/app.js --next-gen-js"]
