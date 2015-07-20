@@ -16,7 +16,7 @@ RUN bash -l -c "nvm install $NODE_VERSION \
     && npm install pm2 -g \
     && cd /opt/src;npm install --production"
 
-ENV PATH ~/.nvm/v$NODE_VERSION/bin:$PATH
+ENV PATH ~/.nvm/versions/io.js/v2.4.0/bin:$PATH
 
 EXPOSE 3000
 CMD ["bash","-c","-l",
