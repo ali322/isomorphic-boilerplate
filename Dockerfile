@@ -16,7 +16,9 @@ RUN bash -l -c "nvm install $NODE_VERSION \
     && npm install pm2 -g \
     && cd /opt/src;npm install --production"
 
-ENV PATH ~/.nvm/versions/io.js/v2.4.0/bin:$PATH
+#ENV PATH ~/.nvm/versions/io.js/v2.4.0/bin:$PATH
+RUN cd /usr/local/bin && \
+    ln -s ~/.nvm/versions/io.js/v2.4.0/bin/* .
 
 EXPOSE 3000
 CMD ["pm2 start /opt/src/app.js --next-gen-js"]
