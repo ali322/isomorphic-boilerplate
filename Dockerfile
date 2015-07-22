@@ -9,4 +9,4 @@ RUN cd /opt/src && \
 WORKDIR   /opt/src
 
 EXPOSE 80
-CMD ["/bin/bash","-c","pm2 start app.js --no-daemon --next-gen-js"]
+CMD ["/bin/bash","-c","pm2 start app.js --no-daemon --next-gen-js --name 'hyena'"]
