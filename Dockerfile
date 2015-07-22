@@ -9,4 +9,4 @@ RUN cd /opt/src && \
 WORKDIR   /opt/src
 
 EXPOSE 3000
-CMD ["pm2 start /opt/src/app.js --next-gen-js"]
+CMD ["pm2 list"]
