@@ -9,4 +9,4 @@ RUN cd /opt/src && \
 WORKDIR   /opt/src
 
 EXPOSE 3000
-CMD ["/bin/bash","-c","pm2 start app.js --no-daemon"]
+CMD ["/bin/bash","-c","pm2 start app.js --no-daemon --next-gen-js"]
