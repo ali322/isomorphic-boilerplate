@@ -8,5 +8,5 @@ RUN cd /opt/src && \
     npm install --production
 WORKDIR   /opt/src
 
-EXPOSE 3000
+EXPOSE 80
 CMD ["/bin/bash","-c","pm2 start app.js --no-daemon --next-gen-js"]
