@@ -9,4 +9,4 @@ RUN cd /opt/src && \
 WORKDIR   /opt/src
 
 EXPOSE 3000
-CMD ["/bin/bash","-c","pm2 list"]
+CMD ["/bin/bash","-c","pm2 start app.js"]
