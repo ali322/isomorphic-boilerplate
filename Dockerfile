@@ -6,7 +6,7 @@ ADD . /opt/src
 
 RUN cd /opt/src && \
     #npm install pm2 -g && \
-    npm install --productio
+    npm install --production
 WORKDIR   /opt/src
 
 EXPOSE 8081
