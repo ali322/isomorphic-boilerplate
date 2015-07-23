@@ -16,8 +16,8 @@ app.set('view engine', 'html');
 app.set("views", __dirname + '/view');
 app.use(router);
 
-http.createServer(app).listen(5000, '127.0.0.1', function(err) {
-    console.log("hyena start at %d", 5000);
+http.createServer(app).listen(80, function(err) {
+    console.log("hyena start at %d", 80);
 }).on("error", function(err) {
     console.log("cant start hyena", err.code);
 });
