@@ -11,4 +11,4 @@ WORKDIR   /opt/src
 
 EXPOSE 8081
 #CMD ["/bin/bash","-c","pm2 start app.js --no-daemon --name 'hyena'"]
-CMD ["/bin/bash","-c","node index.js"]
+CMD ["/bin/bash","-c","node app.js"]
