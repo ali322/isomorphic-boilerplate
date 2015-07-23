@@ -9,6 +9,6 @@ RUN cd /opt/src && \
     npm install --productio
 WORKDIR   /opt/src
 
-EXPOSE 80
+EXPOSE 8081
 #CMD ["/bin/bash","-c","pm2 start app.js --no-daemon --name 'hyena'"]
 CMD ["/bin/bash","-c","node app.js"]
