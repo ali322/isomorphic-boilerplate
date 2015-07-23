@@ -1,7 +1,7 @@
 var express = require("express"),
     http = require("http"),
-    bodyParser = require("body-parser"),
-    methodOverride = require("method-override"),
+    // bodyParser = require("body-parser"),
+    // methodOverride = require("method-override"),
     cons = require("consolidate");
 
 var app = express();
