@@ -1,7 +1,7 @@
 'use strict'
-require('node-jsx').install();
-var React = require("react");
-var User = React.createFactory(require("../../public/index/index.jsx"));
+// require('node-jsx').install();
+// var React = require("react");
+// var User = React.createFactory(require("../../public/index/index.jsx"));
 
 let index = function(req, res) {
     var markup = React.renderToString(User());
@@ -9,7 +9,7 @@ let index = function(req, res) {
         //base:'view/index.html',
         //isNonStatic:false,
         //tags: 'content',
-        content:markup
+        content:"333"
     });
 };
 
