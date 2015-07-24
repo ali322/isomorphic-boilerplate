@@ -14,7 +14,10 @@ app.use(methodOverride());
 app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set("views", __dirname + '/view');
-app.use(router);
+// app.use(router);
+app.get('/',function(){
+    res.send('hello!')
+})
 
 app.listen(8081, function() {
     console.log("hyena start at %d", 8081);
