@@ -8,4 +8,4 @@ RUN cd /opt/src && \
 WORKDIR   /opt/src
 
 EXPOSE 8081
-CMD ["node", "index.js"]
+CMD ["node", "app.js"]
