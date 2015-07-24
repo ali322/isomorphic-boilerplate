@@ -6,9 +6,9 @@ var express = require("express");
 
 var app = express();
 
-// var router = require("./router.js");
+var router = require("./router.js");
 
-// app.use(express.static('public'));
+app.use(express.static('public'));
 // app.use(bodyParser());
 // app.use(methodOverride());
 // app.engine('html', cons.swig);
