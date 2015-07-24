@@ -15,7 +15,7 @@ app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set("views", __dirname + '/view');
 // app.use(router);
-app.get('/',function(){
+app.get('/',function(req,res){
     res.send('hello!')
 })
 
