@@ -29,7 +29,7 @@ module.exports = function(env) {
             jsFiles.push(vendorJsFile);
             // console.log(module.name, extensionJsFile);
             jsFiles.push(moduleJsFile);
-            jsFiles.push('./bower_components/binnng/debug.js/debug.js');
+            // jsFiles.push('./bower_components/binnng/debug.js/debug.js');
             // console.log(jsFiles)
             var sources = gulp.src(_.union(cssFiles, jsFiles), {
                 read: false
@@ -37,12 +37,14 @@ module.exports = function(env) {
             gulp.src(injectTarget).pipe(inject(sources, {
                 relative: true,
                 transform: function(filepath) {
-                    var prefixPattern = new RegExp(".+"+env.staticFolder+"\/"),
-                        vendorPattern = new RegExp(env.vendorFolder+"\/.+js"),
-                        buildPattern = new RegExp(".+"+module.buildFolder+"\/");
-                    filepath = filepath.replace(prefixPattern,'./');
+                    var prefixPattern = new RegExp(".+" + env.staticFolder + "\/"),
+                        vendorPattern = new RegExp(env.vendorFolder + "\/.+js"),
+                        buildPattern = new RegExp(".+" + module.buildFolder + "\/");
+                    filepath = filepath.replace(prefixPattern, './');
                     if (vendorPattern.test(filepath) === false && path.extname(filepath) === ".js") {
                         filepath = filepath.replace(buildPattern, env.hmrPublicPath);
+                    } else {
+                        filepath = filepath.replace(/^\.\//g, '/public/');
                     }
                     return inject.transform.apply(inject.transform, arguments);
                 }
@@ -75,7 +77,12 @@ module.exports = function(env) {
                 read: false
             });
             gulp.src(injectTarget).pipe(inject(sources, {
-                relative: true
+                relative: true,
+                transform: function(filepath) {
+                    console.log(filepath);
+                    filepath = filepath.replace(/^\.{2}\//g, '/');
+                    return inject.transform.apply(inject.transform, arguments);
+                }
             })).pipe(gulp.dest(injectedPath));
         });
     });
