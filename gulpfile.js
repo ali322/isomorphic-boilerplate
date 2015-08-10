@@ -3,6 +3,7 @@ var gulp = require("gulp"),
     livereload = require("gulp-livereload");
 
 var env = require("./task/environment.js")(__dirname);
+require("./task/vendor-css.js")(env);
 require("./task/webpack-inject.js")(env);
 
 gulp.task("nodemon", function() {
