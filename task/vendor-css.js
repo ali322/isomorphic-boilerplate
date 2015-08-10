@@ -14,13 +14,13 @@ module.exports = function(env) {
         buildPath = env.vendor.path + "/" + env.vendor.buildFolder,
         distPath = env.vendor.path + "/" + env.vendor.distFolder,
         vendors = [];
-    del.sync(buildPath+ '/*.css');
-    del.sync(distPath+ '/*.css');
     _.each(vendorConfig[vendorChunkName].css, function(vendorCss) {
         vendors.push(vendorCss.path);
     });
 
     gulp.task('vendor-css', function() {
+        del.sync(buildPath + '/*.css');
+        del.sync(distPath + '/*.css');
         gulp.src(vendors)
             .pipe(concat(buildCssFile))
             .pipe(gulp.dest(buildPath))
