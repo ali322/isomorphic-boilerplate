@@ -25,7 +25,7 @@ module.exports = function(env) {
             // console.log(moduleJsFile);
             cssFiles.push(vendorCssFile);
             // cssFiles.push(extensionCssFile);
-            cssFiles.push(moduleCssFile);
+            // cssFiles.push(moduleCssFile);
             jsFiles.push(vendorJsFile);
             // console.log(module.name, extensionJsFile);
             jsFiles.push(moduleJsFile);
