@@ -2,6 +2,9 @@ var React = require("react");
 
 // require("./stylesheet/index.scss");
 var User = React.createClass({
+    getInitialState(){
+        return this.props.initialData;
+    }
     render() {
         console.log(this.props);
         return (
@@ -28,7 +31,8 @@ var UserButton = React.createClass({
 module.exports = User;
 
 if(typeof window !== 'undefined'){
-    window.onload = function(){
-        React.render(<User/>,document.body);
-    };
+    document.addEventListener('DOMContentLoaded',function(){
+        var initialData = JSON.parse(document.getElementById("initial-data").textContent);
+        React.render(<User initialData={initialData} />,document.body);
+    });
 }

@@ -20,6 +20,7 @@
     {% autoescape false %}
     {{content}}
     {% endautoescape %}
+    <script type="application/json" id="initial-data">{{ initialData|json|safe }}</script>
     <!-- inject:js -->
     <script src="./vendor/build/react.js"></script>
     <script src="http://localhost:9527/hmr/index.js"></script>
