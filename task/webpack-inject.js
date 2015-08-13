@@ -44,7 +44,7 @@ module.exports = function(env) {
                     if (vendorPattern.test(filepath) === false && path.extname(filepath) === ".js") {
                         filepath = filepath.replace(buildPattern, env.hmrPublicPath);
                     } else {
-                        filepath = filepath.replace(/^\.\//g, '/public/');
+                        filepath = filepath.replace(/^\.\//g, '/client/');
                     }
                     return inject.transform.apply(inject.transform, arguments);
                 }

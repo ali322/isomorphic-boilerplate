@@ -1,8 +1,8 @@
 {
     "index": {
         "html": ["./view/index.html"],
-        "path": "./public/index/",
-        "entyJs": "./public/index/index.jsx",
+        "path": "./client/index/",
+        "entyJs": "./client/index/index.jsx",
         "sourceCompiler": {
             "js": "react",
             "css": "scss"

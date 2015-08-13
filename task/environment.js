@@ -10,12 +10,12 @@ var env = function(rootPath) {
             moduleConfig: path.join(rootPath, "task/config/module.json")
         },
         vendor: {
-            path: './public/vendor/',
+            path: './client/vendor/',
             buildFolder: 'build/',
             distFolder: 'dist/'
         },
         hmrPublicPath:"http://localhost:9527/hmr/",
-        staticFolder:"public",
+        staticFolder:"client",
         vendorFolder:"vendor"
     };
 

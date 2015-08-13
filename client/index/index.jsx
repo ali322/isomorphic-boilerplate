@@ -4,7 +4,7 @@ var React = require("react");
 var User = React.createClass({
     getInitialState(){
         return this.props.initialData;
-    }
+    },
     render() {
         console.log(this.props);
         return (
