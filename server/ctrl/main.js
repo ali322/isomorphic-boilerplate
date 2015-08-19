@@ -1,7 +1,7 @@
 'use strict'
 require('node-jsx').install();
 var React = require("react");
-var User = React.createFactory(require("../../shared/index/component.jsx"));
+var IndexComponent = React.createFactory(require("../../shared/index/component.jsx"));
 
 let index = function(req, res) {
     var initialData = {
@@ -10,7 +10,7 @@ let index = function(req, res) {
             count: 6
         }
     };
-    var markup = React.renderToString(User({
+    var markup = React.renderToString(IndexComponent({
         initialData
     }));
     res.render("index", {
