@@ -1,7 +1,7 @@
 'use strict'
 require('node-jsx').install();
 var React = require("react");
-var User = React.createFactory(require("../../client/index/index.jsx"));
+var User = React.createFactory(require("../../shared/index/component.jsx"));
 
 let index = function(req, res) {
     var initialData = {
