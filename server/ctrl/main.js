@@ -1,5 +1,4 @@
 'use strict'
-require('node-jsx').install();
 var React = require("react");
 var IndexComponent = React.createFactory(require("../../shared/index/component.jsx"));
 
