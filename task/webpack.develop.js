@@ -49,7 +49,7 @@ module.exports = {
             exclude: [node_modules_dir],
             loader: 'json'
         }, {
-            test: /\.(js|jsx)$/,
+            test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
             loader: 'babel-loader'
         }, , {
