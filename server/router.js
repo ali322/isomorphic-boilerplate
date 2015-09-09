@@ -8,7 +8,7 @@ require("babel-core/register")({
     extensions: [".es6", ".jsx"]
 });
 
-let mainCtrl = require("./ctrl/main.js");
+var mainCtrl = require("./ctrl/main.js");
 router.get("/",mainCtrl.index);
 
 module.exports = router;

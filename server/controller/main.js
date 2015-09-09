@@ -2,7 +2,7 @@
 var React = require("react");
 var IndexComponent = React.createFactory(require("../../shared/index/component.jsx"));
 
-let index = function(req, res) {
+var index = function(req, res) {
     var initialState = {
         resFetched: true,
         pagination: {
@@ -10,18 +10,18 @@ let index = function(req, res) {
         }
     };
     var markup = React.renderToString(IndexComponent({
-        initialState
+        initialState:initialState
     }));
     res.render("index", {
         //base:'view/index.html',
         //isNonStatic:false,
         //tags: 'content',
         content: markup,
-        initialState
+        initialState:initialState
     });
 };
 
 
 module.exports = {
-    index
+    index:index
 };
