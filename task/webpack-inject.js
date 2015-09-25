@@ -3,7 +3,7 @@ var gulp = require("gulp"),
     // mapstream = require("map-stream"),
     path = require("path"),
     fs = require("fs"),
-    del = require("del"),
+    // del = require("del"),
     _ = require("lodash");
 
 module.exports = function(env) {
@@ -25,12 +25,12 @@ module.exports = function(env) {
             // console.log(moduleJsFile);
             cssFiles.push(vendorCssFile);
             // cssFiles.push(extensionCssFile);
-            // cssFiles.push(moduleCssFile);
+            // cssFiles.push(moduleCssFile); hot update
             jsFiles.push(vendorJsFile);
             // console.log(module.name, extensionJsFile);
             jsFiles.push(moduleJsFile);
             // jsFiles.push('./bower_components/binnng/debug.js/debug.js');
-            // console.log(jsFiles)
+            // console.log(cssFiles)
             var sources = gulp.src(_.union(cssFiles, jsFiles), {
                 read: false
             });
@@ -43,6 +43,8 @@ module.exports = function(env) {
                     filepath = filepath.replace(prefixPattern, './');
                     if (vendorPattern.test(filepath) === false && path.extname(filepath) === ".js") {
                         filepath = filepath.replace(buildPattern, env.hmrPublicPath);
+                    } else if (vendorPattern.test(filepath) === true && path.extname(filepath) === ".js") {
+                        filepath = filepath.replace(/^\.\//g, env.hmrPublicPath);
                     } else {
                         filepath = filepath.replace(/^\.\//g, '/client/');
                     }
