@@ -40,7 +40,7 @@ var env = function(rootPath) {
     // console.log(env.modules);
     env.entyCssSet = [], env.entyJsSet = [];
 
-    env.entyCssSet.push(path.join(rootPath, 'modules/common/stylesheet/*.scss'));
+    env.entyCssSet.push(path.join(rootPath, 'modules/asset/stylesheet/*.scss'));
     _.each(env.modules, function(module) {
         env.entyCssSet.push(module.path + 'stylesheet/*.scss');
 

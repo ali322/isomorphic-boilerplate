@@ -1,0 +1,23 @@
+html, body {
+  height: 100%; }
+
+.error-container {
+  height: 100%; }
+  .error-container .error-content {
+    height: 100%; }
+
+.error-layer {
+  font-size: .7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; }
+  .error-layer .error-panel {
+    align-self: baseline;
+    padding-top: 3rem;
+    width: 60%; }
+    .error-layer .error-panel > img {
+      width: 100%; }
+    .error-layer .error-panel p {
+      margin: .5rem 0;
+      text-align: center; }

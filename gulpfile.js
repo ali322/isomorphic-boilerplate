@@ -13,12 +13,11 @@ gulp.task("nodemon", function() {
         ignore: [
             ".git",
             "node_modules",
-            ".idea",
-            // "src",
+            "shared",
             "test",
-            "public"
+            "client"
         ],
-        ext: "js html jsx"
+        ext: "js html es6"
     }).on("restart", function() {
         setTimeout(function() {
             livereload.changed('/');

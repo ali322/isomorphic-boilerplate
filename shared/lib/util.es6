@@ -1,12 +1,16 @@
 'use strict'
+import reqwest from "reqwest";
+
 const util = {
-    apiRequest(url,param = {}){
-        return reqwest({
+    apiRequest(url,param,options={
+        method:"get",
+        type:"json"
+    }) {
+        options = Object.assign({},options,{
             url,
-            data:param,
-            type:json,
-            method:"GET"
-        })
+            data:param
+        });
+        return reqwest(options);
     }
 }
 

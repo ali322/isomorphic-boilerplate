@@ -1,4 +1,14 @@
 {
+    "error": {
+        "html": ["./view/error.html"],
+        "path": "./client/error/",
+        "entyJs": "./client/error/error.jsx",
+        "sourceCompiler": {
+            "js": "react",
+            "css": "scss"
+        },
+        "libBundle": "react"
+    },
     "index": {
         "html": ["./view/index.html"],
         "path": "./client/index/",

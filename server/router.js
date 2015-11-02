@@ -8,7 +8,10 @@ require("babel-core/register")({
     extensions: [".es6", ".jsx"]
 });
 
-var mainCtrl = require("./ctrl/main.js");
-router.get("/",mainCtrl.index);
+router.get("/",require("./controller/main.js").index);
+router.post("/weather",require("./controller/main.js").weather);
+
+router.all("*",require("./controller/main.js").notFoundHandler);
+router.use(require("./controller/main.js").errorHandler);
 
 module.exports = router;

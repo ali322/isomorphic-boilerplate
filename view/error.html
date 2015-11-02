@@ -1,19 +1,19 @@
-{% extends "./layout.html" %}
-{% block title %}Detail{% endblock %}
+{% extends './layout.html' %}
+{% block title %}List{% endblock %} 
 {% block css %}
 <!-- inject:css -->
 <link rel="stylesheet" href="/client/vendor/build/react.css">
 <!-- endinject -->
 {% endblock %} 
 {% block content %}
-<div class="index-container">
-    <div id="weather">{{ markup|safe }}</div>
+<div class="error-container">
+    <div id="error">{{ markup|safe }}</div>
 </div>
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %}
 {% block js %}
 <!-- inject:js -->
 <script src="http://localhost:9527/hmr/vendor/build/react.js"></script>
-<script src="http://localhost:9527/hmr/index.js"></script>
+<script src="http://localhost:9527/hmr/error.js"></script>
 <!-- endinject -->
 {% endblock %}

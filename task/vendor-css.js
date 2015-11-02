@@ -17,7 +17,6 @@ module.exports = function(env) {
     _.each(vendorConfig[vendorChunkName].css, function(vendorCss) {
         vendors.push(vendorCss.path);
     });
-
     gulp.task('vendor-css', function() {
         del.sync(buildPath + '/*.css');
         del.sync(distPath + '/*.css');

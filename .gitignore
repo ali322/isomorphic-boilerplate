@@ -3,7 +3,8 @@ discards/
 .git/
 .settings/
 .project
-# /public/**/build/
-# /public/**/stylesheet/
-# /public/**/*.jsx
-# /public/**/test/
+# /client/**/build/
+# /client/**/stylesheet/
+# /client/**/*.jsx
+# /client/**/__tests__/
+# /server/**/__tests__/

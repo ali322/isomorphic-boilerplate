@@ -1,14 +1,20 @@
 {
     "react": {
         "js": [{
-            "path":"react"
+            "path": "react"
         }, {
-            "path": "reflux"
+            "path": "redux"
+        }, {
+            "path": "react-redux"
+        }, {
+            "path": "bluebird"
+        }, {
+            "path": "reqwest"
         }, {
             "path": "lodash"
         }],
-        "css": [
-            "./bower_components/swiper/dist/css/swiper.min.css"
-        ]
+        "css": [{
+            "path": "./node_modules/normalize.css/normalize.css"
+        }]
     }
 }

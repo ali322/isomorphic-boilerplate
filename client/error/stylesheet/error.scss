@@ -1,0 +1,11 @@
+@import "../../asset/common.scss";
+$gray-color:#555;
+
+.error-container {
+    height: 100%;
+    .error-content {
+        height: 100%;
+    }
+}
+
+@import "../../../shared/common/error/error.scss";

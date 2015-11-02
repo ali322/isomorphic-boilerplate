@@ -54,7 +54,7 @@ module.exports = {
         }, {
             test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
-            loader: 'babel-loader'
+            loader: 'babel-loader?optional=runtime'
         }, , {
             test: /\.html/,
             exclude: [node_modules_dir],
