@@ -1,6 +1,6 @@
 #Isomorphic Boilerplate
 
-isomorphic webapp boilerplate
+isomorphic webapp boilerplate [中文文档](./README_zh.md)
 
 Quick start develop your isomorphic webapp with express and react
 ===
