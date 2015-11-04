@@ -1,6 +1,5 @@
-var chai = require("chai"),
-    supertest = require("supertest"),
-    expect = chai.expect;
+'use strict';
+import supertest from "supertest";
 
 describe("route /", function() {
     it("index route should response correct", function() {

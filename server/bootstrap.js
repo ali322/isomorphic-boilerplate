@@ -10,7 +10,7 @@ var app = express();
 var router = require("./router.js");
 
 app.use('/client', express.static('client'));
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(methodOverride());
 
 app.use(session({
