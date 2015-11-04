@@ -1,9 +1,10 @@
 'use strict';
 import supertest from "supertest";
+import nock from "nock";
 
 describe("route /", function() {
     it("index route should response correct", function() {
         var app = require("../bootstrap");
-        supertest(app).get("/").expect(200);
+        nock(":9091").get("/").reply(200);
     })
 });
