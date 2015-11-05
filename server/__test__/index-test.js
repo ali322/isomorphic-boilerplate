@@ -1,5 +1,4 @@
 'use strict';
-import supertest from "supertest";
 import nock from "nock";
 
 describe("route /", function() {
