@@ -10,7 +10,7 @@ var env = require('./environment.js')(path.join(__dirname, '../'));
 var buildFolder = 'build',
     // sourcePath = [],
     vendorChunkName = 'react',
-    vendorFile ="vendor/" + env.vendor.buildFolder + vendorChunkName + '.js';
+    vendorFile = "vendor/" + env.vendor.buildFolder + vendorChunkName + '.js';
 
 /*build modules*/
 var entry = {};
@@ -21,6 +21,7 @@ _.each(env.modules, function(module) {
     var moduleEntry = {};
     moduleEntry[module.name] = [
         'webpack-dev-server/client?http://localhost:9527',
+        // "webpack-hot-middleware/client"
         'webpack/hot/only-dev-server',
         module.entyJs,
         module.entyCss
@@ -36,6 +37,26 @@ _.each(vendorConfig[vendorChunkName].js, function(vendorJs) {
 });
 entry[vendorChunkName] = vendors;
 
+var babelrc = {
+    "stage": 2,
+    "env": {
+        "development": {
+            "plugins": [
+                "react-transform"
+            ],
+            "extra": {
+                "react-transform": {
+                    "transforms": [{
+                        "transform": "react-transform-hmr",
+                        "imports": ["react"],
+                        "locals": ["module"]
+                    }]
+                }
+            }
+        }
+    }
+};
+
 module.exports = {
     entry: entry,
     module: {
@@ -50,7 +71,8 @@ module.exports = {
         }, {
             test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
-            loader: 'react-hot!babel-loader?optional=runtime'
+            loader: 'babel',
+            query: babelrc
         }, , {
             test: /\.html/,
             exclude: [node_modules_dir],
