@@ -75,11 +75,11 @@ module.exports = {
     },
     output: {
         path: "./",
-        filename: env.staticFolder + "/[name]/build/[name].js",
-        chunkFilename: env.staticFolder + "/[name]/build/[id].chunk.js",
+        filename: env.staticFolder + "/bundle/[name]/build/[name].js",
+        chunkFilename: env.staticFolder + "/bundle/[name]/build/[id].chunk.js",
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin( /* chunkName= */ vendorChunkName, /* filename= */ vendorFile),
-        new ExtractTextPlugin(env.staticFolder + "/[name]/build/[name].css")
+        new ExtractTextPlugin(env.staticFolder + "/bundle/[name]/build/[name].css")
     ]
 }
