@@ -16,13 +16,13 @@ let WeatherConnected = connect(selector)(Weather);
 
 function configureStore(initialState){
     const store = createStoreWithMiddleware(rootReducer, initialState)
-    if(module.hot) {
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept(rootReducer,() => {
-            // const nextReducer = require('./reducer.es6');
-            store.replaceReducer(rootReducer)
-        })
-    }
+    // if(module.hot) {
+    //     // Enable Webpack hot module replacement for reducers
+    //     module.hot.accept(rootReducer,() => {
+    //         const nextReducer = require('./reducer.es6');
+    //         store.replaceReducer(rootReducer)
+    //     })
+    // }
     return store
 }
 
