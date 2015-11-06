@@ -22,10 +22,13 @@ isomorphic webapp boilerplate [English Document](./README.md)
 client/
     |-- __tests__/  #前端单元测试
     |-- asset/      #图片,字体等等资源
-    |-- error/      #错误页面入口js和css
+    |-- bundle/
+        |-- common/     #公共的css和js
+        |-- component/  #组件的css
+        |-- index/      #index 页面入口js和css
+        |-- error/      #错误页面入口js和css
+        |-- .../        #更多的页面入口js和css,类似index
     |-- vendor/     #第三方库文件
-    |-- index/      #index 页面入口js和css
-    |-- .../        #更多的页面入口js和css,类似index
 server/
     |-- __tests__   #后端单元测试
     |-- controller/ #express 路由目录
@@ -33,10 +36,11 @@ server/
     |-- router.js   #后端路由定义文件
     |-- bootstrap.js #初始化后端应用,加载中间件和设置应用
 shared/
-    |-- common/     #通用组件(例如:错误组件)
     |-- lib/        #共享库(后端和前端共用)
-    |-- index/      #index页面所有组件
-    |-- .../        #更多的页面所有组件.类似index
+    |-- chunk/
+        |-- common/     #通用组件(例如:错误组件)
+        |-- index/      #index页面所有组件
+        |-- .../        #更多的页面所有组件.类似index
 task/
     |-- config/
         |-- module.json #定义页面配合,以及css和js路径

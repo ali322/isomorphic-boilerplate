@@ -21,11 +21,14 @@ Directory structure
 ```sh
 client/
     |-- __tests__/  #client unit tests
-    |-- asset/      #images,fonts,public css and so on
-    |-- error/      #error page's entry js and css
+    |-- asset/      #images,fonts and so on
+    |-- bundle/
+        |-- common/ #public css and js
+        |-- component/ #component's css
+        |-- error/  #error page's entry js and css
+        |-- index/  #index page's entry js and css
+        |-- .../    #more your own page's entry js and css,like index page
     |-- vendor/     #third party libraries
-    |-- index/      #index page's entry js and css
-    |-- .../        #more your own page's entry js and css,like index page
 server/
     |-- __tests__   #server unit tests
     |-- controller/ #express routes directory
@@ -35,8 +38,11 @@ server/
 shared/
     |-- common/     #common web components,etc:error
     |-- lib/        #shared libraries(client and server)
-    |-- index/      #index page's web components
-    |-- .../        #more your own page's web components,like index page
+    |-- component/  #common component,etc alert,selected
+    |-- chunk/
+        |-- common/     #component in common use
+        |-- index/      #index page's web components
+        |-- .../        #more your own page's web components,like index page
 task/
     |-- config/
         |-- module.json #define page's path and module config

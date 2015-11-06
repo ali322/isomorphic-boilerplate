@@ -1,5 +1,5 @@
 'use strict';
-import {apiRequest} from "../lib/util.es6";
+import {apiRequest} from "../../lib/util.es6";
 export const CHANGE_FIELD = "CHANGE_FIELD";
 export const REQUEST_WEATHER = "REQUEST_WEATHER";
 export const RESPONSE_WEATHER = "RESPONSE_WEATHER";

@@ -1,4 +1,4 @@
-@import "../../asset/common.scss";
+@import "../../common/common.scss";
 $gray-color:#555;
 
 .error-container {
@@ -8,4 +8,4 @@ $gray-color:#555;
     }
 }
 
-@import "../../../shared/common/error/error.scss";
+@import "../../common/error.scss";

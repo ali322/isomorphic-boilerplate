@@ -1,5 +1,4 @@
 {
-  "weather": {
     "city": "长沙",
     "pinyin": "changsha",
     "citycode": "101250101",
@@ -17,5 +16,4 @@
     "WS": "微风(<10m/h)",
     "sunrise": "06:39",
     "sunset": "17:43"
-  }
 }
