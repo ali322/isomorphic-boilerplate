@@ -1,8 +1,8 @@
 {
     "error": {
         "html": ["./view/error.html"],
-        "path": "./client/error/",
-        "entyJs": "./client/error/error.jsx",
+        "path": "./client/bundle/error/",
+        "entyJs": "./client/bundle/error/error.jsx",
         "sourceCompiler": {
             "js": "react",
             "css": "scss"
@@ -11,8 +11,8 @@
     },
     "index": {
         "html": ["./view/index.html"],
-        "path": "./client/index/",
-        "entyJs": "./client/index/index.jsx",
+        "path": "./client/bundle/index/",
+        "entyJs": "./client/bundle/index/index.jsx",
         "sourceCompiler": {
             "js": "react",
             "css": "scss"
