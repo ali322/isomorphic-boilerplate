@@ -10,7 +10,9 @@ var app = express();
 var router = require("./router.js");
 
 app.use('/client', express.static('client'));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+    extended:true
+}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
