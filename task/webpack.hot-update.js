@@ -7,35 +7,29 @@ var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment.js')(path.join(__dirname, '../'));
 
 /*build const*/
-var buildFolder = 'build',
-    // sourcePath = [],
-    vendorChunkName = 'react',
-    vendorFile = "vendor/" + env.vendor.buildFolder + vendorChunkName + '.js';
-
-/*build modules*/
 var entry = {};
-_.each(env.modules, function(module) {
-    if (module.sourceCompiler.js !== vendorChunkName) {
-        return;
-    }
+var commonChunks = [];
+
+_.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
-    moduleEntry[module.name] = [
+    moduleEntry[moduleObj.name] = [
         'webpack-dev-server/client?http://localhost:9527',
-        // "webpack-hot-middleware/client"
-        'webpack/hot/only-dev-server',
-        module.entyJs,
-        module.entyCss
+        // "webpack-hot-middleware/client",
+        'webpack/hot/dev-server',
+        moduleObj.entryJS,
+        moduleObj.entryCSS
     ];
     _.extend(entry, moduleEntry);
 });
 
 /*build vendors*/
-var vendorConfig = require(env.config.vendorConfig),
-    vendors = [];
-_.each(vendorConfig[vendorChunkName].js, function(vendorJs) {
-    vendors.push(vendorJs.path);
+_.each(env.vendors, function(vendor) {
+    commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
+        name: vendor.name,
+        // filename:env.vendorPath + env.buildFolder + vendor.name + ".js"
+    }))
+    entry[vendor.name] = vendor.entryJS;
 });
-entry[vendorChunkName] = vendors;
 
 var babelrc = {
     "stage": 2,
@@ -61,10 +55,6 @@ module.exports = {
     entry: entry,
     module: {
         loaders: [{
-            test: /\.coffee$/,
-            exclude: [node_modules_dir],
-            loader: 'coffee'
-        }, {
             test: /\.json/,
             exclude: [node_modules_dir],
             loader: 'json'
@@ -107,12 +97,11 @@ module.exports = {
         path: path.join(__dirname, "../client"),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
-        publicPath: env.hmrPublicPath
+        publicPath: env.hmrPath
     },
-    plugins: [
+    plugins: _.union([
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         // new ExtractTextPlugin("[name].css")
-        new webpack.optimize.CommonsChunkPlugin(vendorChunkName, vendorFile),
-    ]
+    ],commonChunks)
 }

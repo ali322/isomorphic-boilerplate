@@ -9,45 +9,37 @@ var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment.js')(path.join(__dirname, '../'));
 
 /*build const*/
-var vendorChunkName = 'react',
-    vendorFile = env.vendor.path + env.vendor.distFolder + vendorChunkName + '-[hash].js';
+var entry = {};
+var commonChunks = [];
 
-/*build modules*/
-var moduleEntries = {};
-_.each(env.modules, function(module) {
-    if (module.sourceCompiler.js !== vendorChunkName) {
-        return;
-    }
-    del.sync(path.join(module.path, module.distFolder + '/*.*'));
+/*build pages*/
+var moduleEntries = {},
+    moduleEntryPath = "";
+_.each(env.modules, function(moduleObj) {
+    del.sync(path.join(moduleObj.path, env.distFolder + '/*.*'));
     var moduleEntry = {};
-    moduleEntry[module.name] = [module.entyJs, module.entyCss];
+    moduleEntryPath = moduleObj.path + "../";
+    moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
 });
 
 /*build vendors*/
-var vendorConfig = require(env.config.vendorConfig),
-    vendors = [];
-del.sync(env.vendor.path + "/" + env.vendor.distFolder + '/*.*');
-_.each(vendorConfig[vendorChunkName].js, function(vendorJs) {
-    vendors.push(vendorJs.path);
+del.sync(env.vendorPath + "/" + env.distFolder + '/*.js');
+_.each(env.vendors, function(vendor) {
+    commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
+        name: vendor.name,
+        filename: env.vendorPath + env.distFolder + vendor.name + "-[hash].js"
+    }))
+    entry[vendor.name] = vendor.entryJS;
 });
-// _.each(vendorConfig[vendorChunkName].css, function(vendorCss) {
-//     vendors.push(vendorCss);
-// });
 
 /*add modules and vendors to entry point*/
-var entry = {};
-entry[vendorChunkName] = vendors;
-_.extend(entry, moduleEntries)
-
+_.extend(entry, moduleEntries);
+console.log("entry",entry)
 module.exports = {
     entry: entry,
     module: {
         loaders: [{
-            test: /\.coffee$/,
-            exclude: [node_modules_dir],
-            loader: 'coffee'
-        }, {
             test: /\.json/,
             exclude: [node_modules_dir],
             loader: 'json'
@@ -78,16 +70,15 @@ module.exports = {
     },
     output: {
         path: "./",
-        filename: env.staticFolder + "/bundle/[name]/dist/[name]-[hash].js",
-        chunkFilename: env.staticFolder + "/bundle/[name]/dist/[id]-[hash].chunk.js"
+        filename: moduleEntryPath + "[name]/" + env.distFolder + "[name]-[hash].js",
+        chunkFilename: moduleEntryPath + "[name]/" + env.distFolder + "[id]-[hash].chunk.js"
     },
-    plugins: [
+    plugins: _.union([
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
             }
         }),
-        new webpack.optimize.CommonsChunkPlugin( /* chunkName= */ vendorChunkName, /* filename= */ vendorFile),
-        new ExtractTextPlugin(env.staticFolder + "/bundle/[name]/dist/[name]-[hash].css")
-    ]
+        new ExtractTextPlugin(moduleEntryPath + "[name]/" + env.distFolder + "[name]-[hash].css")
+    ], commonChunks)
 }

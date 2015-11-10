@@ -16,9 +16,9 @@ webpackJsonp([0],{
 
 	var _interopRequireDefault = __webpack_require__(2)["default"];
 
-	var _sharedCommonErrorErrorJsx = __webpack_require__(3);
+	var _sharedChunkCommonErrorJsx = __webpack_require__(3);
 
-	var _sharedCommonErrorErrorJsx2 = _interopRequireDefault(_sharedCommonErrorErrorJsx);
+	var _sharedChunkCommonErrorJsx2 = _interopRequireDefault(_sharedChunkCommonErrorJsx);
 
 	var _react = __webpack_require__(33);
 
@@ -26,7 +26,7 @@ webpackJsonp([0],{
 
 	function bootstrap() {
 	    var initialState = JSON.parse(document.getElementById("initial-state").textContent);
-	    _react2["default"].render(_react2["default"].createElement(_sharedCommonErrorErrorJsx2["default"], { initialState: initialState }), document.getElementById('error'));
+	    _react2["default"].render(_react2["default"].createElement(_sharedChunkCommonErrorJsx2["default"], { initialState: initialState }), document.getElementById('error'));
 	}
 
 	if (typeof window.addEventListener) {

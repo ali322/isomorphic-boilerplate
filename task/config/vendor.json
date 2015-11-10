@@ -1,20 +1,5 @@
 {
-    "react": {
-        "js": [{
-            "path": "react"
-        }, {
-            "path": "redux"
-        }, {
-            "path": "react-redux"
-        }, {
-            "path": "bluebird"
-        }, {
-            "path": "reqwest"
-        }, {
-            "path": "lodash"
-        }],
-        "css": [{
-            "path": "./node_modules/normalize.css/normalize.css"
-        }]
-    }
+    "react":[
+        "react","redux","react","react-redux","bluebird","reqwest","lodash"
+    ]
 }

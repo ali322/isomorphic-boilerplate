@@ -7,44 +7,34 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment.js')(path.join(__dirname, '../'));
 
-/*build const*/
-var vendorChunkName = 'react',
-    vendorFile = env.vendor.path + env.vendor.buildFolder + vendorChunkName + '.js';
+var entry = {};
+var commonChunks = [];
 
 /*build modules*/
-var moduleEntries = {};
-_.each(env.modules, function(module) {
-    if (module.sourceCompiler.js !== vendorChunkName) {
-        return;
-    }
+var moduleEntries = {},
+    moduleEntryPath = "";
+_.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
-    moduleEntry[module.name] = [module.entyJs, module.entyCss];
+    moduleEntryPath = moduleObj.path + "../";
+    moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
 });
 
 /*build vendors*/
-var vendorConfig = require(env.config.vendorConfig),
-    vendors = [];
-_.each(vendorConfig[vendorChunkName].js, function(vendorJs) {
-    vendors.push(vendorJs.path);
+_.each(env.vendors, function(vendor) {
+    commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
+        name: vendor.name,
+        filename: env.vendorPath + env.buildFolder + vendor.name + ".js"
+    }))
+    entry[vendor.name] = vendor.entryJS;
 });
-// _.each(vendorConfig[vendorChunkName].css, function(vendorCss) {
-//     vendors.push(vendorCss.path);
-// });
 
-/*add modules and vendors to entry point*/
-var entry = {};
-entry[vendorChunkName] = vendors;
 _.extend(entry, moduleEntries)
-    // console.log(moduleEntries, vendors);
+console.log("entry", entry, moduleEntryPath);
 module.exports = {
     entry: entry,
     module: {
         loaders: [{
-            test: /\.coffee$/,
-            exclude: [node_modules_dir],
-            loader: 'coffee'
-        }, {
             test: /\.json/,
             exclude: [node_modules_dir],
             loader: 'json'
@@ -71,15 +61,14 @@ module.exports = {
         }]
     },
     resolve: {
-        extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
+        extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json"]
     },
     output: {
         path: "./",
-        filename: env.staticFolder + "/bundle/[name]/build/[name].js",
-        chunkFilename: env.staticFolder + "/bundle/[name]/build/[id].chunk.js",
+        filename: moduleEntryPath + "[name]/" + env.buildFolder + "[name].js",
+        chunkFilename: moduleEntryPath + "[name]/" + env.buildFolder + "[id].chunk.js",
     },
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin( /* chunkName= */ vendorChunkName, /* filename= */ vendorFile),
-        new ExtractTextPlugin(env.staticFolder + "/bundle/[name]/build/[name].css")
-    ]
+    plugins: _.union([
+        new ExtractTextPlugin(moduleEntryPath + "[name]/" + env.buildFolder + "[name].css")
+    ], commonChunks)
 }

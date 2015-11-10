@@ -3,7 +3,7 @@ var gulp = require("gulp"),
     livereload = require("gulp-livereload");
 
 var env = require("./task/environment.js")(__dirname);
-require("./task/vendor-css.js")(env);
+// require("./task/vendor-css.js")(env);
 require("./task/webpack-inject.js")(env);
 
 gulp.task("nodemon", function() {
@@ -13,7 +13,7 @@ gulp.task("nodemon", function() {
         ignore: [
             ".git",
             "node_modules",
-            "shared",
+            // "shared",
             "test",
             "client"
         ],

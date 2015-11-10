@@ -1,22 +1,20 @@
 {
     "error": {
-        "html": ["./view/error.html"],
+        "html": ["error.html"],
         "path": "./client/bundle/error/",
-        "entyJs": "./client/bundle/error/error.jsx",
-        "sourceCompiler": {
-            "js": "react",
+        "compiler": {
+            "js": "babel",
             "css": "scss"
         },
-        "libBundle": "react"
+        "vendor": "react"
     },
     "index": {
-        "html": ["./view/index.html"],
+        "html": ["index.html"],
         "path": "./client/bundle/index/",
-        "entyJs": "./client/bundle/index/index.jsx",
-        "sourceCompiler": {
-            "js": "react",
+        "compiler": {
+            "js": "babel",
             "css": "scss"
         },
-        "libBundle": "react"
+        "vendor": "react"
     }
 }

@@ -1,5 +1,5 @@
 'use strict';
-import ErrorContent from "../../../shared/thunk/common/error.jsx";
+import ErrorContent from "../../../shared/chunk/common/error.jsx";
 import React from "react";
 
 function bootstrap(){

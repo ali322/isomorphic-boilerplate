@@ -6,7 +6,8 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   noInfo:true,
-  inline:true,
+  // inline:true,
+  stats:{colors:true},
   //contentBase:"http://localhost:3000/",
   watchOptions:{
       aggregateTimeout:800
@@ -16,6 +17,5 @@ new WebpackDevServer(webpack(config), {
   if (err) {
     console.log(err);
   }
-
-  console.log('Listening at localhost:9527');
+  console.log('🌎 Listening at localhost:9527');
 });
