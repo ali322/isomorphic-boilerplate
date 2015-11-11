@@ -27,7 +27,7 @@ var weather = function(req,res){
 
 var index = function(req,res,next) {
     sharedUtil.apiRequest("http://apistore.baidu.com/microservice/weather",{
-        cityname:"广州"
+        cityname:"北京"
     }).then(function(ret){
         if(ret.errMsg === "success"){
             var initialState = {

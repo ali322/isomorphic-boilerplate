@@ -19,5 +19,5 @@ new WebpackDevServer(webpack(config), {
   if (err) {
     console.log(err);
   }
-  console.log('🌎HMR Listening at %d',hmrPort);
+  console.log('🌎 HMR Listening at %d',hmrPort);
 });
