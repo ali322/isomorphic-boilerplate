@@ -6,7 +6,7 @@
   "scripts": {
     "test-client": "jest",
     "test": "mocha --reporter spec --bail --watch --check-leaks --compilers js:babel-core/register server/__test__/ client/__test__/",
-    "start": "gulp browser-sync",
+    "start": "LISTEN_PORT=9876 gulp start",
     "start-static": "node task/static-server.js",
     "develop-static": "npm run static-build && gulp develop-webpack",
     "release-static": "npm run static-prod && gulp deploy-webpack",

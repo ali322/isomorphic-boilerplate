@@ -36,9 +36,10 @@ gulp.task("nodemon", function() {
     });
 });
 
-gulp.task("browser-sync", ["nodemon"], function() {
+gulp.task("start", ["nodemon"], function() {
+    var listenPort = process.env.LISTEN_PORT || 3000;
     browserSync({
-        proxy: "http://localhost:3000",
+        proxy: "http://localhost:" + listenPort,
         port: 4000,
         files: "view/*.html",
         online: false,
