@@ -25,6 +25,7 @@ gulp.task("develop-webpack", function() {
         });
         gulp.src(injectTarget).pipe(inject(sources, {
             relative: true,
+            empty:true,
             transform: function(filepath) {
                 var vendorPattern = new RegExp(".+" + moduleObj.vendor),
                     buildPattern = new RegExp(".+" + env.buildFolder);
