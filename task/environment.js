@@ -8,7 +8,6 @@ var env = {
     pagePath: "./view/",
     hmrPath: "/hmr/"
 };
-console.log('init env')
 var moduleConfig = require("./config/module.json"),
     modules = [];
 _.each(moduleConfig, function(moduleObj, moduleName) {
