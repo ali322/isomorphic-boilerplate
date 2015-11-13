@@ -44,7 +44,7 @@ webpackJsonp([0],{
 
 	var _get = __webpack_require__(4)["default"];
 
-	var _inherits = __webpack_require__(18)["default"];
+	var _inherits = __webpack_require__(20)["default"];
 
 	var _createClass = __webpack_require__(29)["default"];
 

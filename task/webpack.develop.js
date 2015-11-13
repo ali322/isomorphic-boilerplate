@@ -6,7 +6,7 @@ var webpack = require('webpack'),
 // var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
-var env = require('./environment.js')(path.join(__dirname, '../'));
+var env = require('./environment');
 
 var entry = {};
 var commonChunks = [];
@@ -31,7 +31,7 @@ _.each(env.vendors, function(vendor) {
 });
 
 _.extend(entry, moduleEntries)
-console.log("entry", entry, moduleEntryPath);
+// console.log("entry", env.modules);
 module.exports = {
     entry: entry,
     module: {
