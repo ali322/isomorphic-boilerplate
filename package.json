@@ -4,14 +4,14 @@
   "description": "isomorphic webapp boilerplate",
   "main": "app.js",
   "scripts": {
+    "start":"node app.js",
     "test-client": "jest",
     "test": "mocha --reporter spec --bail --watch --check-leaks --compilers js:babel-core/register server/__test__/ client/__test__/",
-    "start": "LISTEN_PORT=9876 gulp start",
-    "start-static": "node task/static-server.js",
+    "develop": "LISTEN_PORT=9876 DEV_PORT=5000 gulp start",
     "develop-static": "npm run static-build && gulp develop-webpack",
-    "release-static": "npm run static-prod && gulp deploy-webpack",
+    "release-static": "npm run static-release && gulp deploy-webpack",
     "static-build": "webpack --config ./task/webpack.develop.js --display-error-details",
-    "static-prod": "webpack --config ./task/webpack.production.js --display-error-details",
+    "static-release": "webpack --config ./task/webpack.production.js --display-error-details",
     "vendor-css": "gulp vendor-css"
   },
   "jest": {
@@ -38,7 +38,7 @@
   "repository": "https://github.com/ali322/isomorphic-boilerplate",
   "license": "MIT",
   "dependencies": {
-    "babel-core": "^6.0.15",
+    "babel-core": "^5.8.22",
     "babel-runtime": "^6.0.14",
     "body-parser": "^1.13.2",
     "classnames": "^2.2.0",
@@ -60,7 +60,6 @@
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
-    "babel-core": "^5.6.15",
     "babel-loader": "^5.3.1",
     "babel-plugin-react-transform": "^1.1.1",
     "browser-sync": "^2.10.0",
@@ -72,8 +71,6 @@
     "gulp-concat": "^2.6.0",
     "gulp-inject": "^1.3.1",
     "gulp-rename": "^1.2.2",
-    "jest-cli": "^0.7.0",
-    "methods": "^1.1.1",
     "mocha": "^2.3.3",
     "nock": "^2.17.0",
     "nodemon": "^1.3.7",

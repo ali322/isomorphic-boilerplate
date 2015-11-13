@@ -1,19 +1,15 @@
-{% extends "./layout.html" %}
-{% block title %}Detail{% endblock %}
-{% block css %}
+{% extends "./layout.html" %} {% block title %}Detail{% endblock %} {% block css %}
 <!-- inject:css -->
 <link rel="stylesheet" href="/client/bundle/index/dist/index-ad91f43b99368a55a2df.css">
 <!-- endinject -->
-{% endblock %} 
-{% block content %}
+{% endblock %} {% block content %}
 <div class="index-container">
     <div id="weather">{{ markup|safe }}</div>
 </div>
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
-{% endblock %}
-{% block js %}
+{% endblock %} {% block js %}
 <!-- inject:js -->
-<script src="http://localhost:9527/hmr/react.js"></script>
-<script src="http://localhost:9527/hmr/index.js"></script>
+<script src="/hmr/react.js"></script>
+<script src="/hmr/index.js"></script>
 <!-- endinject -->
 {% endblock %}

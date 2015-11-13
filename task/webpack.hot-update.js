@@ -1,3 +1,4 @@
+'use strict';
 var webpack = require('webpack'),
     path = require('path'),
     _ = require("lodash");
@@ -13,8 +14,8 @@ var commonChunks = [];
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [
-        'webpack-dev-server/client?http://localhost:9527',
-        // "webpack-hot-middleware/client",
+        // 'webpack-dev-server/client?http://localhost:9527',
+        "webpack-hot-middleware/client",
         'webpack/hot/dev-server',
         moduleObj.entryJS,
         moduleObj.entryCSS
@@ -89,7 +90,7 @@ module.exports = {
             loader: 'url?limit=25000'
         }]
     },
-    devtool: "#source-map",
+    devtool: "#eval-source-map",
     resolve: {
         extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
     },
@@ -97,9 +98,10 @@ module.exports = {
         path: path.join(__dirname, "../client"),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
-        publicPath: env.hmrPath
+        publicPath: "/hmr/"
     },
     plugins: _.union([
+        new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         // new ExtractTextPlugin("[name].css")

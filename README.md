@@ -5,9 +5,8 @@ isomorphic webapp boilerplate [中文文档](./README_zh.md)
 Quick start develop your isomorphic webapp with express and react
 ===
 - run`npm install`
-- run`npm start` to get backend server start(eg:express)
 - run`npm run develop-webpack` to inject necessary files to the template file
-- run`npm run start-public` to get webpack HMR service start
+- run`npm run develop` to get develop server start
 
 Deploy to production environment
 ===
@@ -48,7 +47,7 @@ task/
         |-- module.json #define page's path and module config
         |-- vendor.json #define third party libraries
     |-- environment.js  #define module's env variables
-    |-- server.js       #webpack dev server entry file
+    |-- dev-server.js       #webpack dev server entry file
     |-- vendor-css.js   #third party library's css compile
     |-- webpack-inject.js #inject compiled js and css into templates
     |-- webpack.develop.js #compile modules and vendors for develop

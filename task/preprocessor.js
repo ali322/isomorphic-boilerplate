@@ -1,3 +1,4 @@
+'use strict';
 var babel = require("babel-core");
 // var ReactTools = require("react-tools");
 
