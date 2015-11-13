@@ -48,10 +48,10 @@ module.exports = {
             exclude: [node_modules_dir],
             loader: 'html'
         }, {
-            test: /\.scss/,
+            test: /\.styl/,
             exclude: [node_modules_dir],
-            loader: ExtractTextPlugin.extract('style', 'css!sass!autoprefixer')
-        }, {
+            loader: ExtractTextPlugin.extract('style', 'css!stylus!autoprefixer')
+        },{
             test: /\.css/,
             exclude: [node_modules_dir],
             loader: ExtractTextPlugin.extract('style', 'css')

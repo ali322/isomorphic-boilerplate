@@ -16,7 +16,7 @@ var env = function(rootPath) {
         var entryJS = moduleObj.entryJS !== undefined ? moduleObj.entryJS :
             moduleObj.path + moduleName + ".jsx";
         var entryCSS = moduleObj.entryCSS !== undefined ? moduleObj.entryCSS :
-            moduleObj.path +"stylesheet/"+ moduleName + ".scss";
+            moduleObj.path +"stylesheet/"+ moduleName + ".styl";
         var entryHtml = _.map(moduleObj.html, function(pageHtml) {
             pageHtml = env.pagePath + pageHtml;
             return pageHtml;

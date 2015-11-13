@@ -4,7 +4,7 @@
         "path": "./client/bundle/error/",
         "compiler": {
             "js": "babel",
-            "css": "scss"
+            "css": "stylus"
         },
         "vendor": "react"
     },
@@ -13,7 +13,7 @@
         "path": "./client/bundle/index/",
         "compiler": {
             "js": "babel",
-            "css": "scss"
+            "css": "stylus"
         },
         "vendor": "react"
     }

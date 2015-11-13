@@ -75,8 +75,8 @@
     "nock": "^2.17.0",
     "nodemon": "^1.3.7",
     "react-transform-hmr": "^1.0.1",
-    "sass-loader": "^1.0.2",
     "style-loader": "^0.12.3",
+    "stylus-loader": "^1.4.2",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.5.0"
