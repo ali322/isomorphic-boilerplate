@@ -7,7 +7,7 @@ var env = function(rootPath) {
         distFolder: "dist/",
         vendorPath: "./client/vendor/",
         pagePath: "./view/",
-        hmrPath: "http://localhost:9527/hmr/"
+        hmrPath: "/hmr/"
     };
 
     var moduleConfig = require(path.join(rootPath, 'task/config/module.json')),

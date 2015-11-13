@@ -98,7 +98,7 @@ module.exports = {
         path: path.join(__dirname, "../client"),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
-        publicPath: "/hmr/"
+        publicPath: env.hmrPath
     },
     plugins: _.union([
         new webpack.optimize.OccurenceOrderPlugin(true),

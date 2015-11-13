@@ -53,7 +53,7 @@ gulp.task("start", ["nodemon"], function() {
             target: "http://localhost:" + listenPort,
             middleware: [
                 webpackDevMiddleware(bundler, {
-                    publicPath: "/hmr/",
+                    publicPath: config.output.publicPath,
                     stats: {
                         colors: true
                     },

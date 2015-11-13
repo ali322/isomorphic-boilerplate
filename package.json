@@ -4,7 +4,7 @@
   "description": "isomorphic webapp boilerplate",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "test-client": "jest",
     "test": "mocha --reporter spec --bail --watch --check-leaks --compilers js:babel-core/register server/__test__/ client/__test__/",
     "develop": "LISTEN_PORT=9876 DEV_PORT=5000 gulp start",
@@ -78,6 +78,7 @@
     "sass-loader": "^1.0.2",
     "style-loader": "^0.12.3",
     "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.10.1"
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.5.0"
   }
 }
