@@ -1,84 +1,90 @@
 {
-  "name": "hyena",
-  "version": "0.0.1",
-  "description": "isomorphic webapp boilerplate",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "test-client": "jest",
-    "test": "mocha --reporter spec --bail --watch --check-leaks --compilers js:babel-core/register server/__test__/ client/__test__/",
-    "develop": "LISTEN_PORT=9876 DEV_PORT=5000 gulp start",
-    "develop-static": "npm run static-build && gulp develop-webpack",
-    "release-static": "npm run static-release && gulp deploy-webpack",
-    "static-build": "webpack --config ./task/webpack.develop.js --display-error-details",
-    "static-release": "webpack --config ./task/webpack.production.js --display-error-details",
-    "vendor-css": "gulp vendor-css"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/task/preprocessor.js",
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json"
+    "name": "hyena",
+    "version": "0.0.1",
+    "description": "isomorphic webapp boilerplate",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "npm run backend-test && npm run frontend-test",
+        "frontend-test": "karma start ./task/karma.config.js",
+        "backend-test": "mocha --reporter spec --bail --check-leaks --compilers js:babel-core/register server/__tests__/",
+        "develop": "LISTEN_PORT=9876 DEV_PORT=5000 gulp start",
+        "develop-static": "npm run static-build && gulp develop-webpack",
+        "release-static": "npm run static-release && gulp deploy-webpack",
+        "static-build": "webpack --config ./task/webpack.develop.js --display-error-details",
+        "static-release": "webpack --config ./task/webpack.production.js --display-error-details"
+    },
+    "jest": {
+        "scriptPreprocessor": "<rootDir>/task/preprocessor.js",
+        "moduleFileExtensions": [
+            "js",
+            "jsx",
+            "json"
+        ],
+        "testDirectoryName": "__test__",
+        "testPathDirs": [
+            "<rootDir>/client"
+        ],
+        "unmockedModulePathPatterns": [
+            "<rootDir>/node_modules/react",
+            "<rootDir>/node_modules/bluebird"
+        ]
+    },
+    "keywords": [
+        "isomorphic boilerplate"
     ],
-    "testDirectoryName": "__test__",
-    "testPathDirs": [
-      "<rootDir>/client"
-    ],
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/reflux",
-      "<rootDir>/node_modules/bluebird"
-    ]
-  },
-  "keywords": [
-    "isomorphic boilerplate"
-  ],
-  "author": "alichen",
-  "repository": "https://github.com/ali322/isomorphic-boilerplate",
-  "license": "MIT",
-  "dependencies": {
-    "babel-core": "^5.8.22",
-    "babel-runtime": "^6.0.14",
-    "body-parser": "^1.13.2",
-    "classnames": "^2.2.0",
-    "consolidate": "^0.13.1",
-    "express": "^4.13.1",
-    "express-session": "^1.12.1",
-    "lodash": "^3.10.1",
-    "method-override": "^2.3.3",
-    "normalize.css": "^3.0.3",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.1",
-    "react-redux": "^4.0.0",
-    "redux": "^3.0.4",
-    "redux-logger": "^2.0.4",
-    "redux-thunk": "^1.0.0",
-    "reqwest": "^2.0.5",
-    "swig": "^1.4.2",
-    "xhr2": "^0.1.3"
-  },
-  "devDependencies": {
-    "autoprefixer-loader": "^2.0.0",
-    "babel-loader": "^5.3.1",
-    "babel-plugin-react-transform": "^1.1.1",
-    "browser-sync": "^2.10.0",
-    "css-loader": "^0.14.5",
-    "del": "^1.2.0",
-    "expect": "^1.12.2",
-    "extract-text-webpack-plugin": "^0.8.2",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-inject": "^3.0.0",
-    "gulp-rename": "^1.2.2",
-    "mocha": "^2.3.3",
-    "nock": "^2.17.0",
-    "nodemon": "^1.3.7",
-    "react-transform-hmr": "^1.0.1",
-    "style-loader": "^0.12.3",
-    "stylus-loader": "^1.4.2",
-    "webpack": "^1.12.2",
-    "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.5.0"
-  }
+    "author": "alichen",
+    "repository": "https://github.com/ali322/isomorphic-boilerplate",
+    "license": "MIT",
+    "dependencies": {
+        "babel-core": "^5.8.22",
+        "babel-runtime": "^6.0.14",
+        "body-parser": "^1.13.2",
+        "classnames": "^2.2.0",
+        "consolidate": "^0.13.1",
+        "express": "^4.13.1",
+        "express-session": "^1.12.1",
+        "lodash": "^3.10.1",
+        "method-override": "^2.3.3",
+        "normalize.css": "^3.0.3",
+        "react": "^0.14.2",
+        "react-dom": "^0.14.1",
+        "react-redux": "^4.0.0",
+        "redux": "^3.0.4",
+        "redux-logger": "^2.0.4",
+        "redux-thunk": "^1.0.0",
+        "reqwest": "^2.0.5",
+        "swig": "^1.4.2",
+        "xhr2": "^0.1.3"
+    },
+    "devDependencies": {
+        "autoprefixer-loader": "^2.0.0",
+        "babel-loader": "^5.3.1",
+        "babel-plugin-react-transform": "^1.1.1",
+        "browser-sync": "^2.10.0",
+        "css-loader": "^0.14.5",
+        "del": "^1.2.0",
+        "expect": "^1.12.2",
+        "extract-text-webpack-plugin": "^0.8.2",
+        "gulp": "^3.9.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-inject": "^3.0.0",
+        "gulp-rename": "^1.2.2",
+        "karma": "^0.13.15",
+        "karma-cli": "^0.1.1",
+        "karma-coverage": "^0.5.3",
+        "karma-jsdom-launcher": "^1.0.0",
+        "karma-mocha": "^0.2.1",
+        "karma-sourcemap-loader": "^0.3.6",
+        "karma-webpack": "^1.7.0",
+        "mocha": "^2.3.3",
+        "nock": "^2.17.0",
+        "nodemon": "^1.3.7",
+        "react-transform-hmr": "^1.0.1",
+        "style-loader": "^0.12.3",
+        "stylus-loader": "^1.4.2",
+        "webpack": "^1.12.2",
+        "webpack-dev-middleware": "^1.2.0",
+        "webpack-hot-middleware": "^2.5.0"
+    }
 }
