@@ -1,9 +1,6 @@
 'use strict';
 import {apiRequest} from "../../lib/util.es6";
-export const CHANGE_FIELD = "CHANGE_FIELD";
-export const REQUEST_WEATHER = "REQUEST_WEATHER";
-export const RESPONSE_WEATHER = "RESPONSE_WEATHER";
-
+import {CHANGE_FIELD,REQUEST_WEATHER,RESPONSE_WEATHER} from "./constant.es6";
 export function changeField(name,value){
     return {
         type:CHANGE_FIELD,

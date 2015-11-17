@@ -4,10 +4,10 @@ import {
     CHANGE_FIELD,
     REQUEST_WEATHER,
     RESPONSE_WEATHER
-} from "./action.es6";
+} from "./constant.es6";
 import {combineReducers} from "redux";
 
-function weatherByCityName(state={},action){
+export function weatherByCityName(state={},action){
     switch(action.type){
         case CHANGE_FIELD:
             const {name,value} = action;

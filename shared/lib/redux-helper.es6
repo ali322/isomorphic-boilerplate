@@ -14,3 +14,4 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 export default createStoreWithMiddleware;
+

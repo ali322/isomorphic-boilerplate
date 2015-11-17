@@ -5,13 +5,18 @@ module.exports = function(config) {
         basePath: "../",
         frameworks: ['mocha'],
         files: [
-            'client/__tests__/*.es6',
+            'client/__tests__/**/*.es6',
+            'client/__tests__/**/*.json'
         ],
         preprocessors: {
-            'client/__tests__/*.es6': ['webpack', 'sourcemap'],
-            'client/__tests__/initialstate/*.json': ['webpack'],
+            'client/__tests__/**/*.es6': ['webpack', 'sourcemap'],
+            'client/__tests__/**/*.json': ['json_fixtures'],
             'shared/**/*.jsx': ['webpack', 'sourcemap'],
             'shared/**/*.es6': ['webpack',"coverage", 'sourcemap']
+        },
+        jsonFixturesPreprocessor:{
+            stripPrefix:"client/__tests__/",
+            variableName:'__initialstate__'
         },
         webpack: {
             resolve: webpackConfig.resolve,
@@ -28,8 +33,8 @@ module.exports = function(config) {
         port: 7000,
         colors: true,
         logLevel: config.LOG_INFO,
-        autoWatch: false,
+        autoWatch: true,
         browsers: ['jsdom'],
-        singleRun: true
+        singleRun: false
     });
 };

@@ -1,28 +1,27 @@
 'use strict'
-import React from "react";
+import React,{Component} from "react";
 import {Provider,connect} from "react-redux";
 import rootReducer from "./reducer.es6";
-import createStoreWithMiddleware from "../../lib/store-creator.es6";
+import createStoreWithMiddleware from "../../lib/redux-helper.es6";
+import {bindActionCreators} from "redux";
 import Weather from "./component.jsx";
+import * as actions from "./action.es6";
 
-function selector(state){
-    const {weatherByCityName} = state
-    return {
-        weatherByCityName
-    };
+class WeatherWrapper extends Component{
+    render(){
+        return (
+            <Weather {...this.props} 
+            {...bindActionCreators(actions,this.props.dispatch)}/>
+        )
+    }
 }
 
-let WeatherConnected = connect(selector)(Weather);
+let WeatherConnected = connect((state)=>{
+    return state;
+})(WeatherWrapper);
 
 function configureStore(initialState){
     const store = createStoreWithMiddleware(rootReducer, initialState)
-    // if(module.hot) {
-    //     // Enable Webpack hot module replacement for reducers
-    //     module.hot.accept(rootReducer,() => {
-    //         const nextReducer = require('./reducer.es6');
-    //         store.replaceReducer(rootReducer)
-    //     })
-    // }
     return store
 }
 
@@ -37,7 +36,7 @@ class WeatherApp extends React.Component{
         const store = configureStore(initialState);
         return (
             <Provider store={store}>
-            <WeatherConnected />
+            <WeatherConnected/>
             </Provider>
         )
     }

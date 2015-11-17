@@ -2,24 +2,21 @@
 import React,{Component} from "react";
 import classNames from "classnames";
 
-import {fetchWeather,changeField} from "./action.es6";
-
 class Weather extends Component{
     handleChange(e){
         e && e.preventDefault();
-        const {dispatch} = this.props;
-        dispatch(changeField("city",e.target.value));
+        const {changeField} = this.props;
+        changeField("city",e.target.value);
     }
     handleQuery(e){
         e && e.preventDefault();
-        const {dispatch} = this.props;
+        const {fetchWeather} = this.props;
         const {weather} = this.props.weatherByCityName;
-        dispatch(fetchWeather({
+        fetchWeather({
             cityname:weather.city
-        }));
+        });
     }
     componentWillReceiveProps(nextProps){
-        const {dispatch} = this.props;
         if(nextProps.weatherByCityName.weatherFetching === false && 
             this.props.weatherByCityName.weatherFetching === true){
             if(nextProps.weatherByCityName.weatherFetched === true){
