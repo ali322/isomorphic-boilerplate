@@ -1,4 +1,5 @@
 var webpackConfig = require("./webpack.develop.js");
+var testPort = process.env.FRONTEND_TEST_PORT || 6000;
 
 module.exports = function(config) {
     config.set({
@@ -30,7 +31,7 @@ module.exports = function(config) {
             type: 'lcov',
             dir: 'client/__coverage__/'
         },
-        port: 7000,
+        port: testPort,
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
