@@ -20,8 +20,7 @@ function responseWeather(param,res){
     return {
         type:RESPONSE_WEATHER,
         param,
-        res,
-        receiveAt:Date.now()
+        res
     }
 }
 

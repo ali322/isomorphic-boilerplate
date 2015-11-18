@@ -52,7 +52,7 @@ module.exports = {
             test: /\.html/,
             exclude: [node_modules_dir],
             loader: 'html'
-        },{
+        }, {
             test: /\.styl/,
             exclude: [node_modules_dir],
             loader: ExtractTextPlugin.extract('style', 'css!stylus!autoprefixer')
@@ -76,9 +76,12 @@ module.exports = {
     },
     plugins: _.union([
         new webpack.optimize.UglifyJsPlugin({
-            compress:{
+            compress: {
                 warnings: false
             }
+        }),
+        new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         }),
         new ExtractTextPlugin(moduleEntryPath + "[name]/" + env.distFolder + "[name]-[hash].css")
     ], commonChunks)

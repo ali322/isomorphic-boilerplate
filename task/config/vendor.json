@@ -1,5 +1,5 @@
 {
     "react":[
-        "react","redux","react","react-redux","bluebird","reqwest","lodash"
+        "react","redux","react","react-redux","bluebird","lodash"
     ]
 }

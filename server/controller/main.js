@@ -1,32 +1,29 @@
 'use strict'
-var sharedUtil = require("../../shared/lib/util.es6");
 var util = require("../lib/util");
 var WeatherApp = util.getSharedComponent("index");
 var ErrorContent = util.getSharedComponent("common","error.jsx");
 
 var weather = function(req,res){
     var cityName = req.body.cityname;
-    if(req.xhr === true){
-        sharedUtil.apiRequest("http://apistore.baidu.com/microservice/weather",{
-            cityname:cityName
-        }).then(function(ret){
-            if(ret.errMsg === "success"){
-                res.json({
-                    weatherFetched:true,
-                    result:ret.retData
-                })
-            }else{
-                res.json({
-                    weatherFetched:false,
-                    errMsg:ret.errMsg
-                })
-            }
-        })
-    }
+    util.apiRequest("http://apistore.baidu.com/microservice/weather",{
+        cityname:cityName
+    }).then(function(ret){
+        if(ret.errMsg === "success"){
+            res.json({
+                weatherFetched:true,
+                result:ret.retData
+            })
+        }else{
+            res.json({
+                weatherFetched:false,
+                errMsg:ret.errMsg
+            })
+        }
+    })
 }
 
 var index = function(req,res,next) {
-    sharedUtil.apiRequest("http://apistore.baidu.com/microservice/weather",{
+    util.apiRequest("http://apistore.baidu.com/microservice/weather",{
         cityname:"长沙"
     }).then(function(ret){
         if(ret.errMsg === "success"){
@@ -45,6 +42,7 @@ var index = function(req,res,next) {
             next(new Error(ret.errMsg))
         }
     },function(){
+        console.log('failed')
         next(new Error("api request failed"))
     })
 };
@@ -54,7 +52,7 @@ var errorHandler = function(err, req, res, next) {
         var initialState = {
             msg: err.message
         };
-        var markup = util.getSharedComponent(ErrorContent({
+        var markup = util.getMarkupByComponent(ErrorContent({
             initialState: initialState
         }));
 

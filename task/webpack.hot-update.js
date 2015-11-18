@@ -71,8 +71,8 @@ module.exports = {
         }, {
             test: /\.styl/,
             exclude: [node_modules_dir],
-            loader:"style!css!stylus!autoprefixer"
-            // loader: ExtractTextPlugin.extract('style', 'css!stylus!autoprefixer')
+            loader: "style!css!stylus!autoprefixer"
+                // loader: ExtractTextPlugin.extract('style', 'css!stylus!autoprefixer')
         }, {
             test: /\.css/,
             exclude: [node_modules_dir],
@@ -104,6 +104,9 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
+        new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        })
         // new ExtractTextPlugin("[name].css")
     ], commonChunks)
 }

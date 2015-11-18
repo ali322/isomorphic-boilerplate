@@ -31,7 +31,7 @@ _.each(env.vendors, function(vendor) {
 });
 
 _.extend(entry, moduleEntries)
-// console.log("entry", env.modules);
+    // console.log("entry", env.modules);
 module.exports = {
     entry: entry,
     module: {
@@ -51,7 +51,7 @@ module.exports = {
             test: /\.styl/,
             exclude: [node_modules_dir],
             loader: ExtractTextPlugin.extract('style', 'css!stylus!autoprefixer')
-        },{
+        }, {
             test: /\.css/,
             exclude: [node_modules_dir],
             loader: ExtractTextPlugin.extract('style', 'css')
@@ -70,6 +70,9 @@ module.exports = {
         chunkFilename: moduleEntryPath + "[name]/" + env.buildFolder + "[id].chunk.js",
     },
     plugins: _.union([
+        new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        }),
         new ExtractTextPlugin(moduleEntryPath + "[name]/" + env.buildFolder + "[name].css")
     ], commonChunks)
 }

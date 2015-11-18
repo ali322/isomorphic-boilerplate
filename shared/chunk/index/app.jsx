@@ -22,6 +22,12 @@ let WeatherConnected = connect((state)=>{
 
 function configureStore(initialState){
     const store = createStoreWithMiddleware(rootReducer, initialState)
+    if (module.hot) {
+        module.hot.accept('./reducer.es6', () => {
+            const nextRootReducer = require('./reducer.es6');
+            store.replaceReducer(nextRootReducer);
+        });
+    }
     return store
 }
 

@@ -1,10 +1,11 @@
 'use strict';
 import ErrorContent from "../../../shared/chunk/common/error.jsx";
 import React from "react";
+import ReactDOM from "react-dom";
 
 function bootstrap(){
     var initialState = JSON.parse(document.getElementById("initial-state").textContent);
-        React.render(<ErrorContent initialState={initialState} />,document.getElementById('error'));
+        ReactDOM.render(<ErrorContent initialState={initialState} />,document.getElementById('error'));
 }
 
 if(typeof window.addEventListener){
