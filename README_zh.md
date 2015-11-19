@@ -45,7 +45,7 @@ task/
         |-- module.json #定义页面配合,以及css和js路径
         |-- vendor.json #定义第三方库
     |-- environment.js  #定义模块的环境变量
-    |-- dev-server.js       #webpack dev server 入口文件
+    |-- develop-server.js       #webpack dev server 入口文件
     |-- vendor-css.js   #编译第三方库的css
     |-- webpack-inject.js #注入编译好的js和css至模板
     |-- webpack.develop.js #为开发环境编译模块和第三方库

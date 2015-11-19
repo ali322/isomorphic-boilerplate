@@ -42,7 +42,6 @@ var index = function(req,res,next) {
             next(new Error(ret.errMsg))
         }
     },function(){
-        console.log('failed')
         next(new Error("api request failed"))
     })
 };

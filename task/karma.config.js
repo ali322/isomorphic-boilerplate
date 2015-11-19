@@ -4,13 +4,13 @@ var testPort = process.env.FRONTEND_TEST_PORT || 6000;
 module.exports = function(config) {
     config.set({
         basePath: "../",
-        frameworks: ['mocha',"sinon"],
+        frameworks: ['mocha', "sinon", "phantomjs-shim"],
         files: [
             'client/__tests__/**/*.es6',
             'client/__tests__/**/*.json'
         ],
         preprocessors: {
-            'client/__tests__/**/*.es6': ['webpack' ,'sourcemap'],
+            'client/__tests__/**/*.es6': ['webpack', 'sourcemap'],
             'client/__tests__/**/*.json': ['json_fixtures'],
             'shared/**/*.jsx': ['webpack', 'sourcemap'],
             'shared/**/*.es6': ['webpack', "coverage", 'sourcemap']
@@ -28,7 +28,7 @@ module.exports = function(config) {
         },
         reporters: ['progress', 'coverage'],
         coverageReporter: {
-            type: 'lcov',
+            type: 'lcovonly',
             dir: 'client/__coverage__/'
         },
         phantomjsLauncher: {
@@ -38,7 +38,7 @@ module.exports = function(config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['SlimerJS'],
+        browsers: ['PhantomJS'],
         singleRun: false
     });
 };

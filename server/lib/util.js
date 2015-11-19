@@ -4,7 +4,6 @@ var React = require("react");
 var ReactDOMServer = require("react-dom/server");
 var sharedUtil = require("../../shared/lib/util.es6");
 var reqwest = require("reqwest");
-var fetch = require("node-fetch");
 var _ = require("lodash");
 
 var util = {

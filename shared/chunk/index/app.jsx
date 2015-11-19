@@ -2,23 +2,13 @@
 import React,{Component} from "react";
 import {Provider,connect} from "react-redux";
 import rootReducer from "./reducer.es6";
-import createStoreWithMiddleware from "../../lib/redux-helper.es6";
-import {bindActionCreators} from "redux";
+import createStoreWithMiddleware,{wrapComponentWithActions} from "../../lib/redux-helper.es6";
 import Weather from "./component.jsx";
 import * as actions from "./action.es6";
 
-class WeatherWrapper extends Component{
-    render(){
-        return (
-            <Weather {...this.props} 
-            {...bindActionCreators(actions,this.props.dispatch)}/>
-        )
-    }
-}
-
 let WeatherConnected = connect((state)=>{
     return state;
-})(WeatherWrapper);
+})(wrapComponentWithActions(Weather,actions));
 
 function configureStore(initialState){
     const store = createStoreWithMiddleware(rootReducer, initialState)

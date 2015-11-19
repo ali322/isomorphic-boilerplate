@@ -1,6 +1,7 @@
 'use strict'
 import React,{Component} from "react";
 import classNames from "classnames";
+import {apiRequest} from "../../lib/util.es6";
 
 class Weather extends Component{
     handleChange(e){
