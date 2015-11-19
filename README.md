@@ -47,7 +47,7 @@ task/
         |-- module.json #define page's path and module config
         |-- vendor.json #define third party libraries
     |-- environment.js  #define module's env variables
-    |-- dev-server.js       #webpack dev server entry file
+    |-- develop-server.js       #webpack dev server entry file
     |-- vendor-css.js   #third party library's css compile
     |-- webpack-inject.js #inject compiled js and css into templates
     |-- webpack.develop.js #compile modules and vendors for develop
