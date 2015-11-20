@@ -1,5 +1,9 @@
 #Isomorphic Boilerplate
 
+[![Build Status](https://travis-ci.org/ali322/isomorphic-boilerplate.svg)](https://travis-ci.org/ali322/isomorphic-boilerplate)
+[![Coverage Status](https://coveralls.io/repos/ali322/isomorphic-boilerplate/badge.svg?branch=master&service=github)](https://coveralls.io/github/ali322/isomorphic-boilerplate?branch=master)
+[![Coverage Status](https://coveralls.io/repos/ali322/isomorphic-boilerplate/badge.svg?branch=master&service=github)](https://coveralls.io/github/ali322/isomorphic-boilerplate?branch=master)
+
 isomorphic webapp boilerplate [中文文档](./README_zh.md)
 
 Quick start develop your isomorphic webapp with express and react
