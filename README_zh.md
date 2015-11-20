@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ali322/isomorphic-boilerplate.svg)](https://travis-ci.org/ali322/isomorphic-boilerplate)
 [![Coverage Status](https://coveralls.io/repos/ali322/isomorphic-boilerplate/badge.svg?branch=master&service=github)](https://coveralls.io/github/ali322/isomorphic-boilerplate?branch=master)
-[![Coverage Status](https://coveralls.io/repos/ali322/isomorphic-boilerplate/badge.svg?branch=master&service=github)](https://coveralls.io/github/ali322/isomorphic-boilerplate?branch=master)
+[![Dependency Status](https://gemnasium.com/ali322/isomorphic-boilerplate.svg)](https://gemnasium.com/ali322/isomorphic-boilerplate)
 
 isomorphic webapp boilerplate [English Document](./README.md)
 
