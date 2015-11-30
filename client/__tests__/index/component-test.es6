@@ -1,5 +1,6 @@
 'use strict';
 import expect from "expect";
+import React from "react";
 import ReactTestUtils from "react/lib/ReactTestUtils";
 import Weather from "../../../shared/chunk/index/component.jsx";
 
