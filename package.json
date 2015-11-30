@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
+    "linter": "esw -w --ext .js,.jsx,.es6 .",
     "test": "npm run backend-test && npm run frontend-test",
     "frontend-test": "FRONTEND_TEST_PORT=8000 karma start ./task/karma.config.js",
     "backend-test": "mocha --reporter list --bail --check-leaks --compilers es6:babel-core/register server/__tests__/",
@@ -49,6 +50,8 @@
     "browser-sync": "^2.10.0",
     "css-loader": "^0.14.5",
     "del": "^1.2.0",
+    "eslint": "^1.10.2",
+    "eslint-watch": "^2.1.4",
     "expect": "^1.12.2",
     "exports-loader": "^0.6.2",
     "extract-text-webpack-plugin": "^0.8.2",
