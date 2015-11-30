@@ -1,5 +1,4 @@
 var express = require("express"),
-    http = require("http"),
     bodyParser = require("body-parser"),
     methodOverride = require("method-override"),
     session = require("express-session"),

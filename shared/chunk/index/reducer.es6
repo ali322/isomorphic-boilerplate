@@ -11,10 +11,8 @@ export function weatherByCityName(state={},action){
     switch(action.type){
         case CHANGE_FIELD:
             const {name,value} = action;
-            var weather = {...state.weather};
-            weather[name] = value;
             return Object.assign({},state,{
-                weather
+                weather:{...state.weather,[name]:value}
             });
         case REQUEST_WEATHER:
             return Object.assign({},state,{

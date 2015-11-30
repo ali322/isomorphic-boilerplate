@@ -1,10 +1,8 @@
 'use strict';
-var _ = require("lodash"),
-    fs = require("fs"),
-    path = require("path");
+var _ = require("lodash");
 
 var apiHandler = {
-    all: function(req, res, next) {
+    all: function(req, res) {
         var apiName = req.params.api;
         var generator = require("./generator/" + apiName)
         var fakeJSON = templateParser(generator)

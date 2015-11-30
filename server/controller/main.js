@@ -46,7 +46,7 @@ var index = function(req,res,next) {
     })
 };
 
-var errorHandler = function(err, req, res, next) {
+var errorHandler = function(err, req, res) {
     if (err) {
         var initialState = {
             msg: err.message

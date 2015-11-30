@@ -21,7 +21,7 @@ function configureStore(initialState){
     return store
 }
 
-class WeatherApp extends React.Component{
+class WeatherApp extends Component{
     render(){
         const {weather} = this.props.initialState;
         const initialState = {
