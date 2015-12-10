@@ -1,5 +1,4 @@
 node_modules/
-discards/
 npm-debug.log
 .git/
 # vendor/
