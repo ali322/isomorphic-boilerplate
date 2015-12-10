@@ -60,7 +60,7 @@ gulp.task("deploy-webpack", function() {
         cssFiles.push(moduleCSSFile);
         jsFiles.push(vendorJSFile);
         jsFiles.push(moduleJSFile);
-        console.log(jsFiles)
+        // console.log(jsFiles)
         var sources = gulp.src(_.union(cssFiles, jsFiles), {
             read: false
         });
