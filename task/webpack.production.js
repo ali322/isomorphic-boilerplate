@@ -58,7 +58,7 @@ module.exports = {
             loader: ExtractTextPlugin.extract('style', 'css!stylus!autoprefixer')
         }, {
             test: /\.css/,
-            exclude: [node_modules_dir],
+            // exclude: [node_modules_dir],
             loader: ExtractTextPlugin.extract('style', 'css')
         }, {
             test: /\.(png|jpg)$/,
