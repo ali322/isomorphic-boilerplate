@@ -2,11 +2,9 @@ node_modules/
 discards/
 npm-debug.log
 .git/
-.settings/
-.project
 vendor/
 client/**/build/
-client/**/dist/
+# client/**/dist/
 client/__coverage__/
 # /client/**/stylesheet/
 # /client/**/*.jsx
