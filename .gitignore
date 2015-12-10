@@ -2,7 +2,7 @@ node_modules/
 discards/
 npm-debug.log
 .git/
-vendor/
+# vendor/
 client/**/build/
 # client/**/dist/
 client/__coverage__/
