@@ -1,5 +1,6 @@
 'use strict';
 var gulp = require("gulp"),
+    os = require("os"),
     nodemon = require("nodemon"),
     webpack = require('webpack'),
     browserSync = require("browser-sync"),
@@ -18,13 +19,13 @@ gulp.task("nodemon", function() {
             "js": "node"
         },
         env: {
-            "NODE_ENV": "develop"
+            // "NODE_ENV": "develop"
         },
         verbose: true,
         stdout: false,
         // ignore: [".git","node_modules","client","shared","task"],
         watch: [
-            "server/controller", "server/lib", "server/*.js", "view",
+            "server/controller","server/mock", "server/lib", "server/*.js", "view",
             // "shared/chunk/**/*.jsx","shared/chunk/**/*.es6"
         ],
         ext: "js html json es6 jsx"
@@ -48,9 +49,22 @@ gulp.task("start", ["nodemon"], function() {
     var listenPort = process.env.LISTEN_PORT || 3000;
     var devPort = process.env.DEV_PORT || 5000;
 
+    var ipv4;
+    var iptable = {}
+    var ifaces=os.networkInterfaces();
+    for (var dev in ifaces) {
+      ifaces[dev].forEach(function(details,alias){
+        if (details.family=='IPv4') {
+            if(details.address !== "127.0.0.1"){
+                ipv4 = details.address
+            }
+          // iptable[dev+(alias?':'+alias:'')]=details.address;
+        }
+      });
+    }
     browserSync({
         proxy: {
-            target: "http://localhost:" + listenPort,
+            target: "http://192.168.0.136:" + listenPort,
             middleware: [
                 webpackDevMiddleware(bundler, {
                     publicPath: config.output.publicPath,
