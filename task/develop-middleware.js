@@ -1,12 +1,10 @@
 'use strict';
-var webpack = require("webpack"),
-    webpackDevMiddleware = require("webpack-dev-middleware"),
-    webpackHotMiddleware = require("webpack-hot-middleware"),
-    config = require('./webpack.hot-update.js');
-
-var bundler = webpack(config);
-
+var config = require('./webpack.hot-update.js');
 module.exports = function(app){
+    var webpack = require("webpack"),
+        webpackDevMiddleware = require("webpack-dev-middleware"),
+        webpackHotMiddleware = require("webpack-hot-middleware"),
+    var bundler = webpack(config);
     app.use(webpackDevMiddleware(bundler, { 
         noInfo: true, 
         stats: {
