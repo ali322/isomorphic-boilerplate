@@ -27,4 +27,9 @@ app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set("views", __dirname + '/../view');
 
+if(process.env.NODE_ENV == "develop"){
+    app = require("../task/develop-middleware")(app)
+}
+var router = require("./router.js");
+app.use(router);
 module.exports = app;
