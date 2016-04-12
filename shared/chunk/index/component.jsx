@@ -33,7 +33,7 @@ class Weather extends Component{
         })
         return (
             <div className={classes}>
-                <h3>Weather</h3>
+                <h3>Weather22</h3>
                 <div className="weather-form">
                     <input type="text" name="cityname" value={weather.city} onChange={this.handleChange.bind(this)}/>
                     <button onClick={this.handleQuery.bind(this)}>Query</button>

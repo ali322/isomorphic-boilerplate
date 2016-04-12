@@ -6,8 +6,6 @@ var express = require("express"),
 
 var app = express();
 
-var router = require("./router.js");
-
 app.use('/client', express.static('client'));
 app.use(bodyParser.urlencoded({
     extended:true
@@ -28,6 +26,5 @@ app.use(session({
 app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set("views", __dirname + '/../view');
-app.use(router);
 
 module.exports = app;

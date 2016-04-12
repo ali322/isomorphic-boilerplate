@@ -1,6 +1,5 @@
 {% extends "./layout.html" %} {% block title %}Detail{% endblock %} {% block css %}
 <!-- inject:css -->
-<link rel="stylesheet" href="/client/bundle/index/dist/index-a12b2071525f07fe5216.css">
 <!-- endinject -->
 {% endblock %} {% block content %}
 <div class="index-container">
@@ -9,7 +8,7 @@
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %} {% block js %}
 <!-- inject:js -->
-<script src="/client/vendor/dist/react-a12b2071525f07fe5216.js"></script>
-<script src="/client/bundle/index/dist/index-a12b2071525f07fe5216.js"></script>
+<script src="/hmr/react.js"></script>
+<script src="/hmr/index.js"></script>
 <!-- endinject -->
 {% endblock %}

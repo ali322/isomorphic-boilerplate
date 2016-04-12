@@ -40,6 +40,9 @@
     "redux-thunk": "^1.0.0",
     "reqwest": "^2.0.5",
     "swig": "^1.4.2",
+    "webpack": "^1.12.15",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0",
     "whatwg-fetch": "^0.10.1",
     "xhr2": "^0.1.3"
   },

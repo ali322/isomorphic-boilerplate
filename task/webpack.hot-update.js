@@ -16,7 +16,7 @@ _.each(env.modules, function(moduleObj) {
     moduleEntry[moduleObj.name] = [
         // 'webpack-dev-server/client?http://localhost:9527',
         "webpack-hot-middleware/client",
-        'webpack/hot/dev-server',
+        // 'webpack/hot/dev-server',
         moduleObj.entryJS,
         moduleObj.entryCSS
     ];
