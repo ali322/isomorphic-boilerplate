@@ -7,13 +7,13 @@ module.exports = function(config) {
         frameworks: ['mocha', "sinon", "phantomjs-shim"],
         files: [
             'client/__tests__/**/*.es6',
-            'client/__tests__/**/*.json',
-            'client/bundle/**/*.jsx'
+            'client/__tests__/**/*.json'
         ],
         preprocessors: {
             'client/__tests__/**/*.es6': ['webpack', 'sourcemap'],
             'client/__tests__/**/*.json': ['json_fixtures'],
-            'client/bundle/**/*.jsx': ['webpack', "coverage", 'sourcemap']
+            'shared/**/*.jsx': ['webpack', 'sourcemap'],
+            'shared/**/*.es6': ['webpack', "coverage", 'sourcemap']
         },
         jsonFixturesPreprocessor: {
             stripPrefix: "client/__tests__/",
@@ -28,12 +28,8 @@ module.exports = function(config) {
         },
         reporters: ['progress', 'coverage'],
         coverageReporter: {
-            type: 'lcov',
-            dir: 'client/__coverage__/',
-            // subdir:"."
-            subdir:function(browser){
-                return browser.toLowerCase().split(/[ /-]/)[0]
-            }
+            type: 'lcovonly',
+            dir: 'client/__coverage__/'
         },
         phantomjsLauncher: {
             exitOnResourceError: true
@@ -41,8 +37,8 @@ module.exports = function(config) {
         port: testPort,
         colors: true,
         logLevel: config.LOG_INFO,
-        autoWatch: false,
+        autoWatch: true,
         browsers: ['PhantomJS'],
-        singleRun: true
+        singleRun: false
     });
 };

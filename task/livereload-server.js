@@ -12,7 +12,7 @@ gulp.task("start", function() {
             "js": "node"
         },
         env: {
-            "NODE_ENV": "develop"
+            // "NODE_ENV": "production"
         },
         verbose: true,
         stdout: false,
