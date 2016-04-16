@@ -9,7 +9,7 @@
     "test": "npm run backend-test && npm run frontend-test",
     "frontend-test": "FRONTEND_TEST_PORT=8000 karma start ./task/karma.config.js",
     "backend-test": "mocha --reporter list --bail --check-leaks --compilers es6:babel-core/register server/__tests__/",
-    "develop": "LISTEN_PORT=3000 DEV_PORT=5000 gulp start",
+    "develop": "gulp start",
     "develop-static": "npm run static-build && gulp develop-webpack",
     "release-static": "npm run static-release && gulp deploy-webpack",
     "static-build": "webpack --config ./task/webpack.develop.js --display-error-details",

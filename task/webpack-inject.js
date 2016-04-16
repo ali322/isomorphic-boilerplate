@@ -32,11 +32,11 @@ gulp.task("develop-webpack", function() {
                 // filepath = filepath.replace(prefixPattern, './');
                 if (vendorPattern.test(filepath) === true) {
                     if (path.extname(filepath) === ".js") {
-                        filepath = filepath.replace(buildPattern, env.hmrPath);
+                        filepath = filepath.replace(buildPattern, "{{hostname}}"+env.hmrPath);
                     }
                 } else if (vendorPattern.test(filepath) === false) {
                     if (path.extname(filepath) === ".js") {
-                        filepath = filepath.replace(buildPattern, env.hmrPath);
+                        filepath = filepath.replace(buildPattern, "{{hostname}}"+env.hmrPath);
                     }
                 }
                 return inject.transform.apply(inject.transform, arguments);

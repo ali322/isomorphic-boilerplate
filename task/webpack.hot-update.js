@@ -105,9 +105,9 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new webpack.ProvidePlugin({
-            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-        })
+        // new webpack.ProvidePlugin({
+        //     'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        // })
         // new ExtractTextPlugin("[name].css")
     ], commonChunks)
 }
