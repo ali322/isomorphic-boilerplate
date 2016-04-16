@@ -2,15 +2,19 @@
     "error": {
         "html": ["error.html"],
         "path": "./client/bundle/error/",
-        "entryJS":"error.jsx",
-        "entryCSS":"stylesheet/error.styl",
+        "compiler": {
+            "js": "babel",
+            "css": "stylus"
+        },
         "vendor": "react"
     },
     "index": {
         "html": ["index.html"],
         "path": "./client/bundle/index/",
-        "entryJS":"index.jsx",
-        "entryCSS":"stylesheet/index.styl",
+        "compiler": {
+            "js": "babel",
+            "css": "stylus"
+        },
         "vendor": "react"
     }
 }

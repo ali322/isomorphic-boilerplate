@@ -1,4 +1,3 @@
-'use strict';
 var webpack = require('webpack'),
     path = require('path'),
     _ = require("lodash");
@@ -71,8 +70,8 @@ module.exports = {
         }, {
             test: /\.styl/,
             exclude: [node_modules_dir],
-            loader: "style!css!autoprefixer!stylus"
-                // loader: ExtractTextPlugin.extract('style', 'css!stylus!autoprefixer')
+            // loader: ExtractTextPlugin.extract('style', 'css!sass!autoprefixer')
+            loader: 'style!css!autoprefixer!stylus'
         }, {
             test: /\.css/,
             exclude: [node_modules_dir],
@@ -105,8 +104,10 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        // new webpack.ProvidePlugin({
-        //     'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     }
         // })
         // new ExtractTextPlugin("[name].css")
     ], commonChunks)
