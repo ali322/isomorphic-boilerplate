@@ -13,9 +13,10 @@ var commonChunks = [];
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [
-        // 'webpack-dev-server/client?http://localhost:9527',
+        // 'webpack-dev-server/client?http://localhost:5000',
         "webpack-hot-middleware/client",
         // 'webpack/hot/dev-server',
+        // "webpack/hot/only-dev-server",
         moduleObj.entryJS,
         moduleObj.entryCSS
     ];
@@ -42,6 +43,7 @@ module.exports = {
             test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
             loader: "react-hot!babel?stage=2"
+            // query: babelrc
         }, , {
             test: /\.html/,
             exclude: [node_modules_dir],

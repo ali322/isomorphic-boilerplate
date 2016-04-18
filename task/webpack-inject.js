@@ -1,5 +1,6 @@
 var gulp = require("gulp"),
     inject = require("gulp-inject"),
+    injectString = require("gulp-inject-string"),
     // mapstream = require("map-stream"),
     path = require("path"),
     fs = require("fs"),
@@ -42,9 +43,23 @@ gulp.task("develop-webpack", function() {
                 return inject.transform.apply(inject.transform, arguments);
             }
 
-        })).pipe(gulp.dest(injectedPath));
+        }))
+        .pipe(injectString.replace('<script src="{{hostname}}/bs/browser-sync-client.js"></script>\n',""))
+        .pipe(injectString.before("<script",'<script src="{{hostname}}/bs/browser-sync-client.js"></script>\n'))
+        .pipe(gulp.dest(injectedPath));
     });
 });
+
+function bundledTime(){
+    const dateObj = new Date()
+    const year = dateObj.getFullYear()
+    const month = dateObj.getMonth()
+    const date = dateObj.getDate()
+    const hour = dateObj.getHours()
+    const minute = dateObj.getMinutes()
+    return year+month+date+hour+minute
+}
+
 gulp.task("deploy-webpack", function() {
     _.each(env.modules, function(moduleObj) {
         var injectTarget = moduleObj.html,
@@ -71,6 +86,8 @@ gulp.task("deploy-webpack", function() {
                 filepath = filepath.replace(/^\.{2}\//g, '/');
                 return inject.transform.apply(inject.transform, arguments);
             }
-        })).pipe(gulp.dest(injectedPath));
+        }))
+        .pipe(injectString.replace(/<meta name="bundledAt" content="\d{12}">/,""))
+        .pipe(injectString.before("</head>",'<meta name="bundledAt" content="'+bundledTime()+'">\n')).pipe(gulp.dest(injectedPath));
     });
 });
