@@ -31,26 +31,6 @@ _.each(env.vendors, function(vendor) {
     entry[vendor.name] = vendor.entryJS;
 });
 
-var babelrc = {
-    "stage": 2,
-    "env": {
-        "development": {
-            "plugins": [
-                "react-transform"
-            ],
-            "extra": {
-                "react-transform": {
-                    "transforms": [{
-                        "transform": "react-transform-hmr",
-                        "imports": ["react"],
-                        "locals": ["module"]
-                    }]
-                }
-            }
-        }
-    }
-};
-
 module.exports = {
     entry: entry,
     module: {
@@ -61,8 +41,7 @@ module.exports = {
         }, {
             test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
-            loader: 'babel',
-            query: babelrc
+            loader: "react-hot!babel?stage=2"
         }, , {
             test: /\.html/,
             exclude: [node_modules_dir],
