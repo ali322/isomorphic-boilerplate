@@ -15,7 +15,7 @@ gulp.task("nodemon", function() {
         delay: "200ms",
         script: "app.js",
         execMap: {
-            "js": "node"
+            "js": "node --debug"
         },
         env: {
             "HMR_ENABLED": true
