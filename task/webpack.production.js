@@ -74,15 +74,19 @@ module.exports = {
         chunkFilename: moduleEntryPath + "[name]/" + env.distFolder + "[id]-[hash].chunk.js"
     },
     plugins: _.union([
-        // new webpack.DefinePlugin({
-        //     NODE_ENV:"production"
-        // }),
+        new webpack.DefinePlugin({
+            'process.env': {NODE_ENV: JSON.stringify('production')}
+        }),
         new webpack.optimize.DedupePlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
             }
+            output: {
+              comments: false
+            },
+            sourceMap: false
         }),
         new ExtractTextPlugin(moduleEntryPath + "[name]/" + env.distFolder + "[name]-[hash].css")
     ], commonChunks)
