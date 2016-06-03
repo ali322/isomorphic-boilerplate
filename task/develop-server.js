@@ -45,12 +45,12 @@ var bundler = webpack(config);
 
 gulp.task("start", ["nodemon"], function() {
     var listenPort = process.env.LISTEN_PORT || 3000;
-    var hmrPort = process.env.HMR_PORT || 5000;
+    var reloaderPort = process.env.RELOADER_PORT || 7000;
     browserSync({
         proxy: {
             target: "http://localhost:" + listenPort,
         },
-        port: hmrPort,
+        port: reloaderPort,
         files: "view/*.html",
         online: false,
         logLevel: "info",
@@ -63,9 +63,9 @@ gulp.task("start", ["nodemon"], function() {
         },
         scriptPath:function(path,port,options){
             path = path.replace(/browser-sync-client(\.\d+)+/,"browser-sync-client")
-            return "http://localhost:" + hmrPort + path
+            return "http://localhost:" + reloaderPort + path
         }
     }, function() {
-        console.log('🌎 hmr-server Listening at %d', hmrPort);
+        console.log('🌎 browserSync Listening at %d', reloaderPort);
     })
 })

@@ -33,19 +33,19 @@ gulp.task("develop-webpack", function() {
                 // filepath = filepath.replace(prefixPattern, './');
                 if (vendorPattern.test(filepath) === true) {
                     if (path.extname(filepath) === ".js") {
-                        filepath = filepath.replace(buildPattern, "{{hostname}}"+env.hmrPath);
+                        filepath = filepath.replace(buildPattern, "{{hmrURL}}"+env.hmrPath);
                     }
                 } else if (vendorPattern.test(filepath) === false) {
                     if (path.extname(filepath) === ".js") {
-                        filepath = filepath.replace(buildPattern, "{{hostname}}"+env.hmrPath);
+                        filepath = filepath.replace(buildPattern, "{{hmrURL}}"+env.hmrPath);
                     }
                 }
                 return inject.transform.apply(inject.transform, arguments);
             }
 
         }))
-        .pipe(injectString.replace('<script src="{{hostname}}/bs/browser-sync-client.js"></script>\n',""))
-        .pipe(injectString.before("<script",'<script src="{{hostname}}/bs/browser-sync-client.js"></script>\n'))
+        .pipe(injectString.replace('<script src="{{reloaderURL}}/bs/browser-sync-client.js"></script>\n',""))
+        .pipe(injectString.before("<script",'<script src="{{reloaderURL}}/bs/browser-sync-client.js"></script>\n'))
         .pipe(gulp.dest(injectedPath));
     });
 });
@@ -87,7 +87,7 @@ gulp.task("deploy-webpack", function() {
                 return inject.transform.apply(inject.transform, arguments);
             }
         }))
-        .pipe(injectString.replace('<script src="{{hostname}}/bs/browser-sync-client.js"></script>\n',""))
+        .pipe(injectString.replace('<script src="{{reloaderURL}}/bs/browser-sync-client.js"></script>\n',""))
         .pipe(injectString.replace('<meta name="bundledAt" content="\d{12}">',""))
         .pipe(injectString.before("</head>",'<meta name="bundledAt" content="'+bundledTime()+'">\n')).pipe(gulp.dest(injectedPath));
     });
