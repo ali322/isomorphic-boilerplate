@@ -9,7 +9,7 @@ var env = require('./environment');
 /*build const*/
 var entry = {};
 var commonChunks = [];
-var hmrPort = process.env.HMR_PORT || 5000;
+var hmrPort = env.hmrPort;
 var hmrURL = "http://localhost:"+hmrPort
 
 _.each(env.modules, function(moduleObj) {
