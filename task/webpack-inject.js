@@ -8,6 +8,8 @@ var gulp = require("gulp"),
     _ = require("lodash");
 
 var env = require("./environment");
+var hmrBasePath = "{{baseURL}}:"+env.hmrPort
+var reloaderBasePath = "{{baseURL}}:"+env.reloaderPort
 
 gulp.task("develop-webpack", function() {
     _.each(env.modules, function(moduleObj) {
@@ -33,19 +35,19 @@ gulp.task("develop-webpack", function() {
                 // filepath = filepath.replace(prefixPattern, './');
                 if (vendorPattern.test(filepath) === true) {
                     if (path.extname(filepath) === ".js") {
-                        filepath = filepath.replace(buildPattern, env.hmrBasePath+env.hmrPath);
+                        filepath = filepath.replace(buildPattern, hmrBasePath+env.hmrPath);
                     }
                 } else if (vendorPattern.test(filepath) === false) {
                     if (path.extname(filepath) === ".js") {
-                        filepath = filepath.replace(buildPattern, env.hmrBasePath+env.hmrPath);
+                        filepath = filepath.replace(buildPattern, hmrBasePath+env.hmrPath);
                     }
                 }
                 return inject.transform.apply(inject.transform, arguments);
             }
 
         }))
-        .pipe(injectString.replace('<script src="'+env.reloaderBasePath+'/bs/browser-sync-client.js"></script>\n',""))
-        .pipe(injectString.before("<script",'<script src="'+env.reloaderBasePath+'/bs/browser-sync-client.js"></script>\n'))
+        .pipe(injectString.replace('<script src="'+reloaderBasePath+'/bs/browser-sync-client.js"></script>\n',""))
+        .pipe(injectString.before("<script",'<script src="'+reloaderBasePath+'/bs/browser-sync-client.js"></script>\n'))
         .pipe(gulp.dest(injectedPath));
     });
 });
@@ -87,7 +89,7 @@ gulp.task("deploy-webpack", function() {
                 return inject.transform.apply(inject.transform, arguments);
             }
         }))
-        .pipe(injectString.replace('<script src="'+env.reloaderBasePath+'/bs/browser-sync-client.js"></script>\n',""))
+        .pipe(injectString.replace('<script src="'+reloaderBasePath+'/bs/browser-sync-client.js"></script>\n',""))
         .pipe(injectString.replace('<meta name="bundledAt" content="\d{12}">',""))
         .pipe(injectString.before("</head>",'<meta name="bundledAt" content="'+bundledTime()+'">\n')).pipe(gulp.dest(injectedPath));
     });

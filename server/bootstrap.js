@@ -29,10 +29,7 @@ app.set("views", __dirname + '/../view');
 
 app.use(function(req,res,next){
     if(process.env.HMR_ENABLED){
-        var hmrPort = process.env.HMR_PORT || 5000;
-        var reloaderPort = process.env.RELOADER_PORT || 7000
-        res.locals.reloaderURL = req.protocol+"://"+req.hostname+":"+reloaderPort
-        res.locals.hmrURL = req.protocol+"://"+req.hostname+":"+hmrPort
+        res.locals.baseURL = req.protocol+"://"+require("../task/helper").getLanIP()
     }
     next()
 })
