@@ -51,7 +51,7 @@ var getLanIP = function(){
     var IPv4 = '127.0.0.1';
     for (var key in interfaces) {
       interfaces[key].forEach(function(details){
-        if (details.family == 'IPv4' && key == 'en0'  ) {
+        if (details.family == 'IPv4' && /^en\d{1}$/.test(key) == true) {
             IPv4 = details.address;
         }
       });
@@ -59,6 +59,7 @@ var getLanIP = function(){
     return IPv4;
 }
 var lanIP = getLanIP()
+env.lanIP = lanIP
 env.reloaderPort = process.env.RELOADER_PORT || 7000;
 env.hmrPort = process.env.HMR_PORT || 5000;
 env.hmrBasePath = "http://"+lanIP+":"+env.hmrPort

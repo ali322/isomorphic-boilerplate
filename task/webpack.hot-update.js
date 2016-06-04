@@ -9,8 +9,7 @@ var env = require('./environment');
 /*build const*/
 var entry = {};
 var commonChunks = [];
-var hmrPort = env.hmrPort;
-var hmrURL = "http://localhost:"+hmrPort
+var hmrURL = env.hmrBasePath
 
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};

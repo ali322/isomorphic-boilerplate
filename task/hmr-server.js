@@ -15,9 +15,9 @@ new WebpackDevServer(webpack(config), {
     poll: 1000
   },
   historyApiFallback: true
-}).listen(env.hmrPort, 'localhost', function (err, result) {
+}).listen(env.hmrPort, env.lanIP, function (err, result) {
   if (err) {
     console.log(err);
   }
-  console.log('🌎 hmr-server Listening at %d',env.hmrPort);
+  console.log('🌎 hmr-server Listening at %d:%d',env.lanIP,env.hmrPort);
 });
