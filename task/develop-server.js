@@ -4,8 +4,6 @@ var gulp = require("gulp"),
     nodemon = require("nodemon"),
     webpack = require('webpack'),
     browserSync = require("browser-sync"),
-    webpackDevMiddleware = require("webpack-dev-middleware"),
-    webpackHotMiddleware = require("webpack-hot-middleware"),
     env = require("./environment"),
     config = require('./webpack.hot-update.js');
 
