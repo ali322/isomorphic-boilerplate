@@ -1,6 +1,6 @@
 {
   "name": "hyena",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "isomorphic webapp boilerplate",
   "main": "app.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "frontend-test": "FRONTEND_TEST_PORT=8000 karma start ./task/karma.config.js",
     "backend-test": "mocha --reporter list --bail --check-leaks --compilers es6:babel-core/register server/__tests__/",
     "develop": "gulp start",
+    "hmr": "node ./task/hmr-server.js",
     "debug": "node-inspector --config ./task/inspector.config.js",
     "develop-static": "npm run static-build && gulp develop-webpack",
     "release-static": "npm run static-release && gulp deploy-webpack",
@@ -25,13 +26,16 @@
   "dependencies": {
     "babel-core": "^5.8.22",
     "babel-runtime": "^6.0.14",
-    "body-parser": "^1.13.2",
     "classnames": "^2.2.0",
-    "consolidate": "^0.13.1",
-    "express": "^4.13.1",
-    "express-session": "^1.12.1",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^3.1.0",
+    "koa-convert": "^1.2.0",
+    "koa-generic-session": "^1.11.1",
+    "koa-methodoverride": "^2.0.0",
+    "koa-router": "^7.0.1",
+    "koa-static": "^2.0.0",
+    "koa-views": "^5.0.2",
     "lodash": "^3.10.1",
-    "method-override": "^2.3.3",
     "normalize.css": "^3.0.3",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
@@ -40,10 +44,7 @@
     "redux-logger": "^2.0.4",
     "redux-thunk": "^1.0.0",
     "reqwest": "^2.0.5",
-    "swig": "^1.4.2",
     "webpack": "^1.12.15",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.10.0",
     "whatwg-fetch": "^0.10.1",
     "xhr2": "^0.1.3"
   },
@@ -61,6 +62,7 @@
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-inject": "^3.0.0",
+    "gulp-inject-string": "^1.1.0",
     "gulp-livereload": "^3.8.1",
     "gulp-rename": "^1.2.2",
     "imports-loader": "^0.6.5",
@@ -83,7 +85,6 @@
     "style-loader": "^0.12.3",
     "stylus-loader": "^1.4.2",
     "webpack": "^1.12.2",
-    "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.5.0"
+    "webpack-dev-server": "^1.14.1"
   }
 }
