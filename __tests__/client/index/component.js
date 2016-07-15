@@ -3,32 +3,31 @@
 import test from "ava"
 import expect from "expect"
 import React from "react";
-import ReactTestUtils from "react/lib/ReactTestUtils";
+import {mount,shallow} from "enzyme"
+import ReactTestUtils from "react-addons-test-utils";
 import Weather from "../../../shared/chunk/index/component.jsx";
 import initialState from "./initialState"
 
-let props,weatherComponent,input,button;
+let el
 
-test.skip.before(t=>{
-    props = {
+test.before(t=>{
+    const props = {
         changeField:expect.createSpy(),
         fetchWeather:expect.createSpy(),
         weatherByCityName:initialState
     }
-    weatherComponent = ReactTestUtils.renderIntoDocument(
-        <Weather {...props}/>
-    );
-    input = ReactTestUtils.findRenderedDOMComponentWithTag(
-        weatherComponent,"input"
-    )
-    button = ReactTestUtils.findRenderedDOMComponentWithTag(
-        weatherComponent,"button"
-    )
+    el = shallow(<Weather {...props}/>)
+    // input = ReactTestUtils.findRenderedDOMComponentWithTag(
+    //     weatherComponent,"input"
+    // )
+    // button = ReactTestUtils.findRenderedDOMComponentWithTag(
+    //     weatherComponent,"button"
+    // )
 })
 
-test.skip("should render correct",t=>{
-    t.is(input.value,"长沙")
-    t.is(button.nextSibling.lastChild.textContent,"changsha")
+test("should render correct",t=>{
+    t.is(el.find("input").prop("value"),"长沙")
+    t.is(el.find("p").first().children().last().text(),"changsha")
 })
 
 test.skip("should call handleQuery with input value",t=>{
