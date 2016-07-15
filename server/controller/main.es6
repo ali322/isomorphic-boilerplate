@@ -1,20 +1,20 @@
 'use strict'
-import util from "../lib/util"
-
-const WeatherApp = util.getSharedComponent("index")
-const ErrorContent = util.getSharedComponent("common","error.jsx")
+import react,{Component} from "react"
+import {apiRequest,markupForComponent} from "../lib/util.es6"
+import WeatherApp from "../../shared/chunk/index/app.jsx"
+import ErrorContent from "../../shared/chunk/common/error.jsx"
 
 export async function index(ctx,next){
-    const ret = await util.apiRequest("http://apistore.baidu.com/microservice/weather",{
+    const ret = await apiRequest("http://apistore.baidu.com/microservice/weather",{
         cityname:"北京"
     })
     if(ret.errMsg === "success"){
         var initialState = {
             weather:ret.retData
         };
-        var markup = util.getMarkupByComponent(WeatherApp({
+        var markup = markupForComponent(WeatherApp,{
             initialState:initialState
-        }));
+        });
         await ctx.render("index", {
             markup: markup,
             initialState:initialState
@@ -27,7 +27,7 @@ export async function index(ctx,next){
 
 export async function weather(ctx,next){
     var cityName = req.body.cityname;
-    util.apiRequest("http://apistore.baidu.com/microservice/weather",{
+    apiRequest("http://apistore.baidu.com/microservice/weather",{
         cityname:cityName
     }).then(function(ret){
         if(ret.errMsg === "success"){
@@ -49,9 +49,9 @@ export async function errorHandler(ctx,next){
         var initialState = {
             msg: err.message
         }
-        var markup = util.getMarkupByComponent(ErrorContent({
+        var markup = markupForComponent(ErrorContent,{
             initialState: initialState
-        }))
+        })
 
         await ctx.render('error', {
             markup: markup,
@@ -66,9 +66,9 @@ export async function notFoundHandler(ctx,next){
     var initialState = {
         msg: "page not found"
     }
-    var markup = util.getMarkupByComponent(ErrorContent({
+    var markup = markupForComponent(ErrorContent,{
         initialState: initialState
-    }))
+    })
 
     await ctx.render('error', {
         markup: markup,

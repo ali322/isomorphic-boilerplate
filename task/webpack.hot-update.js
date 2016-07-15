@@ -42,7 +42,7 @@ module.exports = {
         }, {
             test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
-            loader: "react-hot!babel?stage=2"
+            loader: "react-hot!babel"
             // query: babelrc
         }, , {
             test: /\.html/,

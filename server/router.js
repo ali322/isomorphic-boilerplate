@@ -2,8 +2,8 @@
 var Router = require("koa-router")
 var router = new Router()
 
-require("babel-core/register")({
-    optional:["runtime"],
+require("babel-polyfill");
+require("babel-register")({
     extensions: [".es6", ".jsx"]
 });
 

@@ -20,6 +20,11 @@ app.use(convert(session({
     }
 })))
 
+// app.use(convert(function* (next){
+//     console.log("ctx",this)
+//     yield next
+// }))
+
 app.use(views(`${__dirname}/../view`,{map:{html:"swig"},extension:"html"}))
 
 var router = require("./router.js")
