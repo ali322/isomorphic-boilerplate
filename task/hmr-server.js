@@ -19,5 +19,5 @@ new WebpackDevServer(webpack(config), {
   if (err) {
     console.log(err);
   }
-  console.log('🌎 hmr-server Listening at %d:%d',env.lanIP,env.hmrPort);
+  console.log('🌎 hmr-server Listening at %s:%d',env.lanIP,env.hmrPort);
 });
