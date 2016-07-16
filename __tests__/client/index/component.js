@@ -4,7 +4,6 @@ import test from "ava"
 import sinon from "sinon"
 import React from "react";
 import {shallow,mount} from "enzyme"
-import ReactTestUtils from "react-addons-test-utils";
 import Weather from "../../../shared/chunk/index/component.jsx";
 import initialState from "./initialState"
 

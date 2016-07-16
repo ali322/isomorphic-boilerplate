@@ -1,8 +1,8 @@
 #Isomorphic Boilerplate
 
 [![Build Status](https://travis-ci.org/ali322/isomorphic-boilerplate.svg)](https://travis-ci.org/ali322/isomorphic-boilerplate)
-[![Coverage Status](https://coveralls.io/repos/ali322/isomorphic-boilerplate/badge.svg?branch=master&service=github)](https://coveralls.io/github/ali322/isomorphic-boilerplate?branch=master)
 [![Dependency Status](https://gemnasium.com/ali322/isomorphic-boilerplate.svg)](https://gemnasium.com/ali322/isomorphic-boilerplate)
+[![Code Climate](https://codeclimate.com/github/ali322/isomorphic-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/ali322/isomorphic-boilerplate)
 
 isomorphic webapp boilerplate [中文文档](./README_zh.md)
 
@@ -22,8 +22,10 @@ Directory structure
 ===
 
 ```sh
+__test__/
+    |-- client/ #client unit tests
+    |-- server/ #server unit tests
 client/
-    |-- __tests__/  #client unit tests
     |-- asset/      #images,fonts and so on
     |-- bundle/
         |-- common/ #public css and js
@@ -33,7 +35,6 @@ client/
         |-- .../    #more your own page's entry js and css,like index page
     |-- vendor/     #third party libraries
 server/
-    |-- __tests__   #server unit tests
     |-- controller/ #express routes directory
     |-- lib/        #server libraries,util and helper modules inside
     |-- router.js   #server router,all the routes is defined here
@@ -51,8 +52,7 @@ task/
         |-- module.json #define page's path and module config
         |-- vendor.json #define third party libraries
     |-- environment.js  #define module's env variables
-    |-- develop-server.js       #webpack dev server entry file
-    |-- vendor-css.js   #third party library's css compile
+    |-- hmr-server.js       #webpack dev server entry file
     |-- webpack-inject.js #inject compiled js and css into templates
     |-- webpack.develop.js #compile modules and vendors for develop
     |-- webpack.production.js #compile modules and vendors for production

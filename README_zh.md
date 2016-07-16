@@ -1,8 +1,8 @@
 #Isomorphic Boilerplate
 
 [![Build Status](https://travis-ci.org/ali322/isomorphic-boilerplate.svg)](https://travis-ci.org/ali322/isomorphic-boilerplate)
-[![Coverage Status](https://coveralls.io/repos/ali322/isomorphic-boilerplate/badge.svg?branch=master&service=github)](https://coveralls.io/github/ali322/isomorphic-boilerplate?branch=master)
 [![Dependency Status](https://gemnasium.com/ali322/isomorphic-boilerplate.svg)](https://gemnasium.com/ali322/isomorphic-boilerplate)
+[![Code Climate](https://codeclimate.com/github/ali322/isomorphic-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/ali322/isomorphic-boilerplate)
 
 isomorphic webapp boilerplate [English Document](./README.md)
 
@@ -22,8 +22,10 @@ isomorphic webapp boilerplate [English Document](./README.md)
 ===
 
 ```sh
+__test__/
+    |-- client/ #前端单元测试
+    |-- server/ #后端单元测试
 client/
-    |-- __tests__/  #前端单元测试
     |-- asset/      #图片,字体等等资源
     |-- bundle/
         |-- common/     #公共的css和js
@@ -33,7 +35,6 @@ client/
         |-- .../        #更多的页面入口js和css,类似index
     |-- vendor/     #第三方库文件
 server/
-    |-- __tests__   #后端单元测试
     |-- controller/ #express 路由目录
     |-- lib/        #后端库(工具库等等)
     |-- router.js   #后端路由定义文件
@@ -49,8 +50,7 @@ task/
         |-- module.json #定义页面配合,以及css和js路径
         |-- vendor.json #定义第三方库
     |-- environment.js  #定义模块的环境变量
-    |-- develop-server.js       #webpack dev server 入口文件
-    |-- vendor-css.js   #编译第三方库的css
+    |-- hmr-server.js       #webpack dev server 入口文件
     |-- webpack-inject.js #注入编译好的js和css至模板
     |-- webpack.develop.js #为开发环境编译模块和第三方库
     |-- webpack.production.js #为生产环境编译模块和第三方库
