@@ -1,5 +1,5 @@
 'use strict';
-import {apiRequest} from "../../lib/util.es6";
+import request from "../../lib/request.es6"
 import {CHANGE_FIELD,REQUEST_WEATHER,RESPONSE_WEATHER,FAIL_RESPONSE} from "./constant.es6";
 export function changeField(name,value){
     return {
@@ -31,12 +31,10 @@ function failResponse(err){
 }
 
 export function fetchWeather(param){
-    return (dispatch)=>{
-        dispatch(requestWeather(param));
-        apiRequest("/weather",param,{method:"POST"}).then((res)=>{
-            dispatch(responseWeather(param,res));
-        }).catch((err)=>{
-            dispatch(failResponse(err));
-        })
-    }
+    return (dispatch) => {
+        dispatch(requestWeather(param))
+        return request.get("/weather",param)
+        .then(ret=> dispatch(responseWeather(param,ret)))
+        .catch(err =>dispatch(failResponse(err)))
+  }
 }

@@ -1,5 +1,5 @@
 'use strict'
-import reqwest from "reqwest";
+import reqwest from "reqwest"
 
 const util = {
     apiRequest(url,param,options={

@@ -1,38 +1,39 @@
 'use strict'
 
 import test from "ava"
-import expect from "expect"
+import sinon from "sinon"
 import React from "react";
-import {mount,shallow} from "enzyme"
+import {shallow,mount} from "enzyme"
 import ReactTestUtils from "react-addons-test-utils";
 import Weather from "../../../shared/chunk/index/component.jsx";
 import initialState from "./initialState"
 
-let el
+let wrapper,el
 
 test.before(t=>{
     const props = {
-        changeField:expect.createSpy(),
-        fetchWeather:expect.createSpy(),
+        changeFiwrapperd:sinon.spy(),
+        fetchWeather:sinon.spy(),
+        handleChange:sinon.spy(),
         weatherByCityName:initialState
     }
-    el = shallow(<Weather {...props}/>)
-    // input = ReactTestUtils.findRenderedDOMComponentWithTag(
-    //     weatherComponent,"input"
-    // )
-    // button = ReactTestUtils.findRenderedDOMComponentWithTag(
-    //     weatherComponent,"button"
-    // )
+    wrapper = shallow(<Weather {...props}/>)
+    el = wrapper.instance()
 })
 
 test("should render correct",t=>{
-    t.is(el.find("input").prop("value"),"长沙")
-    t.is(el.find("p").first().children().last().text(),"changsha")
+    t.is(wrapper.find("input").prop("value"),"长沙")
+    t.is(wrapper.find("p").first().children().last().text(),"changsha")
 })
 
-test.skip("should call handleQuery with input value",t=>{
-    input.value = "上海";
-    ReactTestUtils.Simulate.change(input);
-    ReactTestUtils.Simulate.click(button);
-    t.is(props.fetchWeather.calls.length,1)
+test.skip("should call handleChange once after change value",t=>{
+    const input = wrapper.find("input")
+    input.simulate("change",{target:{value:"上海"},preventDefault:()=>{}})
+    t.is(el.props.handleChange.callCount,1)
+})
+
+test("should call handleQuery once after click",t=>{
+    const button = wrapper.find("button")
+    button.simulate("click")
+    t.is(el.props.fetchWeather.callCount,1)
 })
