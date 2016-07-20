@@ -6,7 +6,7 @@
 
 isomorphic webapp boilerplate [中文文档](./README_zh.md)
 
-Quick start develop your isomorphic webapp with express and react
+Quick start
 ===
 - run`npm install`
 - run`npm run develop-webpack` to inject necessary files to the template file

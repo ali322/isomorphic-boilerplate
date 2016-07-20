@@ -6,7 +6,7 @@
 
 isomorphic webapp boilerplate [English Document](./README.md)
 
-快速开发 isomorphic webapp,基于express + react
+快速开发
 ===
 - 运行`npm install`
 - 运行`npm run develop-webpack` 注入js和css至模板文件
