@@ -30,14 +30,14 @@ gulp.task("develop-webpack", function() {
             relative: true,
             empty:true,
             transform: function(filepath) {
-                var vendorPattern = new RegExp(".+" + moduleObj.vendor),
-                    buildPattern = new RegExp(".+" + env.buildFolder);
+                // var vendorPattern = new RegExp(".+" + moduleObj.vendor),
+                    // buildPattern = new RegExp(".+" + env.buildFolder);
                 // filepath = filepath.replace(prefixPattern, './');
-                if (vendorPattern.test(filepath) === true) {
+                if (filepath.search(env.buildFolder) !== -1) {
                     if (path.extname(filepath) === ".js") {
                         filepath = filepath.replace(buildPattern, hmrBasePath+env.hmrPath);
                     }
-                } else if (vendorPattern.test(filepath) === false) {
+                } else if (filepath.search(moduleObj.vendor+'/') !== -1) {
                     if (path.extname(filepath) === ".js") {
                         filepath = filepath.replace(buildPattern, hmrBasePath+env.hmrPath);
                     }
