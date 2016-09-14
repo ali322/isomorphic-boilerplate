@@ -14,7 +14,7 @@ var reloaderBasePath = "{{baseURL}}:"+env.reloaderPort
 gulp.task("develop-webpack", function() {
     _.each(env.modules, function(moduleObj) {
         var injectTarget = moduleObj.html,
-            injectedPath = path.dirname(injectTarget),
+            injectedPath = path.dirname(injectTarget[0]),
             cssFiles = [],
             jsFiles = [],
             // vendorCSSFile = path.join(env.vendorPath, env.buildFolder + moduleObj.vendor + '.css'),
