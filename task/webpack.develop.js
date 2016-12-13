@@ -30,8 +30,7 @@ _.each(env.vendors, function(vendor) {
 });
 
 _.extend(entry, moduleEntries)
-// console.log('modules',env.modules)
-// console.log("entry", entry, moduleEntryPath);
+
 module.exports = {
     entry: entry,
     module: {
