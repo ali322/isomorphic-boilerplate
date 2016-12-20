@@ -6,7 +6,7 @@
 
 基于node的同构JS项目模板 [English Document](./README.md)
 
-快速开发
+开发
 ===
 1. 克隆至本地 `git clone https://github.com/ali322/isomorphic-boilerplate`
 2. 运行 `npm install`
@@ -14,7 +14,7 @@
 4. 运行 `npm start` 启动后端开发服务器
 5. 运行 `npm run frontend` 启动前端开发服务器
 
-部署至生产环境
+部署
 ===
 1. 运行 `npm run deploy-static` 编译前端源码并注入至html模板
 2. 上传项目源码至发布环境
