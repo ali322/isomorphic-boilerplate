@@ -65,3 +65,7 @@ view/
 app.js      #应用入口文件
 gulpfile.js #任务入口文件
 ```
+
+## 许可证
+
+[MIT License](http://en.wikipedia.org/wiki/MIT_License)
