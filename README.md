@@ -8,10 +8,11 @@ yet another isomorphic project boilerplate [中文文档](./README_zh.md)
 
 Develop
 ===
-1. run `npm install`
-2. run `npm run develop-static` build static source and inject to html
-3. run `npm start` to start backend develop server
-4. run `npm run frontend` to start frontend develop server
+1. clone to your local disk `git clone https://github.com/ali322/isomorphic-boilerplate`
+2. run `npm install`
+3. run `npm run develop-static` build static source and inject to html
+4. run `npm start` to start backend develop server
+5. run `npm run frontend` to start frontend develop server
 
 Deploy
 ===

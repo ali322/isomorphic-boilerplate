@@ -8,10 +8,11 @@
 
 快速开发
 ===
-1. 运行 `npm install`
-2. 运行 `npm run develop-static` 编译前端源码并注入至html模板
-3. 运行 `npm start` 启动后端开发服务器
-4. 运行 `npm run frontend` 启动前端开发服务器
+1. 克隆至本地 `git clone https://github.com/ali322/isomorphic-boilerplate`
+2. 运行 `npm install`
+3. 运行 `npm run develop-static` 编译前端源码并注入至html模板
+4. 运行 `npm start` 启动后端开发服务器
+5. 运行 `npm run frontend` 启动前端开发服务器
 
 部署至生产环境
 ===
