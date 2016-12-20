@@ -4,17 +4,15 @@
   "description": "isomorphic webapp boilerplate",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
     "linter": "esw -w --ext .js,.jsx,.es6 .",
-    "mocha": "mocha --reporter list --bail --check-leaks --compilers es6:babel-register __tests__/client/**/action.es6",
     "test": "NODE_ENV=test ava --tap | tap-spec",
-    "develop": "gulp start",
-    "hmr": "node ./task/hmr-server.js",
+    "start": "gulp start",
+    "frontend": "node ./task/hmr-server.js",
     "debug": "node-inspector --config ./task/inspector.config.js",
-    "develop-static": "npm run static-build && gulp develop-webpack",
-    "release-static": "npm run static-release && gulp deploy-webpack",
-    "static-build": "webpack --config ./task/webpack.develop.js --display-error-details",
-    "static-release": "webpack --config ./task/webpack.production.js --display-error-details"
+    "develop-static": "npm run build-static && gulp develop-webpack",
+    "deploy-static": "npm run release-static && gulp deploy-webpack",
+    "build-static": "webpack --config ./task/webpack.develop.js --display-error-details",
+    "release-static": "webpack --config ./task/webpack.production.js --display-error-details"
   },
   "ava": {
     "files": [

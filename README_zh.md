@@ -4,19 +4,22 @@
 [![Dependency Status](https://gemnasium.com/ali322/isomorphic-boilerplate.svg)](https://gemnasium.com/ali322/isomorphic-boilerplate)
 [![Code Climate](https://codeclimate.com/github/ali322/isomorphic-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/ali322/isomorphic-boilerplate)
 
-isomorphic webapp boilerplate [English Document](./README.md)
+基于node的同构JS项目模板 [English Document](./README.md)
 
 快速开发
 ===
-- 运行`npm install`
-- 运行`npm run develop-webpack` 注入js和css至模板文件
-- 运行`npm run develop` 启动开发服务
+1. 运行 `npm install`
+2. 运行 `npm run develop-static` 编译前端源码并注入至html模板
+3. 运行 `npm start` 启动后端开发服务器
+4. 运行 `npm run frontend` 启动前端开发服务器
 
 部署至生产环境
 ===
-- 运行`npm install --production`
-- 运行`npm install pm2 -g`(更多文档请见[pm2 文档](https://github.com/Unitech/PM2))
-- 运行`pm2 start app.js --name <项目名>` 部署至生产
+1. 运行 `npm run deploy-static` 编译前端源码并注入至html模板
+2. 上传项目源码至发布环境
+1. 运行 `npm install --production`
+2. 运行 `npm install pm2 -g` (更多文档请见[pm2 文档](https://github.com/Unitech/PM2))
+3. 运行 `pm2 start app.js --name <Project Name>` 部署至发布环境
 
 目录结构
 ===

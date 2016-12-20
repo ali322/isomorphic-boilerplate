@@ -4,19 +4,22 @@
 [![Dependency Status](https://gemnasium.com/ali322/isomorphic-boilerplate.svg)](https://gemnasium.com/ali322/isomorphic-boilerplate)
 [![Code Climate](https://codeclimate.com/github/ali322/isomorphic-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/ali322/isomorphic-boilerplate)
 
-isomorphic webapp boilerplate [中文文档](./README_zh.md)
+yet another isomorphic project boilerplate [中文文档](./README_zh.md)
 
-Quick start
+Develop
 ===
-- run`npm install`
-- run`npm run develop-webpack` to inject necessary files to the template file
-- run`npm run develop` to get develop server start
+1. run `npm install`
+2. run `npm run develop-static` build static source and inject to html
+3. run `npm start` to start backend develop server
+4. run `npm run frontend` to start frontend develop server
 
-Deploy to production environment
+Deploy
 ===
-- run`npm install --production`
-- run`npm install pm2 -g`(more instructions in [pm2 documention](https://github.com/Unitech/PM2))
-- run`pm2 start app.js --name <Project Name>` to deploy
+1. run `npm run deploy-static` release static source and inject to html
+2. upload your project to deploy environment
+1. run `npm install --production`
+2. run `npm install pm2 -g` (more instructions in [pm2 documention](https://github.com/Unitech/PM2))
+3. run `pm2 start app.js --name <Project Name>` to deploy
 
 Directory structure
 ===
@@ -64,5 +67,9 @@ view/
 app.js      #web application enrty file
 gulpfile.js #task entry file
 ```
+
+## License
+
+[MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
 
