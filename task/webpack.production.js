@@ -35,7 +35,7 @@ _.each(env.vendors, function(vendor) {
 
 /*add modules and vendors to entry point*/
 _.extend(entry, moduleEntries);
-// console.log("entry",entry)
+console.log("entry",entry)
 module.exports = {
     entry: entry,
     module: {
@@ -82,7 +82,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
             output: {
               comments: false
             },
