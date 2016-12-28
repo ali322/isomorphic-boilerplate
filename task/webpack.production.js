@@ -26,7 +26,7 @@ del.sync(path.join(env.clientPath,env.vendorFolder,env.distFolder,"/*.js"))
 _.each(env.vendors, function(vendor) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name: vendor.name,
-        filename:path.join(env.clientPath,env.vendorFolder,env.distFolder,vendor.name + "-[hash].js")
+        filename:path.join(env.vendorFolder,env.distFolder,vendor.name + "-[hash].js")
     }))
     entry[vendor.name] = vendor.entryJS;
 });
