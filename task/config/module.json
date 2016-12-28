@@ -1,7 +1,7 @@
 {
     "error": {
         "html": ["error.html"],
-        "path": "./client/bundle/error/",
+        "path": "error/",
         "compiler": {
             "js": "babel",
             "css": "stylus"
@@ -10,7 +10,7 @@
     },
     "index": {
         "html": ["index.html"],
-        "path": "./client/bundle/index/",
+        "path": "index/",
         "compiler": {
             "js": "babel",
             "css": "stylus"

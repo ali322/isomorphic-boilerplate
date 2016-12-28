@@ -13,22 +13,20 @@ var entry = {};
 var commonChunks = [];
 
 /*build pages*/
-var moduleEntries = {},
-    moduleEntryPath = "";
+var moduleEntries = {}
 _.each(env.modules, function(moduleObj) {
     del.sync(path.join(moduleObj.path, env.distFolder + '/*.*'));
     var moduleEntry = {};
-    moduleEntryPath = moduleObj.path + "../";
     moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
 });
 
 /*build vendors*/
-del.sync(env.vendorPath + "/" + env.distFolder + '/*.js');
+del.sync(path.join(env.clientPath,env.vendorFolder,env.distFolder,"/*.js"))
 _.each(env.vendors, function(vendor) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name: vendor.name,
-        filename: env.vendorPath + env.distFolder + vendor.name + "-[hash].js"
+        filename:path.join(env.clientPath,env.vendorFolder,env.distFolder,vendor.name + "-[hash].js")
     }))
     entry[vendor.name] = vendor.entryJS;
 });
@@ -46,7 +44,7 @@ module.exports = {
         }, {
             test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
-            loader: 'babel-loader'
+            loader: 'babel'
         }, , {
             test: /\.html/,
             exclude: [node_modules_dir],
@@ -69,9 +67,9 @@ module.exports = {
         extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
     },
     output: {
-        path: "./",
-        filename: moduleEntryPath + "[name]/" + env.distFolder + "[name]-[hash].js",
-        chunkFilename: moduleEntryPath + "[name]/" + env.distFolder + "[id]-[hash].chunk.js"
+        path: env.clientPath,
+        filename: path.join('bundle',"[name]",env.distFolder,"[name]-[hash].js"),
+        chunkFilename:path.join('bundle',"[name]",env.distFolder,"[id]-[hash].chunk.js")
     },
     plugins: _.union([
         new webpack.DefinePlugin({
@@ -88,6 +86,6 @@ module.exports = {
             },
             sourceMap: false
         }),
-        new ExtractTextPlugin(moduleEntryPath + "[name]/" + env.distFolder + "[name]-[hash].css")
+        new ExtractTextPlugin(path.join('bundle',"[name]",env.distFolder,"[name]-[hash].css"))
     ], commonChunks)
 }

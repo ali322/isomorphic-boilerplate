@@ -2,9 +2,11 @@ var path = require("path"),
     os = require("os"),
     _ = require("lodash");
 var env = {
-    buildFolder: "build/",
-    distFolder: "dist/",
-    vendorPath: "./client/vendor/",
+    buildFolder: "build",
+    distFolder: "dist",
+    bundleFolder:"bundle",
+    vendorFolder: "vendor",
+    clientPath: "./client",
     pagePath: "./view/",
     hmrPath: "/hmr/"
 };
@@ -13,9 +15,9 @@ var moduleConfig = require('./config/module.json'),
     modules = [];
 _.each(moduleConfig, function(moduleObj, moduleName) {
     var entryJS = moduleObj.entryJS !== undefined ? moduleObj.entryJS :
-        moduleObj.path + moduleName + ".jsx";
+        path.join(env.clientPath,env.bundleFolder,moduleObj.path,moduleName+".jsx")
     var entryCSS = moduleObj.entryCSS !== undefined ? moduleObj.entryCSS :
-        moduleObj.path + "stylesheet/" + moduleName + ".styl";
+        path.join(env.clientPath,env.bundleFolder,moduleObj.path,"stylesheet",moduleName+".styl")
     var entryHtml = [];
     _.each(moduleObj.html, function(pageHtml) {
         entryHtml.push(env.pagePath + pageHtml);
