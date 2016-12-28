@@ -11,11 +11,9 @@ var entry = {};
 var commonChunks = [];
 
 /*build modules*/
-var moduleEntries = {},
-    moduleEntryPath = "";
+var moduleEntries = {}
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
-    moduleEntryPath = moduleObj.path + "../";
     moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
 });
@@ -24,7 +22,7 @@ _.each(env.modules, function(moduleObj) {
 _.each(env.vendors, function(vendor) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name: vendor.name,
-        filename: env.vendorPath + env.buildFolder + vendor.name + ".js"
+        filename: path.join(env.vendorFolder,env.buildFolder,vendor.name + ".js")
     }))
     entry[vendor.name] = vendor.entryJS;
 });
@@ -64,11 +62,11 @@ module.exports = {
         extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json"]
     },
     output: {
-        path: "./",
-        filename: moduleEntryPath + "[name]/" + env.buildFolder + "[name].js",
-        chunkFilename: moduleEntryPath + "[name]/" + env.buildFolder + "[id].chunk.js",
+        path: env.clientPath,
+        filename: path.join('bundle',"[name]",env.buildFolder,"[name].js"),
+        chunkFilename:path.join('bundle',"[name]",env.buildFolder,"[id].chunk.js")
     },
     plugins: _.union([
-        new ExtractTextPlugin(moduleEntryPath + "[name]/" + env.buildFolder + "[name].css")
+        new ExtractTextPlugin(path.join('bundle',"[name]",env.buildFolder,"[name].css"))
     ], commonChunks)
 }

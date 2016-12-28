@@ -19,8 +19,8 @@ gulp.task("develop-webpack", function() {
             jsFiles = [],
             // vendorCSSFile = path.join(env.vendorPath, env.buildFolder + moduleObj.vendor + '.css'),
             // moduleCSSFile = path.join(moduleObj.path, env.buildFolder + '/*.css'),
-            vendorJSFile = path.join(env.vendorPath, env.buildFolder + moduleObj.vendor + '.js'),
-            moduleJSFile = path.join(moduleObj.path, env.buildFolder + '*.js');
+            vendorJSFile = path.join(env.clientPath,env.vendorFolder, env.buildFolder, moduleObj.vendor + '.js'),
+            moduleJSFile = path.join(env.clientPath,env.bundleFolder,moduleObj.path,env.buildFolder, '/*.js');
         jsFiles.push(vendorJSFile);
         jsFiles.push(moduleJSFile);
         var sources = gulp.src(_.union(cssFiles, jsFiles), {
@@ -30,9 +30,7 @@ gulp.task("develop-webpack", function() {
             relative: true,
             empty:true,
             transform: function(filepath) {
-                // var vendorPattern = new RegExp(".+" + moduleObj.vendor),
-                    // buildPattern = new RegExp(".+" + env.buildFolder);
-                // filepath = filepath.replace(prefixPattern, './');
+                var buildPattern = new RegExp(".+" + env.buildFolder+'/');
                 if (filepath.search(env.buildFolder) !== -1) {
                     if (path.extname(filepath) === ".js") {
                         filepath = filepath.replace(buildPattern, hmrBasePath+env.hmrPath);
@@ -68,16 +66,14 @@ gulp.task("deploy-webpack", function() {
             injectedPath = path.dirname(injectTarget),
             cssFiles = [],
             jsFiles = [],
-            vendorCSSFile = path.join(env.vendorPath, env.distFolder + moduleObj.vendor + '-*.css'),
-            // extensionCssFile = path.join(env.extensions.path, '/' + env.extensions.distFolder + '/' + moduleObj.name + '-*.css'),
-            moduleCSSFile = path.join(moduleObj.path, env.distFolder + '*.css'),
-            vendorJSFile = path.join(env.vendorPath, env.distFolder + moduleObj.vendor + '-*.js'),
-            moduleJSFile = path.join(moduleObj.path, env.distFolder + '*.js');
+            vendorCSSFile = path.join(env.clientPath,env.vendorFolder, env.distFolder,moduleObj.vendor + '-*.css'),
+            vendorJSFile = path.join(env.clientPath,env.vendorFolder, env.distFolder, moduleObj.vendor + '-*.js'),
+            moduleCSSFile = path.join(env.clientPath,env.bundleFolder,moduleObj.path, env.distFolder,'/*.css'),
+            moduleJSFile = path.join(env.clientPath,env.bundleFolder,moduleObj.path, env.distFolder,'/*.js');
         cssFiles.push(vendorCSSFile);
         cssFiles.push(moduleCSSFile);
         jsFiles.push(vendorJSFile);
         jsFiles.push(moduleJSFile);
-        // console.log(jsFiles)
         var sources = gulp.src(_.union(cssFiles, jsFiles), {
             read: false
         });

@@ -15,14 +15,14 @@ var commonChunks = [];
 /*build pages*/
 var moduleEntries = {}
 _.each(env.modules, function(moduleObj) {
-    del.sync(path.join(moduleObj.path, env.distFolder + '/*.*'));
+    del.sync(path.join(env.clientPath,env.bundleFolder,moduleObj.path, env.distFolder + '/*.*'));
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
 });
 
 /*build vendors*/
-del.sync(path.join(env.clientPath,env.vendorFolder,env.distFolder,"/*.js"))
+del.sync(path.resolve(path.join(env.clientPath,env.vendorFolder,env.distFolder,"/*.js")))
 _.each(env.vendors, function(vendor) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name: vendor.name,
@@ -33,7 +33,6 @@ _.each(env.vendors, function(vendor) {
 
 /*add modules and vendors to entry point*/
 _.extend(entry, moduleEntries);
-console.log("entry",entry)
 module.exports = {
     entry: entry,
     module: {

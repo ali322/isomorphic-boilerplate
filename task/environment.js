@@ -15,9 +15,9 @@ var moduleConfig = require('./config/module.json'),
     modules = [];
 _.each(moduleConfig, function(moduleObj, moduleName) {
     var entryJS = moduleObj.entryJS !== undefined ? moduleObj.entryJS :
-        path.join(env.clientPath,env.bundleFolder,moduleObj.path,moduleName+".jsx")
+        path.resolve(path.join(env.clientPath,env.bundleFolder,moduleObj.path,moduleName+".jsx"))
     var entryCSS = moduleObj.entryCSS !== undefined ? moduleObj.entryCSS :
-        path.join(env.clientPath,env.bundleFolder,moduleObj.path,"stylesheet",moduleName+".styl")
+        path.resolve(path.join(env.clientPath,env.bundleFolder,moduleObj.path,"stylesheet",moduleName+".styl"))
     var entryHtml = [];
     _.each(moduleObj.html, function(pageHtml) {
         entryHtml.push(env.pagePath + pageHtml);

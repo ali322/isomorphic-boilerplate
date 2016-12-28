@@ -76,7 +76,7 @@ module.exports = {
         extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
     },
     output: {
-        path: path.join(__dirname, "../client"),
+        path: env.clientPath,
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
         publicPath: hmrURL + env.hmrPath
