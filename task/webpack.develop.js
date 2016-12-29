@@ -6,6 +6,7 @@ var webpack = require('webpack'),
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment');
+var InjectHtmlPlugin = require("./inject-html-webpack-plugin")
 
 var entry = {};
 var commonChunks = [];
@@ -67,6 +68,11 @@ module.exports = {
         chunkFilename:path.join('bundle',"[name]",env.buildFolder,"[id].chunk.js")
     },
     plugins: _.union([
+        new InjectHtmlPlugin({
+            prefixURI:"/hn/",
+            chunks:['index'],
+            filename:"./view/index.html"
+        }),
         new ExtractTextPlugin(path.join('bundle',"[name]",env.buildFolder,"[name].css"))
     ], commonChunks)
 }
