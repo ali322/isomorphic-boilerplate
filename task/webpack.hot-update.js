@@ -5,10 +5,12 @@ var webpack = require('webpack'),
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment');
+var InjectHtmlPlugin = require("./inject-html-webpack-plugin")
 
 /*build const*/
 var entry = {};
 var commonChunks = [];
+var htmls = [];
 var hmrURL = env.hmrBasePath
 
 _.each(env.modules, function(moduleObj) {
@@ -20,6 +22,13 @@ _.each(env.modules, function(moduleObj) {
         moduleObj.entryJS,
         moduleObj.entryCSS
     ];
+    moduleObj.html.forEach(function(html){
+        htmls.push(new InjectHtmlPlugin({
+            prefixURI:hmrURL+env.hmrPath,
+            chunks:[moduleObj.name,moduleObj.vendor],
+            filename:html
+        }))
+    })
     _.extend(entry, moduleEntry);
 });
 
@@ -76,7 +85,7 @@ module.exports = {
         extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
     },
     output: {
-        path: env.clientPath,
+        path: path.join(__dirname,'../',env.clientPath),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
         publicPath: hmrURL + env.hmrPath
@@ -85,11 +94,6 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // })
         // new ExtractTextPlugin("[name].css")
-    ], commonChunks)
+    ], commonChunks,htmls)
 }

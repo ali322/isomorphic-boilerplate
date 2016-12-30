@@ -63,10 +63,20 @@ InjectHtmlWebpackPlugin.prototype.apply = function (compiler) {
         var assets = assetsOfChunks(namedChunks,selected)
         var jsLabel = assets['js'].map(function (v) {
             return '<script src="' + path.join(prefixURI, v) + '"></script>'
-        }).join('\n')
+        })
+        if(jsLabel.length > 1){
+            jsLabel.unshift('\r')
+            jsLabel.push('\n')
+        }
+        jsLabel = jsLabel.join('\n')
         var cssLabel = assets['css'].map(function (v) {
             return '<link rel="stylesheet" href="' + path.join(prefixURI, v) + '"/>'
-        }).join('\n')
+        })
+        if(cssLabel.length > 1){
+            cssLabel.unshift('\r')
+            cssLabel.push('\n')
+        }
+        cssLabel = cssLabel.join('\n')
         var _html = fs.readFileSync(filename, 'utf8')
         _html = injectWithin(_html, startInjectJS, endInjectJS, jsLabel)
         _html = injectWithin(_html, startInjectCSS, endInjectCSS, cssLabel)

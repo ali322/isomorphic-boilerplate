@@ -7,10 +7,13 @@ var webpack = require('webpack'),
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment');
+var InjectHtmlPlugin = require("./inject-html-webpack-plugin")
+var autoPrefixer = require('autoprefixer')
 
 /*build const*/
 var entry = {};
 var commonChunks = [];
+var htmls = [];
 
 /*build pages*/
 var moduleEntries = {}
@@ -19,6 +22,12 @@ _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
+    moduleObj.html.forEach(function(html){
+        htmls.push(new InjectHtmlPlugin({
+            chunks:[moduleObj.name,moduleObj.vendor],
+            filename:html
+        }))
+    })
 });
 
 /*build vendors*/
@@ -51,17 +60,20 @@ module.exports = {
         }, {
             test: /\.styl/,
             exclude: [node_modules_dir],
-            loader: ExtractTextPlugin.extract('style', 'css!autoprefixer!stylus')
+            loader: ExtractTextPlugin.extract('style', 'css!postcss!stylus')
         }, {
             test: /\.css/,
             exclude: [node_modules_dir],
-            loader: ExtractTextPlugin.extract('style', 'css')
+            loader: 'file-loader?name=[path][name].[ext]!extract!css?modules&importLoaders=1!postcss'
         }, {
             test: /\.(png|jpg)$/,
             exclude: [node_modules_dir],
             loader: 'url?limit=25000'
         }]
     },
+    postcss:function(webpack){
+        return [postcssImport({addDependencyTo:true}),autoPrefixer()]
+    }
     resolve: {
         extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
     },
@@ -86,5 +98,5 @@ module.exports = {
             sourceMap: false
         }),
         new ExtractTextPlugin(path.join('bundle',"[name]",env.distFolder,"[name]-[hash].css"))
-    ], commonChunks)
+    ], commonChunks,htmls)
 }

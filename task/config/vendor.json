@@ -1,5 +1,8 @@
 {
     "react":[
         "react","redux","react","react-redux","bluebird","lodash"
+    ],
+    "react-base":[
+        "react","react-dom"
     ]
 }

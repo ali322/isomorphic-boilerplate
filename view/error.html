@@ -1,9 +1,7 @@
 {% extends './layout.html' %}
 {% block title %}List{% endblock %} 
 {% block css %}
-<!-- inject:css -->
-<link rel="stylesheet" href="/client/bundle/error/dist/error-1b8c3310e3daccde11cd.css">
-<!-- endinject -->
+<!-- start:css --><link rel="stylesheet" href="/hn/bundle/error/dist/error-1b8c3310e3daccde11cd.css"/><!-- end:css -->
 {% endblock %} 
 {% block content %}
 <div class="error-container">
@@ -12,8 +10,9 @@
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %}
 {% block js %}
-<!-- inject:js -->
-<script src="/client/vendor/dist/react-1b8c3310e3daccde11cd.js"></script>
-<script src="/client/bundle/error/dist/error-1b8c3310e3daccde11cd.js"></script>
-<!-- endinject -->
+<!-- start:js -->
+<script src="/hn/bundle/error/dist/error-1b8c3310e3daccde11cd.js"></script>
+<script src="/hn/vendor/dist/react-1b8c3310e3daccde11cd.js"></script>
+
+<!-- end:js -->
 {% endblock %}

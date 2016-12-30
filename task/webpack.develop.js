@@ -10,6 +10,7 @@ var InjectHtmlPlugin = require("./inject-html-webpack-plugin")
 
 var entry = {};
 var commonChunks = [];
+var htmls = []
 
 /*build modules*/
 var moduleEntries = {}
@@ -17,6 +18,13 @@ _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
+    moduleObj.html.forEach(function(html){
+        htmls.push(new InjectHtmlPlugin({
+            prefixURI:'/hn/',
+            chunks:[moduleObj.name,moduleObj.vendor],
+            filename:html
+        }))
+    })
 });
 
 /*build vendors*/
@@ -29,6 +37,7 @@ _.each(env.vendors, function(vendor) {
 });
 
 _.extend(entry, moduleEntries)
+
 
 module.exports = {
     entry: entry,
@@ -68,11 +77,6 @@ module.exports = {
         chunkFilename:path.join('bundle',"[name]",env.buildFolder,"[id].chunk.js")
     },
     plugins: _.union([
-        new InjectHtmlPlugin({
-            prefixURI:"/hn/",
-            chunks:['index'],
-            filename:"./view/index.html"
-        }),
         new ExtractTextPlugin(path.join('bundle',"[name]",env.buildFolder,"[name].css"))
-    ], commonChunks)
+    ], commonChunks,htmls)
 }

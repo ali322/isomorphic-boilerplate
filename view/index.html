@@ -1,17 +1,14 @@
 {% extends "./layout.html" %} {% block title %}Detail{% endblock %} {% block css %}
-<!-- inject:css -->
-<link rel="stylesheet" href="/client/bundle/index/dist/index-1b8c3310e3daccde11cd.css">
-<!-- endinject -->
+<!-- start:css --><link rel="stylesheet" href="/hn/bundle/index/dist/index-1b8c3310e3daccde11cd.css"/><!-- end:css -->
 {% endblock %} {% block content %}
 <div class="index-container">
     <div id="weather">{{ markup|safe }}</div>
 </div>
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %} {% block js %}
-<!-- inject:js -->
-<script src="/client/vendor/dist/react-1b8c3310e3daccde11cd.js"></script>
-<script src="/client/bundle/index/dist/index-1b8c3310e3daccde11cd.js"></script>
-<!-- endinject -->
-<!-- start:js --><script src="/hn/bundle/index/build/index.js"></script><!-- end:js -->
-<!-- start:css --><link rel="stylesheet" href="/hn/bundle/index/build/index.css"/><!-- end:css -->
+<!-- start:js -->
+<script src="/hn/bundle/index/dist/index-1b8c3310e3daccde11cd.js"></script>
+<script src="/hn/vendor/dist/react-1b8c3310e3daccde11cd.js"></script>
+
+<!-- end:js -->
 {% endblock %}
