@@ -7,13 +7,23 @@ var webpack = require('webpack'),
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment');
-var InjectHtmlPlugin = require("./inject-html-webpack-plugin")
+var InjectHtmlPlugin = require("inject-html-webpack-plugin")
 var autoPrefixer = require('autoprefixer')
 
 /*build const*/
 var entry = {};
 var commonChunks = [];
 var htmls = [];
+
+function bundleTime(){
+    const dateObj = new Date()
+    const year = dateObj.getFullYear()
+    const month = dateObj.getMonth() + 1
+    const date = dateObj.getDate()
+    const hour = dateObj.getHours()
+    const minute = dateObj.getMinutes()
+    return ""+year+month+date+hour+minute
+}
 
 /*build pages*/
 var moduleEntries = {}
@@ -25,7 +35,12 @@ _.each(env.modules, function(moduleObj) {
     moduleObj.html.forEach(function(html){
         htmls.push(new InjectHtmlPlugin({
             chunks:[moduleObj.name,moduleObj.vendor],
-            filename:html
+            filename:html,
+            customInject:[{
+                start:'<!-- start:bundle-time -->',
+                end:'<!-- end:bundle-time -->',
+                content:bundleTime()
+            }]
         }))
     })
 });

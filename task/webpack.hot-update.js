@@ -5,13 +5,15 @@ var webpack = require('webpack'),
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment');
-var InjectHtmlPlugin = require("./inject-html-webpack-plugin")
+var InjectHtmlPlugin = require("inject-html-webpack-plugin")
 
 /*build const*/
 var entry = {};
 var commonChunks = [];
 var htmls = [];
-var hmrURL = env.hmrBasePath
+// var hmrURL = env.hmrBasePath
+var hmrPath = "{{baseURL}}:"+env.hmrPort+env.hmrPath
+var reloaderBasePath = "{{baseURL}}:"+env.reloaderPort
 
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
@@ -24,9 +26,14 @@ _.each(env.modules, function(moduleObj) {
     ];
     moduleObj.html.forEach(function(html){
         htmls.push(new InjectHtmlPlugin({
-            prefixURI:hmrURL+env.hmrPath,
+            prefixURI:hmrPath,
             chunks:[moduleObj.name,moduleObj.vendor],
-            filename:html
+            filename:html,
+            customInject:[{
+                start:'<!-- start:browser-sync -->',
+                end:'<!-- end:browser-sync -->',
+                content:'<script src="'+reloaderBasePath+'/bs/browser-sync-client.js"></script>'
+            }]
         }))
     })
     _.extend(entry, moduleEntry);
