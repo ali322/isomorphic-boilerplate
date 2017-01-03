@@ -64,7 +64,7 @@ var lanIP = getLanIP()
 env.lanIP = lanIP
 env.reloaderPort = process.env.RELOADER_PORT || 7000;
 env.hmrPort = process.env.HMR_PORT || 5000;
-env.hmrBasePath = "http://"+lanIP+":"+env.hmrPort
+// env.hmrBasePath = "http://"+lanIP+":"+env.hmrPort
 env.reloaderBasePath = "http://"+lanIP+":"+env.reloaderPor
 
 module.exports = env;
