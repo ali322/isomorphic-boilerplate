@@ -1,7 +1,7 @@
 'use strict'
 var os = require("os");
 
-var getLanIP = function(){
+function getLanIP(){
     var interfaces = os.networkInterfaces();
     var IPv4 = '127.0.0.1';
     for (var key in interfaces) {
@@ -14,6 +14,17 @@ var getLanIP = function(){
     return IPv4;
 }
 
+function bundleTime(){
+    const dateObj = new Date()
+    const year = dateObj.getFullYear()
+    const month = dateObj.getMonth() + 1
+    const date = dateObj.getDate()
+    const hour = dateObj.getHours()
+    const minute = dateObj.getMinutes()
+    return ""+year+month+date+hour+minute
+}
+
 module.exports = {
-    getLanIP:getLanIP
+    getLanIP:getLanIP,
+    bundleTime:bundleTime
 }

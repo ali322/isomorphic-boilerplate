@@ -11,23 +11,26 @@ var InjectHtmlPlugin = require("inject-html-webpack-plugin")
 var entry = {};
 var commonChunks = [];
 var htmls = [];
-// var hmrURL = env.hmrBasePath
 var hmrPath = "{{baseURL}}:"+env.hmrPort+env.hmrPath
 var reloaderBasePath = "{{baseURL}}:"+env.reloaderPort
 
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [
-        'webpack-dev-server/client?'+hmrURL,
-        // "webpack-hot-middleware/client",
-        // "webpack/hot/only-dev-server",
+        'webpack-dev-server/client?'+env.hmrBasePath,
+        "webpack/hot/only-dev-server",
         moduleObj.entryJS,
         moduleObj.entryCSS
     ];
     moduleObj.html.forEach(function(html){
+        var _chunks = [moduleObj.name]
+        if(moduleObj.vendor){
+            moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
+            // moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
+        }
         htmls.push(new InjectHtmlPlugin({
             prefixURI:hmrPath,
-            chunks:[moduleObj.name,moduleObj.vendor],
+            chunks:_chunks,
             filename:html,
             customInject:[{
                 start:'<!-- start:browser-sync -->',
@@ -40,13 +43,17 @@ _.each(env.modules, function(moduleObj) {
 });
 
 /*build vendors*/
-_.each(env.vendors, function(vendor) {
+_.each(env.vendors['js'], function(vendor,key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
-        name: vendor.name,
-        // filename:env.vendorPath + env.buildFolder + vendor.name + ".js"
+        name: key,
+        chunks:[key],
+        filename:path.join(env.vendorFolder,env.distFolder,key + ".js")
     }))
-    entry[vendor.name] = vendor.entryJS;
+    entry[key] = vendor;
 });
+_.each(env.vendors['css'],function(vendor,key){
+    entry[key] = vendor;
+})
 
 module.exports = {
     entry: entry,
@@ -67,12 +74,10 @@ module.exports = {
         }, {
             test: /\.styl/,
             exclude: [node_modules_dir],
-            // loader: ExtractTextPlugin.extract('style', 'css!sass!autoprefixer')
             loader: 'style!css!autoprefixer!stylus'
         }, {
             test: /\.css/,
             exclude: [node_modules_dir],
-            // loader: ExtractTextPlugin.extract('style', 'css!autoprefixer')
             loader: 'style!css'
         }, {
             test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -89,18 +94,17 @@ module.exports = {
     devtool: "#eval-source-map",
     watch:true,
     resolve: {
-        extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
+        extensions: ["", ".js", ".json", ".es6", ".jsx"]
     },
     output: {
         path: path.join(__dirname,'../',env.clientPath),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
-        publicPath: hmrURL + env.hmrPath
+        publicPath: env.hmrBasePath + env.hmrPath
     },
     plugins: _.union([
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        // new ExtractTextPlugin("[name].css")
     ], commonChunks,htmls)
 }

@@ -1,29 +1,21 @@
 var webpack = require('webpack'),
     path = require('path'),
     del = require("del"),
+    fs = require("fs"),
     _ = require("lodash");
 
-// var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var node_modules_dir = path.resolve(__dirname, '../node_modules');
-var env = require('./environment');
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var node_modules_dir = path.resolve(__dirname, '../node_modules')
+var env = require('./environment')
+var helper = require("./helper")
 var InjectHtmlPlugin = require("inject-html-webpack-plugin")
 var autoPrefixer = require('autoprefixer')
+var postcssImport = require('postcss-import')
 
 /*build const*/
 var entry = {};
 var commonChunks = [];
 var htmls = [];
-
-function bundleTime(){
-    const dateObj = new Date()
-    const year = dateObj.getFullYear()
-    const month = dateObj.getMonth() + 1
-    const date = dateObj.getDate()
-    const hour = dateObj.getHours()
-    const minute = dateObj.getMinutes()
-    return ""+year+month+date+hour+minute
-}
 
 /*build pages*/
 var moduleEntries = {}
@@ -33,13 +25,18 @@ _.each(env.modules, function(moduleObj) {
     moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS];
     _.extend(moduleEntries, moduleEntry)
     moduleObj.html.forEach(function(html){
+        var _chunks = [moduleObj.name]
+        if(moduleObj.vendor){
+            moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
+            // moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
+        }
         htmls.push(new InjectHtmlPlugin({
-            chunks:[moduleObj.name,moduleObj.vendor],
+            chunks:_chunks,
             filename:html,
             customInject:[{
                 start:'<!-- start:bundle-time -->',
                 end:'<!-- end:bundle-time -->',
-                content:bundleTime()
+                content:helper.bundleTime()
             }]
         }))
     })
@@ -47,16 +44,27 @@ _.each(env.modules, function(moduleObj) {
 
 /*build vendors*/
 del.sync(path.resolve(path.join(env.clientPath,env.vendorFolder,env.distFolder,"/*.js")))
-_.each(env.vendors, function(vendor) {
+_.each(env.vendors['js'], function(vendor,key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
-        name: vendor.name,
-        filename:path.join(env.vendorFolder,env.distFolder,vendor.name + "-[hash].js")
+        name: key,
+        chunks:[key],
+        filename:path.join(env.vendorFolder,env.distFolder,key + "-[hash].js")
     }))
-    entry[vendor.name] = vendor.entryJS;
+    entry[key] = vendor;
 });
+_.each(env.vendors['css'],function(vendor,key){
+    var _imports = [],proxyCSS = path.join(env.clientPath,env.vendorFolder,env.distFolder,key + ".css")
+    vendor.forEach(function(v){
+        _imports.push('@import "'+v+'";')
+    })
+    fs.writeFileSync(proxyCSS,_imports.join('\n'))
+    var proxyChunkName = _.keys(env.vendors['js'])[0]
+    entry[proxyChunkName] = entry[proxyChunkName].concat([path.resolve(proxyCSS)]);
+})
 
 /*add modules and vendors to entry point*/
 _.extend(entry, moduleEntries);
+
 module.exports = {
     entry: entry,
     module: {
@@ -78,8 +86,8 @@ module.exports = {
             loader: ExtractTextPlugin.extract('style', 'css!postcss!stylus')
         }, {
             test: /\.css/,
-            exclude: [node_modules_dir],
-            loader: 'file-loader?name=[path][name].[ext]!extract!css?modules&importLoaders=1!postcss'
+            // exclude: [node_modules_dir],
+            loader: 'file-loader?name=vendor/dist/[name].[ext]!extract!css?modules&importLoaders=1!postcss'
         }, {
             test: /\.(png|jpg)$/,
             exclude: [node_modules_dir],
@@ -88,9 +96,9 @@ module.exports = {
     },
     postcss:function(webpack){
         return [postcssImport({addDependencyTo:true}),autoPrefixer()]
-    }
+    },
     resolve: {
-        extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js", ".json", ".coffee"]
+        extensions: ["", ".js", ".json", ".es6", ".jsx"]
     },
     output: {
         path: env.clientPath,
@@ -112,6 +120,6 @@ module.exports = {
             },
             sourceMap: false
         }),
-        new ExtractTextPlugin(path.join('bundle',"[name]",env.distFolder,"[name]-[hash].css"))
+        new ExtractTextPlugin(path.join('bundle',"[name]",env.distFolder,"[name]-[hash].css"),{allChunks:true})
     ], commonChunks,htmls)
 }

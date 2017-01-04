@@ -8,13 +8,6 @@ export function markupForComponent(RenderComponent,props={}){
     return ReactDOMServer.renderToString(<RenderComponent {...props}/>)
 }
 
-export function apiRequest(url,param,options){
-    var defaultOptions = {
-            url: url,
-            data: param,
-            method: "get",
-            type: "json",
-            ...options
-        };
-    return reqwest(defaultOptions);
+export function apiRequest(url){
+    return fetch(url).then(ret=>ret.json());
 }

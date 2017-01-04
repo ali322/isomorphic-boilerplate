@@ -22,31 +22,18 @@ _.each(moduleConfig, function(moduleObj, moduleName) {
     _.each(moduleObj.html, function(pageHtml) {
         entryHtml.push(env.pagePath + pageHtml);
     });
-    // console.log('entryHtmls',entryHtml)
     var module = _.extend(moduleObj, {
         name: moduleName,
         entryCSS: entryCSS,
         entryJS: entryJS,
         html: entryHtml
     });
-    // console.log(module);
     modules.push(module);
 })
 env.modules = modules;
-// console.log('modules',modules);
 
-var vendorConfig = require('./config/vendor.json'),
-    vendors = [];
-_.each(vendorConfig, function(vendorJS, vendorName) {
-    var vendor = {
-        name: vendorName,
-        entryJS: vendorJS,
-        // entryCSS:vendorObj.css
-        // entry:_.union(vendorObj.js,vendorObj.css)
-    };
-    vendors.push(vendor);
-});
-env.vendors = vendors;
+var vendorConfig = require('./config/vendor.json')
+env.vendors = vendorConfig;
 
 var getLanIP = function(){
     var interfaces = os.networkInterfaces();
@@ -64,6 +51,7 @@ var lanIP = getLanIP()
 env.lanIP = lanIP
 env.reloaderPort = process.env.RELOADER_PORT || 7000;
 env.hmrPort = process.env.HMR_PORT || 5000;
-env.reloaderBasePath = "http://"+lanIP+":"+env.reloaderPor
+env.hmrBasePath = "http://"+lanIP+":"+env.hmrPort
+env.reloaderBasePath = "http://"+lanIP+":"+env.reloaderPort
 
 module.exports = env;

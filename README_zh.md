@@ -10,13 +10,12 @@
 ===
 1. 克隆至本地 `git clone https://github.com/ali322/isomorphic-boilerplate`
 2. 运行 `npm install`
-3. 运行 `npm run develop-static` 编译前端源码并注入至html模板
 4. 运行 `npm start` 启动后端开发服务器
-5. 运行 `npm run frontend` 启动前端开发服务器
+5. 运行 `npm run hmr` 启动前端开发服务器
 
 部署
 ===
-1. 运行 `npm run deploy-static` 编译前端源码并注入至html模板
+1. 运行 `npm run release-static` 编译前端源码并注入至html模板
 2. 上传项目源码至发布环境
 1. 运行 `npm install --production`
 2. 运行 `npm install pm2 -g` (更多文档请见[pm2 文档](https://github.com/Unitech/PM2))
@@ -55,8 +54,7 @@ task/
         |-- vendor.json #定义第三方库
     |-- environment.js  #定义模块的环境变量
     |-- hmr-server.js       #webpack dev server 入口文件
-    |-- webpack-inject.js #注入编译好的js和css至模板
-    |-- webpack.develop.js #为开发环境编译模块和第三方库
+    |-- develop-server.js #后端开发服务器入口文件
     |-- webpack.production.js #为生产环境编译模块和第三方库
     |-- webpack.hot-update.js #为热替换开发环境编译模块和第三方库
 view/

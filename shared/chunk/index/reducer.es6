@@ -2,30 +2,30 @@
 
 import {
     CHANGE_FIELD,
-    REQUEST_WEATHER,
-    RESPONSE_WEATHER
+    REQUEST_REPO,
+    RESPONSE_REPO
 } from "./constant.es6";
 import {combineReducers} from "redux";
 
-export function weatherByCityName(state={},action){
+export function eventsReducer(state={},action){
     switch(action.type){
         case CHANGE_FIELD:
             const {name,value} = action;
             return Object.assign({},state,{
-                weather:{...state.weather,[name]:value}
+                [name]:value
             });
-        case REQUEST_WEATHER:
+        case REQUEST_REPO:
             return Object.assign({},state,{
-                weatherFetched:false,
-                weatherFetching:true
+                repoFetched:false,
+                repoFetching:true
             });
-        case RESPONSE_WEATHER:
-            const weather = action.res.result;
-            const weatherFetched = action.res.weatherFetched;
+        case RESPONSE_REPO:
+            const events = action.res.result;
+            const repoFetched = action.res.isFetched;
             return Object.assign({},state,{
-                weather,
-                weatherFetched,
-                weatherFetching:false
+                events,
+                repoFetched,
+                repoFetching:false
             })
         default:
             return state;
@@ -33,7 +33,7 @@ export function weatherByCityName(state={},action){
 }
 
 const rootReducer = combineReducers({
-    weatherByCityName
+    eventsReducer
 });
 
 export default rootReducer;

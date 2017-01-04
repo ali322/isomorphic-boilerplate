@@ -1,8 +1,13 @@
 {
-    "react":[
-        "react","redux","react","react-redux","bluebird","lodash"
-    ],
-    "react-base":[
-        "react","react-dom"
-    ]
+    "js":{
+        "react":[
+            "react","redux","react","react-redux","bluebird","lodash"
+        ],
+        "react-base":[
+            "react","react-dom"
+        ]
+    },
+    "css":{
+        "common":["normalize.css/normalize.css"]
+    }
 }

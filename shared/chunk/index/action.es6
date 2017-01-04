@@ -1,6 +1,6 @@
 'use strict';
 import request from "../../lib/request.es6"
-import {CHANGE_FIELD,REQUEST_WEATHER,RESPONSE_WEATHER,FAIL_RESPONSE} from "./constant.es6";
+import {CHANGE_FIELD,REQUEST_REPO,RESPONSE_REPO,FAIL_RESPONSE} from "./constant.es6";
 export function changeField(name,value){
     return {
         type:CHANGE_FIELD,
@@ -9,16 +9,16 @@ export function changeField(name,value){
     }
 }
 
-function requestWeather(param){
+function requestRepo(param){
     return {
-        type:REQUEST_WEATHER,
+        type:REQUEST_REPO,
         param
     }
 }
 
-function responseWeather(param,res){
+function responseRepo(param,res){
     return {
-        type:RESPONSE_WEATHER,
+        type:RESPONSE_REPO,
         param,
         res
     }
@@ -30,11 +30,11 @@ function failResponse(err){
     }
 }
 
-export function fetchWeather(param){
+export function fetchRepo(param){
     return (dispatch) => {
-        dispatch(requestWeather(param))
-        return request.get("/weather",param)
-        .then(ret=> dispatch(responseWeather(param,ret)))
+        dispatch(requestRepo(param))
+        return request.get("/repo",param)
+        .then(ret=> dispatch(responseRepo(param,ret)))
         .catch(err =>dispatch(failResponse(err)))
   }
 }

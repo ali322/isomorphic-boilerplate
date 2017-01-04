@@ -5,12 +5,10 @@ import WeatherApp from "../../shared/chunk/index/app.jsx"
 import ErrorContent from "../../shared/chunk/common/error.jsx"
 
 export async function index(ctx,next){
-    const ret = await apiRequest("http://apistore.baidu.com/microservice/weather",{
-        cityname:"北京"
-    })
-    if(ret.errMsg === "success"){
+    const ret = await apiRequest("https://api.github.com/events")
+    if(ret.length > 0){
         var initialState = {
-            weather:ret.retData
+            events:ret
         };
         var markup = markupForComponent(WeatherApp,{
             initialState:initialState
@@ -21,27 +19,24 @@ export async function index(ctx,next){
         });
 
     }else{
-        next(new Error(ret.errMsg))
+        next(new Error("no events"))
     }
 }
 
-export async function weather(ctx,next){
-    var cityName = req.body.cityname;
-    apiRequest("http://apistore.baidu.com/microservice/weather",{
-        cityname:cityName
-    }).then(function(ret){
-        if(ret.errMsg === "success"){
-            ctx.body = {
-                weatherFetched:true,
-                result:ret.retData
-            }
-        }else{
-            ctx.body = {
-                weatherFetched:false,
-                errMsg:ret.errMsg
-            }
+export async function repo(ctx,next){
+    var repo = req.body.repo;
+    const ret = await apiRequest(`https://api.github.com/repos/${repo}/events`)
+    if(ret.errMsg === "success"){
+        ctx.body = {
+            weatherFetched:true,
+            result:ret.retData
         }
-    })
+    }else{
+        ctx.body = {
+            weatherFetched:false,
+            errMsg:ret.errMsg
+        }
+    }
 }
 
 export async function errorHandler(ctx,next){

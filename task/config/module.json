@@ -6,7 +6,10 @@
             "js": "babel",
             "css": "stylus"
         },
-        "vendor": "react"
+        "vendor": {
+            "js":"react-base",
+            "css":"common"
+        }
     },
     "index": {
         "html": ["index.html"],
@@ -15,6 +18,8 @@
             "js": "babel",
             "css": "stylus"
         },
-        "vendor": "react"
+        "vendor": {
+            "js":"react"
+        }
     }
 }

@@ -3,12 +3,12 @@ import React,{Component} from "react";
 import {Provider,connect} from "react-redux";
 import rootReducer from "./reducer.es6";
 import createStoreWithMiddleware,{wrapComponentWithActions} from "../../lib/redux-helper.es6";
-import Weather from "./component.jsx";
+import Events from "./component.jsx";
 import * as actions from "./action.es6";
 
-let WeatherConnected = connect((state)=>{
-    return state;
-})(wrapComponentWithActions(Weather,actions));
+let EventsConnected = connect((state)=>{
+    return {...state.eventsReducer};
+})(wrapComponentWithActions(Events,actions));
 
 function configureStore(initialState){
     const store = createStoreWithMiddleware(rootReducer, initialState)
@@ -21,21 +21,22 @@ function configureStore(initialState){
     return store
 }
 
-class WeatherApp extends Component{
+class App extends Component{
     render(){
-        const {weather} = this.props.initialState;
+        const {events} = this.props.initialState;
         const initialState = {
-            weatherByCityName:{
-                weather
+            eventsReducer:{
+                events,
+                repo:''
             }
         }
         const store = configureStore(initialState);
         return (
             <Provider store={store}>
-            <WeatherConnected/>
+            <EventsConnected/>
             </Provider>
         )
     }
 }
 
-export default WeatherApp;
+export default App;

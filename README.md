@@ -10,13 +10,12 @@ Develop
 ===
 1. clone to your local disk `git clone https://github.com/ali322/isomorphic-boilerplate`
 2. run `npm install`
-3. run `npm run develop-static` build static source and inject to html
 4. run `npm start` to start backend develop server
-5. run `npm run frontend` to start frontend develop server
+5. run `npm run hmr` to start frontend develop server
 
 Deploy
 ===
-1. run `npm run deploy-static` release static source and inject to html
+1. run `npm run release-static` release static source and inject to html
 2. upload your project to deploy environment
 1. run `npm install --production`
 2. run `npm install pm2 -g` (more instructions in [pm2 documention](https://github.com/Unitech/PM2))
@@ -57,8 +56,7 @@ task/
         |-- vendor.json #define third party libraries
     |-- environment.js  #define module's env variables
     |-- hmr-server.js       #webpack dev server entry file
-    |-- webpack-inject.js #inject compiled js and css into templates
-    |-- webpack.develop.js #compile modules and vendors for develop
+    |-- develop-sever.js #backend dev server entry file
     |-- webpack.production.js #compile modules and vendors for production
     |-- webpack.hot-update.js #compile modules and vendors for develop in HMR
 view/
