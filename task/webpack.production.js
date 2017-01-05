@@ -11,6 +11,7 @@ var helper = require("./helper")
 var InjectHtmlPlugin = require("inject-html-webpack-plugin")
 var autoPrefixer = require('autoprefixer')
 var postcssImport = require('postcss-import')
+var ChunkFilterPlugin = require("./chunk-filter-webpack-plugin")
 
 /*build const*/
 var entry = {};
@@ -43,23 +44,17 @@ _.each(env.modules, function(moduleObj) {
 });
 
 /*build vendors*/
-del.sync(path.resolve(path.join(env.clientPath,env.vendorFolder,env.distFolder,"/*.js")))
+del.sync(path.resolve(path.join(env.clientPath,env.vendorFolder,env.distFolder,"/*.*")))
 _.each(env.vendors['js'], function(vendor,key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name: key,
         chunks:[key],
-        filename:path.join(env.vendorFolder,env.distFolder,key + "-[hash].js")
+        filename:path.join(env.vendorFolder,env.distFolder,key + "-[hash:8].js")
     }))
     entry[key] = vendor;
 });
 _.each(env.vendors['css'],function(vendor,key){
-    var _imports = [],proxyCSS = path.join(env.clientPath,env.vendorFolder,env.distFolder,key + ".css")
-    vendor.forEach(function(v){
-        _imports.push('@import "'+v+'";')
-    })
-    fs.writeFileSync(proxyCSS,_imports.join('\n'))
-    var proxyChunkName = _.keys(env.vendors['js'])[0]
-    entry[proxyChunkName] = entry[proxyChunkName].concat([path.resolve(proxyCSS)]);
+    entry[key] = vendor;
 })
 
 /*add modules and vendors to entry point*/
@@ -87,7 +82,8 @@ module.exports = {
         }, {
             test: /\.css/,
             // exclude: [node_modules_dir],
-            loader: 'file-loader?name=vendor/dist/[name].[ext]!extract!css?modules&importLoaders=1!postcss'
+            loader:ExtractTextPlugin.extract('style', 'css!postcss')
+            // loader: 'file-loader?name=vendor/dist/[name].[ext]!extract!css?modules&importLoaders=1!postcss'
         }, {
             test: /\.(png|jpg)$/,
             exclude: [node_modules_dir],
@@ -102,8 +98,8 @@ module.exports = {
     },
     output: {
         path: env.clientPath,
-        filename: path.join('bundle',"[name]",env.distFolder,"[name]-[hash].js"),
-        chunkFilename:path.join('bundle',"[name]",env.distFolder,"[id]-[hash].chunk.js")
+        filename: path.join('bundle',"[name]",env.distFolder,"[name]-[hash:8].js"),
+        chunkFilename:path.join('bundle',"[name]",env.distFolder,"[id]-[hash:8].chunk.js")
     },
     plugins: _.union([
         new webpack.DefinePlugin({
@@ -120,6 +116,11 @@ module.exports = {
             },
             sourceMap: false
         }),
-        new ExtractTextPlugin(path.join('bundle',"[name]",env.distFolder,"[name]-[hash].css"),{allChunks:true})
+        new ExtractTextPlugin(path.join('bundle',"[name]",env.distFolder,"[name]-[contenthash:8].css"),{allChunks:true}),
+        new ChunkFilterPlugin({
+            chunks:['common'],
+            test:/\.css/,
+            path:path.join(env.vendorFolder,env.distFolder)
+        })
     ], commonChunks,htmls)
 }
