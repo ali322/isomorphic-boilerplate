@@ -1,25 +1,25 @@
 'use strict'
-import React,{Component} from "react";
+import React, { Component } from "react";
 import classNames from "classnames";
 
-class Events extends Component{
-    handleChange(e){
+class Events extends Component {
+    handleChange(e) {
         e && e.preventDefault();
-        const {changeField} = this.props;
-        changeField("repo",e.target.value);
+        const { changeField } = this.props;
+        changeField("repo", e.target.value);
     }
-    handleQuery(e){
+    handleQuery(e) {
         e && e.preventDefault();
-        const {fetchRepo} = this.props;
-        const {weather} = this.props.weatherByCityName;
+        const { fetchRepo } = this.props;
+        const { weather } = this.props.weatherByCityName;
         fetchRepo({
-            cityname:weather.city
+            cityname: weather.city
         });
     }
-    render(){
-        const {events,repo} = this.props;
+    render() {
+        const { events, repo } = this.props;
         const classes = classNames({
-            "events-content":true
+            "events-content": true
         })
         return (
             <div className={classes}>
@@ -38,7 +38,7 @@ class Events extends Component{
                             <p>{event.created_at}</p>
                             </span>
                         </div>
-                        <p>{event.type.replace('Event','').toLowerCase()} In <b>{event.repo.name}</b></p>
+                        <p>{event.type.replace('Event','').toLowerCase()} In <b>{event.repo.name}1</b></p>
                         </div>
                     ))}
                 </div>
