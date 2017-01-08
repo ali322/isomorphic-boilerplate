@@ -65,6 +65,7 @@
     "ava": "^0.15.2",
     "babel-loader": "^6.2.4",
     "browser-sync": "^2.10.0",
+    "chunk-transform-webpack-plugin": "^0.0.6",
     "css-loader": "^0.14.5",
     "del": "^1.2.0",
     "enzyme": "^2.4.1",

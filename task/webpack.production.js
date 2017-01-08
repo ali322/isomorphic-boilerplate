@@ -11,7 +11,7 @@ var helper = require("./helper")
 var InjectHtmlPlugin = require("inject-html-webpack-plugin")
 var autoPrefixer = require('autoprefixer')
 var postcssImport = require('postcss-import')
-var ChunkTransformPlugin = require("./chunk-transform-webpack-plugin")
+var ChunkTransformPlugin = require("chunk-transform-webpack-plugin")
 
 /*build const*/
 var entry = {};
