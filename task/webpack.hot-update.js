@@ -11,31 +11,31 @@ var InjectHtmlPlugin = require("inject-html-webpack-plugin")
 var entry = {};
 var commonChunks = [];
 var htmls = [];
-var hmrPath = "{{baseURL}}:"+env.hmrPort+env.hmrPath
-var reloaderBasePath = "{{baseURL}}:"+env.reloaderPort
+var hmrPath = "{{baseURL}}:" + env.hmrPort + env.hmrPath
+var reloaderBasePath = "{{baseURL}}:" + env.reloaderPort
 
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [
-        'webpack-dev-server/client?'+env.hmrBasePath,
+        'webpack-dev-server/client?' + env.hmrBasePath,
         "webpack/hot/only-dev-server",
         moduleObj.entryJS,
         moduleObj.entryCSS
     ];
-    moduleObj.html.forEach(function(html){
+    moduleObj.html.forEach(function(html) {
         var _chunks = [moduleObj.name]
-        if(moduleObj.vendor){
+        if (moduleObj.vendor) {
             moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
-            // moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
+            moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
         }
         htmls.push(new InjectHtmlPlugin({
-            prefixURI:hmrPath,
-            chunks:_chunks,
-            filename:html,
-            customInject:[{
-                start:'<!-- start:browser-sync -->',
-                end:'<!-- end:browser-sync -->',
-                content:'<script src="'+reloaderBasePath+'/bs/browser-sync-client.js"></script>'
+            prefixURI: hmrPath,
+            chunks: _chunks,
+            filename: html,
+            customInject: [{
+                start: '<!-- start:browser-sync -->',
+                end: '<!-- end:browser-sync -->',
+                content: '<script src="' + reloaderBasePath + '/bs/browser-sync-client.js"></script>'
             }]
         }))
     })
@@ -43,15 +43,15 @@ _.each(env.modules, function(moduleObj) {
 });
 
 /*build vendors*/
-_.each(env.vendors['js'], function(vendor,key) {
+_.each(env.vendors['js'], function(vendor, key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name: key,
-        chunks:[key],
-        filename:path.join(env.vendorFolder,env.distFolder,key + ".js")
+        chunks: [key],
+        filename: path.join(env.vendorFolder, env.distFolder, key + ".js")
     }))
     entry[key] = vendor;
 });
-_.each(env.vendors['css'],function(vendor,key){
+_.each(env.vendors['css'], function(vendor, key) {
     entry[key] = vendor;
 })
 
@@ -92,12 +92,12 @@ module.exports = {
         }]
     },
     devtool: "#eval-source-map",
-    watch:true,
+    watch: true,
     resolve: {
         extensions: ["", ".js", ".json", ".es6", ".jsx"]
     },
     output: {
-        path: path.join(__dirname,'../',env.clientPath),
+        path: path.join(__dirname, '../', env.clientPath),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
         publicPath: env.hmrBasePath + env.hmrPath
@@ -106,5 +106,5 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-    ], commonChunks,htmls)
+    ], commonChunks, htmls)
 }

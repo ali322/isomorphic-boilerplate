@@ -27,6 +27,7 @@ class Events extends Component {
                 <div className="events-form">
                     <input type="text" name="cityname" value={repo} onChange={this.handleChange.bind(this)}/>
                     <button onClick={this.handleQuery.bind(this)}>Query</button>
+                    <img src="sprites/search.png"/>
                 </div>
                 <div className="events">
                     {events.map(event=>(
