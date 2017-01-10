@@ -14,14 +14,18 @@ var autoPrefixer = require('autoprefixer')
 var postcssImport = require('postcss-import')
 var sprites = require('postcss-sprites')
 var cssURL = require('postcss-url')
-var mime = require('mime')
 
-/*build const*/
+/** build variables*/
 var entry = {};
 var commonChunks = [];
 var htmls = [];
+var ASSET_INPUT = path.join(env.clientPath,env.assetFolder)
+var ASSET_OUTPUT = path.join(env.assetFolder,env.distFolder)
 
-/*build pages*/
+/** clean dist */
+del.sync([path.join(env.clientPath,env.vendorFolder),path.join(env.clientPath,env.assetFolder,env.distFolder)])
+
+/** build modules*/
 var moduleEntries = {}
 _.each(env.modules, function(moduleObj) {
     del.sync(path.join(env.clientPath, env.bundleFolder, moduleObj.path, env.distFolder + '/*.*'));
@@ -46,7 +50,7 @@ _.each(env.modules, function(moduleObj) {
     })
 });
 
-/*build vendors*/
+/** build vendors*/
 del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder, env.distFolder, "/*.*")))
 _.each(env.vendors['js'], function(vendor, key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
@@ -60,7 +64,7 @@ _.each(env.vendors['css'], function(vendor, key) {
     entry[key] = vendor;
 })
 
-/*add modules and vendors to entry point*/
+/** add modules and vendors to entry point*/
 _.extend(entry, moduleEntries);
 
 module.exports = {
@@ -84,15 +88,20 @@ module.exports = {
                 loader: ExtractTextPlugin.extract('style', 'css!postcss!stylus')
             }, {
                 test: /\.css/,
-                // exclude: [node_modules_dir],
                 loader: ExtractTextPlugin.extract('style', 'css!postcss')
             },
             {
                 test: /\.(png|jpg)$/,
                 exclude: [node_modules_dir],
                 loaders: [
-                    'file?publicPath=../../../&hash=sha512&digest=hex&name=asset/image/[hash:8].[ext]',
+                    'file?publicPath=../../&hash=sha512&digest=hex&name='+ASSET_OUTPUT+'/image/[hash:8].[ext]',
                     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
+            },
+            {
+                test:/\.(eot|ttf|woff2|svg|woff)/,
+                loaders: [
+                    'file?publicPath=../../&hash=sha512&digest=hex&name='+ASSET_OUTPUT+'/font/[hash:8].[ext]',
                 ]
             }
         ]
@@ -101,20 +110,12 @@ module.exports = {
         return [postcssImport({ addDependencyTo: true }),
             autoPrefixer(),
             cssURL({
-                url: function(URL, decl, from, dirname, to, options, result) {
-                    var _url = path.join(path.relative(to, path.join(env.clientPath, 'asset')), URL)
-                    var _file = path.resolve(path.join(env.clientPath, 'asset', URL))
-                    var _stats = fs.statSync(_file)
-                    var mimeType = mime.lookup(_file)
-                    if (_stats.size <= 500) {
-                        _file = fs.readFileSync(_file)
-                        return "data:" + mimeType + ";base64," + _file.toString("base64")
-                    }
-                    return _url
+                url: function(originURL, decl, from, dirname, to, options, result) {
+                    return helper.urlResolver(originURL,from,to,ASSET_INPUT)
                 }
             }),
             sprites({
-                spritePath: path.join(env.clientPath, 'asset', 'sprites')
+                spritePath: path.join(env.clientPath, env.assetFolder, 'sprites')
             })
         ]
     },

@@ -26,8 +26,7 @@ class Events extends Component {
                 <h3>Github Events</h3>
                 <div className="events-form">
                     <input type="text" name="cityname" value={repo} onChange={this.handleChange.bind(this)}/>
-                    <button onClick={this.handleQuery.bind(this)}>Query</button>
-                    <img src="sprites/search.png"/>
+                    <button onClick={this.handleQuery.bind(this)}><i className="fa fa-search"/></button>
                 </div>
                 <div className="events">
                     {events.map(event=>(

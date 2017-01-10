@@ -6,13 +6,18 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var node_modules_dir = path.resolve(__dirname, '../node_modules');
 var env = require('./environment');
 var InjectHtmlPlugin = require("inject-html-webpack-plugin")
+var autoPrefixer = require('autoprefixer')
+var postcssImport = require('postcss-import')
+var cssURL = require('postcss-url')
+var helper = require('./helper')
 
-/*build const*/
+/** build variables*/
 var entry = {};
 var commonChunks = [];
 var htmls = [];
 var hmrPath = "{{baseURL}}:" + env.hmrPort + env.hmrPath
 var reloaderBasePath = "{{baseURL}}:" + env.reloaderPort
+var ASSET_INPUT = path.join(env.clientPath,env.assetFolder)
 
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
@@ -29,7 +34,7 @@ _.each(env.modules, function(moduleObj) {
             moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
         }
         htmls.push(new InjectHtmlPlugin({
-            prefixURI: hmrPath,
+            processor: hmrPath,
             chunks: _chunks,
             filename: html,
             customInject: [{
@@ -42,12 +47,11 @@ _.each(env.modules, function(moduleObj) {
     _.extend(entry, moduleEntry);
 });
 
-/*build vendors*/
+/** build vendors*/
 _.each(env.vendors['js'], function(vendor, key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name: key,
-        chunks: [key],
-        filename: path.join(env.vendorFolder, env.distFolder, key + ".js")
+        chunks: [key]
     }))
     entry[key] = vendor;
 });
@@ -74,10 +78,9 @@ module.exports = {
         }, {
             test: /\.styl/,
             exclude: [node_modules_dir],
-            loader: 'style!css!autoprefixer!stylus'
+            loader: 'style!css!postcss!stylus'
         }, {
             test: /\.css/,
-            exclude: [node_modules_dir],
             loader: 'style!css'
         }, {
             test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -90,6 +93,16 @@ module.exports = {
             exclude: [node_modules_dir],
             loader: 'url?limit=25000'
         }]
+    },
+    postcss: function(webpack) {
+        return [postcssImport({ addDependencyTo: true }),
+            autoPrefixer(),
+            cssURL({
+                url: function(originURL, decl, from, dirname, to, options, result) {
+                    return helper.urlResolver(originURL,from,to,ASSET_INPUT)
+                }
+            })
+        ]
     },
     devtool: "#eval-source-map",
     watch: true,

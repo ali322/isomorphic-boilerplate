@@ -19,7 +19,8 @@
             "css": "stylus"
         },
         "vendor": {
-            "js":"react"
+            "js":"react",
+            "css":"common"
         }
     }
 }

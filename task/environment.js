@@ -6,6 +6,7 @@ var env = {
     distFolder: "dist",
     bundleFolder:"bundle",
     vendorFolder: "vendor",
+    assetFolder:'asset',
     clientPath: "./client",
     pagePath: "./view/",
     hmrPath: "/hmr/"
