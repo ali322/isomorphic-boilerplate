@@ -428,8 +428,8 @@ textarea {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url(../../asset/dist/font/674f50d2.eot);
-  src: url(../../asset/dist/font/674f50d2.eot?#iefix&v=4.7.0) format('embedded-opentype'), url(../../asset/dist/font/af7ae505.woff2) format('woff2'), url(../../asset/dist/font/fee66e71.woff) format('woff'), url(../../asset/dist/font/b06871f2.ttf) format('truetype'), url(../../asset/dist/font/912ec66d.svg#fontawesomeregular) format('svg');
+  src: url(../../../asset/dist/font/674f50d2.eot);
+  src: url(../../../asset/dist/font/674f50d2.eot?#iefix&v=4.7.0) format('embedded-opentype'), url(../../../asset/dist/font/af7ae505.woff2) format('woff2'), url(../../../asset/dist/font/fee66e71.woff) format('woff'), url(../../../asset/dist/font/b06871f2.ttf) format('truetype'), url(../../../asset/dist/font/912ec66d.svg#fontawesomeregular) format('svg');
   font-weight: normal;
   font-style: normal;
 }

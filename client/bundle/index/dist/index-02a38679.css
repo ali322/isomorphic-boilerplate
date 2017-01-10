@@ -50,17 +50,17 @@ a:hover {
   zoom: 1;
 }
 .search-icon {
-  background-image: url(../../asset/dist/image/56a1098b.png);
+  background-image: url(.../../../asset/dist/image/56a1098b.png);
   background-position: 0px 0px;
   background-size: 400px 400px;
 }
 .refresh-icon {
-  background-image: url(../../asset/dist/image/56a1098b.png);
+  background-image: url(.../../../asset/dist/image/56a1098b.png);
   background-position: -200px 0px;
   background-size: 400px 400px;
 }
 .more-icon {
-  background-image: url(../../asset/dist/image/56a1098b.png);
+  background-image: url(.../../../asset/dist/image/56a1098b.png);
   background-position: 0px -200px;
   background-size: 400px 400px;
 }

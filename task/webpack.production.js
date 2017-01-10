@@ -20,7 +20,8 @@ var entry = {};
 var commonChunks = [];
 var htmls = [];
 var ASSET_INPUT = path.join(env.clientPath,env.assetFolder)
-var ASSET_OUTPUT = path.join(env.assetFolder,env.distFolder)
+var ASSET_IMAGE_OUTPUT = [env.assetFolder,env.distFolder,'image'].join(path.sep) + path.sep
+var ASSET_FONT_OUTPUT = [env.assetFolder,env.distFolder,'font'].join(path.sep) + path.sep
 
 /** clean dist */
 del.sync([path.join(env.clientPath,env.vendorFolder),path.join(env.clientPath,env.assetFolder,env.distFolder)])
@@ -94,17 +95,27 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 exclude: [node_modules_dir],
                 loaders: [
-                    'file?publicPath=../../&hash=sha512&digest=hex&name='+ASSET_OUTPUT+'/image/[hash:8].[ext]',
+                    'file?outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
                     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
                 ]
             },
             {
                 test:/\.(eot|ttf|woff2|svg|woff)/,
                 loaders: [
-                    'file?publicPath=../../&hash=sha512&digest=hex&name='+ASSET_OUTPUT+'/font/[hash:8].[ext]',
+                    'file?config=fontLoader&outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
                 ]
             }
         ]
+    },
+    fileLoader:{
+        publicPath:function(url){
+            return "../../../asset/dist/image/"+url
+        }
+    },
+    fontLoader:{
+        publicPath:function(url){
+            return "../../../asset/dist/font/"+url
+        }
     },
     postcss: function(webpack) {
         return [postcssImport({ addDependencyTo: true }),

@@ -24931,9 +24931,8 @@
 	                    _react2.default.createElement(
 	                        "button",
 	                        { onClick: this.handleQuery.bind(this) },
-	                        "Query"
-	                    ),
-	                    _react2.default.createElement("img", { src: "sprites/search.png" })
+	                        _react2.default.createElement("i", { className: "fa fa-search" })
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    "div",
