@@ -31,7 +31,6 @@ del.sync([path.join(env.clientPath,env.assetFolder,env.distFolder)])
 /** build vendors*/
 // del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder)))
 var dllRefs = []
-/** DllReferencePlugin vendor js */
 var vendorJS = fs.readdirSync(path.join(env.clientPath,env.vendorFolder,env.distFolder))
 _.each(env.vendors['js'], function(vendor, key) {
     // commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
