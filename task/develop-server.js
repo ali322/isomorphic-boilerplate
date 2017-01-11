@@ -3,6 +3,8 @@ var gulp = require("gulp"),
     os = require("os"),
     nodemon = require("nodemon"),
     webpack = require('webpack'),
+    webpackDevMiddleware = require('webpack-dev-middleware'),
+    webpackHotMiddleware = require('webpack-hot-middleware'),
     browserSync = require("browser-sync"),
     env = require("./environment"),
     config = require('./webpack.hot-update.js');
@@ -29,7 +31,7 @@ gulp.task("nodemon", function() {
         ext: "js html json es6 jsx"
     }).on("readable", function(data) {
         this.stdout.on('data', function(chunk) {
-            if (/server listening at/.test(chunk)) {
+            if (/app started at/.test(chunk)) {
                 browserSync.reload({
                     stream: false
                 })
@@ -47,6 +49,17 @@ gulp.task("start", ["nodemon"], function() {
     browserSync({
         proxy: {
             target: "http://localhost:" + listenPort,
+            middleware: [
+                webpackDevMiddleware(bundler, {
+                    publicPath: config.output.publicPath,
+                    stats: {
+                        colors: true
+                    },
+                    hot: true,
+                    noInfo: true
+                }),
+                webpackHotMiddleware(bundler)
+            ]
         },
         port: env.reloaderPort,
         files: "view/*.html",

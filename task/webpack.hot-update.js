@@ -17,7 +17,7 @@ var happypackPlugin = helper.happypackPlugin()
 var entry = {};
 var commonChunks = [];
 var htmls = [];
-var hmrPath = "{{baseURL}}:" + env.hmrPort + env.hmrPath
+var hmrPath = "{{baseURL}}:" + env.reloaderPort + env.hmrPath
 var reloaderBasePath = "{{baseURL}}:" + env.reloaderPort
 var ASSET_INPUT = path.join(env.clientPath,env.assetFolder)
 
@@ -38,8 +38,7 @@ _.each(env.vendors['css'], function(vendor, key) {
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [
-        'webpack-dev-server/client?' + env.hmrBasePath,
-        "webpack/hot/only-dev-server",
+        "webpack-hot-middleware/client",
         moduleObj.entryJS,
         moduleObj.entryCSS
     ];
@@ -123,7 +122,7 @@ module.exports = {
         path: path.join(__dirname, '..', env.clientPath),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
-        publicPath: env.hmrBasePath + env.hmrPath
+        publicPath: env.hmrPath
     },
     plugins: _.union([
         new webpack.optimize.OccurenceOrderPlugin(true),
