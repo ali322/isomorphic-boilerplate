@@ -8,8 +8,8 @@
     "test": "NODE_ENV=test ava --tap | tap-spec",
     "start": "gulp start",
     "hmr": "node ./task/hmr-server.js",
-    "dll": "node ./task/webpack-dll.js",
-    "release-dll": "NODE_ENV=production node ./task/webpack-dll.js",
+    "dll": "webpack --config ./task/webpack.dll.js --display-error-details",
+    "release-dll": "NODE_ENV=production webpack --config ./task/webpack.dll.js --display-error-details",
     "release-static": "webpack --config ./task/webpack.production.js --display-error-details"
   },
   "ava": {

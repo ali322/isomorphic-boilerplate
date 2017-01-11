@@ -6,11 +6,12 @@ var path = require('path'),
 var env = require("./environment")
 var DEBUG = !(process.env.NODE_ENV === 'production')
 var OUTPUT_PATH = DEBUG?path.join(env.clientPath, env.vendorFolder,env.buildFolder):path.join(env.clientPath, env.vendorFolder,env.distFolder)
+var MANIFEST_PATH = path.join(env.clientPath, env.vendorFolder)
 
 var plugins = [
     new webpack.DllPlugin({
-        name: '[name]',
-        path: path.resolve(path.join(OUTPUT_PATH,'[name]-manifest.json')),
+        name: '[name]_[hash]',
+        path: path.resolve(path.join(MANIFEST_PATH,'[name]-manifest.json')),
         context: path.resolve(env.clientPath)
     }),
     new webpack.optimize.OccurenceOrderPlugin()
@@ -19,7 +20,7 @@ var plugins = [
 if (!DEBUG) {
     plugins = plugins.concat([
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': "production"
+            'process.env': { NODE_ENV: JSON.stringify('production') }
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: { warnings: false },
@@ -28,23 +29,20 @@ if (!DEBUG) {
     ])
 }
 
-del.sync(OUTPUT_PATH)
+del.sync(path.join(env.clientPath,env.vendorFolder))
 
+var _entry = {}
 _.each(env.vendors['js'],function(vendor,key){
-    var _entry = {}
     _entry[key] = vendor
-    webpack({
-        devtool: '#eval-source-map',
-        entry: _entry,
-        output: {
-            path:OUTPUT_PATH,
-            filename: '[name].js',
-            library: '[name]'
-            // libraryTarget: 'umd',
-            // umdNamedDefine: true
-        },
-        plugins:plugins
-    }).run(function(err,stats){
-        if(err)console.log(err)
-    })
 })
+
+module.exports = {
+    // devtool: '#source-map',
+    entry: _entry,
+    output: {
+        path:OUTPUT_PATH,
+        filename: '[name]-[chunkhash:8].js',
+        library: '[name]_[hash]'
+    },
+    plugins:plugins
+}

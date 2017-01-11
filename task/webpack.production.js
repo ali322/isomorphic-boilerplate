@@ -28,22 +28,53 @@ var ASSET_FONT_OUTPUT = path.join(env.assetFolder,env.distFolder,'font',path.sep
 /** clean dist */
 del.sync([path.join(env.clientPath,env.assetFolder,env.distFolder)])
 
+/** build vendors*/
+// del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder)))
+var dllRefs = []
+/** DllReferencePlugin vendor js */
+var vendorJS = fs.readdirSync(path.join(env.clientPath,env.vendorFolder,env.distFolder))
+_.each(env.vendors['js'], function(vendor, key) {
+    // commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
+    //     name:key,
+    //     chunks:[key],
+    //     filename: path.join(env.vendorFolder, env.distFolder, key + "-[hash:8].js")
+    // }))
+    // entry[key] = vendor
+    var _manifest = require(path.join("..",env.clientPath,env.vendorFolder,key+'-manifest.json'))
+    dllRefs.push(new webpack.DllReferencePlugin({
+        context:path.resolve(env.clientPath),
+        manifest:_manifest,
+    }))
+});
+
+_.each(env.vendors['css'], function(vendor, key) {
+    entry[key] = vendor;
+})
+
 /** build modules*/
-var moduleEntries = {}
 _.each(env.modules, function(moduleObj) {
     del.sync(path.join(env.clientPath, env.bundleFolder, moduleObj.path, env.distFolder + '/*.*'));
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [moduleObj.entryJS, moduleObj.entryCSS]
-    _.extend(moduleEntries, moduleEntry)
-    moduleObj.html.forEach(function(html) {
-        var _chunks = [moduleObj.name]
-        if (moduleObj.vendor) {
-            moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
-            moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
+    var _chunks = [moduleObj.name]
+    var _more = {js:[]}
+    if (moduleObj.vendor) {
+        moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
+        if(moduleObj.vendor.js){
+            _more.js = vendorJS.filter(function(v){
+                var _regexp = new RegExp(moduleObj.vendor.js+"-\\w+\\.js$")
+                return _regexp.test(v)
+            }).map(function(v){
+                return path.join(env.vendorFolder,env.distFolder,v)
+            })
         }
+        moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
+    }
+    moduleObj.html.forEach(function(html) {
         htmls.push(new InjectHtmlPlugin({
             chunks: _chunks,
             filename: html,
+            more:_more,
             customInject: [{
                 start: '<!-- start:bundle-time -->',
                 end: '<!-- end:bundle-time -->',
@@ -51,23 +82,8 @@ _.each(env.modules, function(moduleObj) {
             }]
         }))
     })
+    _.extend(entry,moduleEntry)
 });
-
-/** build vendors*/
-del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder)))
-_.each(env.vendors['js'], function(vendor, key) {
-    commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
-        name:key,
-        chunks:[key],
-        filename: path.join(env.vendorFolder, env.distFolder, key + "-[hash:8].js")
-    }))
-});
-_.each(env.vendors['css'], function(vendor, key) {
-    entry[key] = vendor;
-})
-
-/** add modules and vendors to entry point*/
-_.extend(entry, moduleEntries);
 
 module.exports = {
     entry: entry,
@@ -153,5 +169,5 @@ module.exports = {
             test: /\.css/,
             filename: function(filename) { return path.join(env.vendorFolder, env.distFolder, path.basename(filename)) }
         })
-    ],happypackPlugin,commonChunks, htmls)
+    ],dllRefs,happypackPlugin, htmls)
 }

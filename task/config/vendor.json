@@ -1,9 +1,9 @@
 {
     "js":{
         "react":[
-            "react","redux","react","react-redux","bluebird","lodash"
+            "react","redux","react-dom","react-redux","redux-thunk","redux-logger","bluebird","isomorphic-fetch"
         ],
-        "reactBase":[
+        "react_base":[
             "react","react-dom"
         ]
     },

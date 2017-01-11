@@ -1,5 +1,6 @@
 var webpack = require('webpack'),
     path = require('path'),
+    fs = require('fs'),
     _ = require("lodash");
 
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -20,6 +21,20 @@ var hmrPath = "{{baseURL}}:" + env.hmrPort + env.hmrPath
 var reloaderBasePath = "{{baseURL}}:" + env.reloaderPort
 var ASSET_INPUT = path.join(env.clientPath,env.assetFolder)
 
+/** build vendors*/
+var dllRefs = []
+var vendorJS = fs.readdirSync(path.join(env.clientPath,env.vendorFolder,env.distFolder))
+_.each(env.vendors['js'], function(vendor, key) {
+    var _manifest = require(path.join("..",env.clientPath,env.vendorFolder,key+'-manifest.json'))
+    dllRefs.push(new webpack.DllReferencePlugin({
+        context:path.resolve(env.clientPath),
+        manifest:_manifest
+    }))
+});
+_.each(env.vendors['css'], function(vendor, key) {
+    entry[key] = vendor;
+})
+
 _.each(env.modules, function(moduleObj) {
     var moduleEntry = {};
     moduleEntry[moduleObj.name] = [
@@ -28,16 +43,26 @@ _.each(env.modules, function(moduleObj) {
         moduleObj.entryJS,
         moduleObj.entryCSS
     ];
-    moduleObj.html.forEach(function(html) {
-        var _chunks = [moduleObj.name]
-        if (moduleObj.vendor) {
-            moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
-            moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
+    var _chunks = [moduleObj.name]
+    var _more = {js:[]}
+    if (moduleObj.vendor) {
+        if(moduleObj.vendor.js){
+            _more.js = vendorJS.filter(function(v){
+                var _regexp = new RegExp(moduleObj.vendor.js+"-\\w+\\.js$")
+                return _regexp.test(v)
+            }).map(function(v){
+                return path.join(env.vendorFolder,env.distFolder,v)
+            })
         }
+        // moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
+        moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
+    }
+    moduleObj.html.forEach(function(html) {
         htmls.push(new InjectHtmlPlugin({
             processor: hmrPath,
             chunks: _chunks,
             filename: html,
+            more:_more,
             customInject: [{
                 start: '<!-- start:browser-sync -->',
                 end: '<!-- end:browser-sync -->',
@@ -47,19 +72,6 @@ _.each(env.modules, function(moduleObj) {
     })
     _.extend(entry, moduleEntry);
 });
-
-/** build vendors*/
-_.each(env.vendors['js'], function(vendor, key) {
-    commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
-        name:key,
-        chunks:[key],
-        filename: path.join(env.vendorFolder, env.distFolder, key + "-[hash:8].js")
-    }))
-    entry[key] = vendor
-});
-_.each(env.vendors['css'], function(vendor, key) {
-    entry[key] = vendor;
-})
 
 module.exports = {
     entry: entry,
@@ -117,5 +129,5 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-    ],happypackPlugin,commonChunks, htmls)
+    ],dllRefs,happypackPlugin,commonChunks, htmls)
 }
