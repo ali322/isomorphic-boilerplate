@@ -44,7 +44,6 @@ _.each(env.modules, function(moduleObj) {
         htmls.push(new InjectHtmlPlugin({
             chunks: _chunks,
             filename: html,
-            more:_more,
             customInject: [{
                 start: '<!-- start:bundle-time -->',
                 end: '<!-- end:bundle-time -->',
@@ -55,7 +54,7 @@ _.each(env.modules, function(moduleObj) {
 });
 
 /** build vendors*/
-// del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder, env.distFolder, "/*.*")))
+del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder)))
 _.each(env.vendors['js'], function(vendor, key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
         name:key,

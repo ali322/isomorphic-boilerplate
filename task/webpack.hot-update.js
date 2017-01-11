@@ -30,7 +30,6 @@ _.each(env.modules, function(moduleObj) {
     ];
     moduleObj.html.forEach(function(html) {
         var _chunks = [moduleObj.name]
-        var _more = {js:[]}
         if (moduleObj.vendor) {
             moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
             moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
@@ -38,7 +37,6 @@ _.each(env.modules, function(moduleObj) {
         htmls.push(new InjectHtmlPlugin({
             processor: hmrPath,
             chunks: _chunks,
-            more:_more,
             filename: html,
             customInject: [{
                 start: '<!-- start:browser-sync -->',
