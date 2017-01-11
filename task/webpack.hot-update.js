@@ -10,6 +10,7 @@ var autoPrefixer = require('autoprefixer')
 var postcssImport = require('postcss-import')
 var cssURL = require('postcss-url')
 var helper = require('./helper')
+var happypackPlugin = helper.happypackPlugin()
 
 /** build variables*/
 var entry = {};
@@ -29,6 +30,7 @@ _.each(env.modules, function(moduleObj) {
     ];
     moduleObj.html.forEach(function(html) {
         var _chunks = [moduleObj.name]
+        var _more = {js:[]}
         if (moduleObj.vendor) {
             moduleObj.vendor.js && _chunks.push(moduleObj.vendor.js)
             moduleObj.vendor.css && _chunks.push(moduleObj.vendor.css)
@@ -36,6 +38,7 @@ _.each(env.modules, function(moduleObj) {
         htmls.push(new InjectHtmlPlugin({
             processor: hmrPath,
             chunks: _chunks,
+            more:_more,
             filename: html,
             customInject: [{
                 start: '<!-- start:browser-sync -->',
@@ -50,10 +53,11 @@ _.each(env.modules, function(moduleObj) {
 /** build vendors*/
 _.each(env.vendors['js'], function(vendor, key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
-        name: key,
-        chunks: [key]
+        name:key,
+        chunks:[key],
+        filename: path.join(env.vendorFolder, env.distFolder, key + "-[hash:8].js")
     }))
-    entry[key] = vendor;
+    entry[key] = vendor
 });
 _.each(env.vendors['css'], function(vendor, key) {
     entry[key] = vendor;
@@ -69,16 +73,12 @@ module.exports = {
         }, {
             test: /\.(es6|jsx)$/,
             exclude: [node_modules_dir],
-            loader: "react-hot!babel"
+            loader: "react-hot!happypack/loader?id=js"
             // query: babelrc
-        }, , {
-            test: /\.html/,
-            exclude: [node_modules_dir],
-            loader: 'html'
         }, {
             test: /\.styl/,
             exclude: [node_modules_dir],
-            loader: 'style!css!postcss!stylus'
+            loader: 'style!css!postcss!happypack/loader?id=stylus'
         }, {
             test: /\.css/,
             loader: 'style!css'
@@ -110,7 +110,7 @@ module.exports = {
         extensions: ["", ".js", ".json", ".es6", ".jsx"]
     },
     output: {
-        path: path.join(__dirname, '../', env.clientPath),
+        path: path.join(__dirname, '..', env.clientPath),
         filename: "[name].js",
         chunkFilename: "[id].chunk.js",
         publicPath: env.hmrBasePath + env.hmrPath
@@ -119,5 +119,5 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-    ], commonChunks, htmls)
+    ],happypackPlugin,commonChunks, htmls)
 }

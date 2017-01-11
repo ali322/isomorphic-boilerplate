@@ -2,7 +2,8 @@
 var os = require("os"),
     path = require('path'),
     fs = require('fs'),
-    mime = require('mime')
+    mime = require('mime'),
+    HappyPack = require('happypack')
 
 function getLanIP() {
     var interfaces = os.networkInterfaces();
@@ -49,8 +50,28 @@ function urlResolver(originURL, from, to, input) {
     return _url
 }
 
+function happypackPlugin(){
+    var compilerThreadPool = HappyPack.ThreadPool({size:os.cpus().length})
+    var _instances = [
+        new HappyPack({
+            id:'js',
+            threadPool:compilerThreadPool,
+            loaders:['babel?cacheDirectory=true'],
+            verbose:false
+        }),
+        new HappyPack({
+            id:'stylus',
+            threadPool:compilerThreadPool,
+            loaders:['stylus'],
+            verbose:false
+        })
+    ]
+    return _instances
+}
+
 module.exports = {
     getLanIP: getLanIP,
     bundleTime: bundleTime,
-    urlResolver: urlResolver
+    urlResolver: urlResolver,
+    happypackPlugin:happypackPlugin
 }

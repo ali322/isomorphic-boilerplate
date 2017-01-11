@@ -7,7 +7,7 @@
             "css": "stylus"
         },
         "vendor": {
-            "js":"react-base",
+            "js":"react",
             "css":"common"
         }
     },
@@ -19,7 +19,7 @@
             "css": "stylus"
         },
         "vendor": {
-            "js":"react",
+            "js":"reactBase",
             "css":"common"
         }
     }

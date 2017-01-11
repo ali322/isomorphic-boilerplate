@@ -5,6 +5,7 @@ var webpack = require('webpack'),
     _ = require("lodash");
 
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
+// var UglifyJsPlugin = require('webpack-uglify-parallel')
 var node_modules_dir = path.resolve(__dirname, '../node_modules')
 var env = require('./environment')
 var helper = require("./helper")
@@ -14,17 +15,18 @@ var autoPrefixer = require('autoprefixer')
 var postcssImport = require('postcss-import')
 var sprites = require('postcss-sprites')
 var cssURL = require('postcss-url')
+var happypackPlugin = helper.happypackPlugin()
 
 /** build variables*/
 var entry = {};
 var commonChunks = [];
 var htmls = [];
 var ASSET_INPUT = path.join(env.clientPath,env.assetFolder)
-var ASSET_IMAGE_OUTPUT = [env.assetFolder,env.distFolder,'image'].join(path.sep) + path.sep
-var ASSET_FONT_OUTPUT = [env.assetFolder,env.distFolder,'font'].join(path.sep) + path.sep
+var ASSET_IMAGE_OUTPUT = path.join(env.assetFolder,env.distFolder,'image',path.sep)
+var ASSET_FONT_OUTPUT = path.join(env.assetFolder,env.distFolder,'font',path.sep)
 
 /** clean dist */
-del.sync([path.join(env.clientPath,env.vendorFolder),path.join(env.clientPath,env.assetFolder,env.distFolder)])
+del.sync([path.join(env.clientPath,env.assetFolder,env.distFolder)])
 
 /** build modules*/
 var moduleEntries = {}
@@ -42,6 +44,7 @@ _.each(env.modules, function(moduleObj) {
         htmls.push(new InjectHtmlPlugin({
             chunks: _chunks,
             filename: html,
+            more:_more,
             customInject: [{
                 start: '<!-- start:bundle-time -->',
                 end: '<!-- end:bundle-time -->',
@@ -52,14 +55,13 @@ _.each(env.modules, function(moduleObj) {
 });
 
 /** build vendors*/
-del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder, env.distFolder, "/*.*")))
+// del.sync(path.resolve(path.join(env.clientPath, env.vendorFolder, env.distFolder, "/*.*")))
 _.each(env.vendors['js'], function(vendor, key) {
     commonChunks.push(new webpack.optimize.CommonsChunkPlugin({
-        name: key,
-        chunks: [key],
+        name:key,
+        chunks:[key],
         filename: path.join(env.vendorFolder, env.distFolder, key + "-[hash:8].js")
     }))
-    entry[key] = vendor;
 });
 _.each(env.vendors['css'], function(vendor, key) {
     entry[key] = vendor;
@@ -78,15 +80,11 @@ module.exports = {
             }, {
                 test: /\.(es6|jsx)$/,
                 exclude: [node_modules_dir],
-                loader: 'babel'
-            }, , {
-                test: /\.html/,
-                exclude: [node_modules_dir],
-                loader: 'file?name=../[path]/dist/[name].[ext]!extract!html'
+                loader: 'happypack/loader?id=js'
             }, {
                 test: /\.styl/,
                 exclude: [node_modules_dir],
-                loader: ExtractTextPlugin.extract('style', 'css!postcss!stylus')
+                loader: ExtractTextPlugin.extract('style','css!postcss!happypack/loader?id=stylus')
             }, {
                 test: /\.css/,
                 loader: ExtractTextPlugin.extract('style', 'css!postcss')
@@ -102,19 +100,16 @@ module.exports = {
             {
                 test:/\.(eot|ttf|woff2|svg|woff)/,
                 loaders: [
-                    'file?config=fontLoader&outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
+                    'file?outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
                 ]
             }
         ]
     },
     fileLoader:{
         publicPath:function(url){
-            return "../../../asset/dist/image/"+url
-        }
-    },
-    fontLoader:{
-        publicPath:function(url){
-            return "../../../asset/dist/font/"+url
+            var _prefix = /\.(jpg|png|bmp|gif)$/.test(url) ? path.join('..','..','..', env.assetFolder,env.distFolder, 'image') :
+                path.join('..','..', env.assetFolder,env.distFolder, 'font')
+            return path.join(_prefix, url)
         }
     },
     postcss: function(webpack) {
@@ -142,22 +137,22 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('production') }
         }),
-        // new webpack.optimize.DedupePlugin(),
-        // new webpack.optimize.OccurenceOrderPlugin(true),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     },
-        //     output: {
-        //         comments: false
-        //     },
-        //     sourceMap: false
-        // }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(true),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: false
+            },
+            sourceMap: false
+        }),
         new ExtractTextPlugin(path.join('bundle', "[name]", env.distFolder, "[name]-[contenthash:8].css"), { allChunks: true }),
         new ChunkTransformPlugin({
             chunks: ['common'],
             test: /\.css/,
             filename: function(filename) { return path.join(env.vendorFolder, env.distFolder, path.basename(filename)) }
         })
-    ], commonChunks, htmls)
+    ],happypackPlugin,commonChunks, htmls)
 }

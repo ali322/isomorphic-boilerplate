@@ -8,7 +8,8 @@
     "test": "NODE_ENV=test ava --tap | tap-spec",
     "start": "gulp start",
     "hmr": "node ./task/hmr-server.js",
-    "debug": "node-inspector --config ./task/inspector.config.js",
+    "dll": "node ./task/webpack-dll.js",
+    "release-dll": "NODE_ENV=production node ./task/webpack-dll.js",
     "release-static": "webpack --config ./task/webpack.production.js --display-error-details"
   },
   "ava": {
@@ -74,10 +75,11 @@
     "extract-loader": "^0.1.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "gulp": "^3.9.0",
+    "happypack": "^3.0.2",
     "html-loader": "^0.4.4",
     "image-loader": "^0.0.1",
     "image-webpack-loader": "^3.1.0",
-    "inject-html-webpack-plugin": "^0.0.12",
+    "inject-html-webpack-plugin": "^0.0.18",
     "loader-utils": "^0.2.16",
     "mime": "^1.3.4",
     "nock": "^3.1.1",
@@ -95,6 +97,7 @@
     "tap-spec": "^4.1.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-uglify-parallel": "^0.1.3"
   }
 }
