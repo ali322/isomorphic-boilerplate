@@ -107,12 +107,16 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 exclude: [node_modules_dir],
                 loaders: [
-                    'file?outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
+                    'url-loader?limit=2500&outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
                     'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
                 ]
             },
             {
-                test:/\.(eot|ttf|woff2|svg|woff)/,
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader:'url-loader?limit=2500&outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
+            }
+            {
+                test:/\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loaders: [
                     'file?outputPath='+ASSET_FONT_OUTPUT+'&hash=sha512&digest=hex&name=[hash:8].[ext]',
                 ]
@@ -140,7 +144,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ["", ".js", ".json", ".es6", ".jsx"]
+        extensions: ["", ".js", ".json", ".es6", ".jsx",'.stylus','.css','.html']
     },
     output: {
         path: env.clientPath,

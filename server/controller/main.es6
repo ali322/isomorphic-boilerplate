@@ -8,6 +8,7 @@ export async function index(ctx, next) {
     const ret = await apiRequest("https://api.github.com/events")
     if (ret.length > 0) {
         var initialState = {
+            flag:3,
             events: ret
         };
         var markup = markupForComponent(WeatherApp, {

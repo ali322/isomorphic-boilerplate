@@ -1,7 +1,7 @@
 'use strict';
 var gulp = require("gulp"),
     os = require("os"),
-    nodemon = require("nodemon"),
+    nodemon = require("gulp-nodemon"),
     webpack = require('webpack'),
     webpackDevMiddleware = require('webpack-dev-middleware'),
     webpackHotMiddleware = require('webpack-hot-middleware'),
@@ -11,17 +11,18 @@ var gulp = require("gulp"),
 
 var bundler = webpack(config);
 
-gulp.task("nodemon", function() {
-    nodemon({
+gulp.task("nodemon", function(cb) {
+    var started = false
+    return nodemon({
         delay: "200ms",
         script: "app.js",
-        execMap: {
-            "js": "node --debug"
-        },
+        // execMap: {
+        //     "js": "node --debug"
+        // },
         env: {
             "HMR_ENABLED": true
         },
-        verbose: true,
+        verbose: false,
         stdout: false,
         // ignore: [".git","node_modules","client","shared","task"],
         watch: [
@@ -29,6 +30,11 @@ gulp.task("nodemon", function() {
             // "shared/chunk/**/*.jsx","shared/chunk/**/*.es6"
         ],
         ext: "js html json es6 jsx"
+    }).on('start',function(){
+        if(!started){
+            cb()
+        }
+        started = true
     }).on("readable", function(data) {
         this.stdout.on('data', function(chunk) {
             if (/app started at/.test(chunk)) {
@@ -41,8 +47,6 @@ gulp.task("nodemon", function() {
         this.stderr.pipe(process.stderr);
     });
 });
-
-var bundler = webpack(config);
 
 gulp.task("start", ["nodemon"], function() {
     var listenPort = process.env.LISTEN_PORT || 3000;

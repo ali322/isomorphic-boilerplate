@@ -23,10 +23,11 @@ function configureStore(initialState){
 
 class App extends Component{
     render(){
-        const {events} = this.props.initialState;
+        const {events,flag} = this.props.initialState;
         const initialState = {
             eventsReducer:{
                 events,
+                flag,
                 repo:''
             }
         }

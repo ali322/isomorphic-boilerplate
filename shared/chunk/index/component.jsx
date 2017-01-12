@@ -17,13 +17,13 @@ class Events extends Component {
         });
     }
     render() {
-        const { events, repo } = this.props;
+        const { events, repo,flag } = this.props;
         const classes = classNames({
             "events-content": true
         })
         return (
             <div className={classes}>
-                <h3>Github Events</h3>
+                <h3>Github Events{flag}</h3>
                 <div className="events-form">
                     <input type="text" name="cityname" value={repo} onChange={this.handleChange.bind(this)}/>
                     <button onClick={this.handleQuery.bind(this)}><i className="fa fa-search"/></button>
