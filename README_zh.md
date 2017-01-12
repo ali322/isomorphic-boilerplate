@@ -55,6 +55,7 @@ task/
     |-- environment.js  #定义模块的环境变量
     |-- hmr-server.js       #webpack dev server 入口文件
     |-- develop-server.js #后端开发服务器入口文件
+    |-- webpack.dll.js  #打包第三方库
     |-- webpack.production.js #为生产环境编译模块和第三方库
     |-- webpack.hot-update.js #为热替换开发环境编译模块和第三方库
 view/

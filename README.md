@@ -56,6 +56,7 @@ task/
         |-- vendor.json #define third party libraries
     |-- environment.js  #define module's env variables
     |-- hmr-server.js       #webpack dev server entry file
+    |-- webpack.dll.js   #compile vendor into dll
     |-- develop-sever.js #backend dev server entry file
     |-- webpack.production.js #compile modules and vendors for production
     |-- webpack.hot-update.js #compile modules and vendors for develop in HMR
