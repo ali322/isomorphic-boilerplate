@@ -9,8 +9,6 @@ var gulp = require("gulp"),
     env = require("./environment"),
     config = require('./webpack.hot-update.js');
 
-var bundler = webpack(config);
-
 gulp.task("nodemon", function(cb) {
     var started = false
     return nodemon({
@@ -50,6 +48,7 @@ gulp.task("nodemon", function(cb) {
 
 gulp.task("start", ["nodemon"], function() {
     var listenPort = process.env.LISTEN_PORT || 3000;
+    var bundler = webpack(config);
     browserSync({
         proxy: {
             target: "http://localhost:" + listenPort,

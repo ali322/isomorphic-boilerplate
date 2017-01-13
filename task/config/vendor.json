@@ -8,6 +8,6 @@
         ]
     },
     "css":{
-        "common":["normalize.css/normalize.css","font-awesome/css/font-awesome.css"]
+        "common":["font-awesome/css/font-awesome.css"]
     }
 }
