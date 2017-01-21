@@ -8,8 +8,11 @@
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %} {% block js %}
 <!-- start:js -->
-<script src="vendor/dist/react-73bdbb87.js"></script>
-<script src="{{baseURL}}:7000/hmr/index.js"></script>
-<script src="{{baseURL}}:7000/hmr/common.js"></script>
+<script src="dist/vendor/react-34d45149.js"></script>
+<script src="/hmr/index.js"></script>
+<script src="/hmr/common.js"></script>
 <!-- end:js -->
+<!-- start:browser-sync -->
+<script src="/bs/browser-sync-client.js"></script>
+<!-- end:browser-sync -->
 {% endblock %}

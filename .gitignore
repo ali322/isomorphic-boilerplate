@@ -4,6 +4,7 @@ typings/
 .vscode/
 .happypack/
 .git/
+.nva/temp/
 # vendor/
 client/**/build/
 # client/**/dist/

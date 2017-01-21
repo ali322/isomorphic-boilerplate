@@ -1,5 +1,5 @@
 'use strict';
-import WeatherApp from "../../../shared/chunk/index/app.jsx";
+import WeatherApp from "./module/app.jsx";
 import React from "react";
 import ReactDOM from "react-dom";
 

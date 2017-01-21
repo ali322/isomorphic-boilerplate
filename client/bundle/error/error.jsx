@@ -1,5 +1,5 @@
 'use strict';
-import ErrorContent from "../../../shared/chunk/common/error.jsx";
+import ErrorContent from "./module/app.jsx";
 import React from "react";
 import ReactDOM from "react-dom";
 

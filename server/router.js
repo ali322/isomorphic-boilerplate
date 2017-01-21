@@ -1,18 +1,29 @@
-'use strict'
-var Router = require("koa-router")
-var router = new Router()
+import Router from 'koa-router'
+const router = new Router()
 
-require("babel-polyfill");
-require("babel-register")({
-    extensions: [".es6", ".jsx"]
-});
+import main,{notFoundHandler,errorHandler} from './controller/main'
 
-router.use(require("./middleware.es6").constants)
+applyRoutes(router,main)
 
-router.get("/",require("./controller/main.es6").index);
-router.post("/repo",require("./controller/main.es6").repo);
+router.all("*",notFoundHandler)
+router.use(errorHandler)
 
-router.all("*",require("./controller/main.es6").notFoundHandler);
-router.use(require("./controller/main.es6").errorHandler);
+function applyRoutes(router,...controllers){
+    for(let i in controllers){
+        let controller = controllers[i]
+        for(let k in controller.actions){
+            let action = controller[controller.actions[k]]
+            let middlewares = []
+            if(Array.isArray(controller.middleware)){
+                middlewares = middlewares.concat(controller.middleware)
+            }
+            if(Array.isArray(action.middleware)){
+                middlewares = middlewares.concat(action.middleware)
+            }
+            console.log('middlewares',middlewares)
+            router[action.type](controller.namespace + action.url,...middlewares,action)
+        }
+    }
+}
 
-module.exports = router;
+export default router

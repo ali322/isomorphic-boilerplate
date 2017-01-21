@@ -1,11 +1,11 @@
-'use strict'
-var Koa = require("koa")
-var staticServer = require("koa-static"),
-    bodyParser = require("koa-bodyparser"),
-    methodOverride = require("koa-methodoverride"),
-    convert = require("koa-convert"),
-    session = require("koa-generic-session"),
-    views = require("koa-views")
+import Koa from 'koa'
+import staticServer from 'koa-static'
+import bodyParser from 'koa-bodyparser'
+import methodOverride from 'koa-methodoverride'
+import convert from 'koa-convert'
+import session from 'koa-generic-session'
+import views from 'koa-views'
+import router from './router'
 
 const app = new Koa()
 
@@ -21,8 +21,6 @@ app.use(convert(session({
 })))
 
 app.use(views(`${__dirname}/../view`, { map: { html: "swig" }, extension: "html" }))
-
-var router = require("./router.js")
 
 app.use(router.routes())
 app.use(router.allowedMethods())

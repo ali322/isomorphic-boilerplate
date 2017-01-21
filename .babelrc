@@ -1,10 +1,12 @@
 {
-    "presets":["react","es2015"],
+    "presets":["react","latest"],
     "plugins":[
         "transform-object-rest-spread",
-        "transform-async-to-generator",
-        "transform-object-assign",
-        "transform-class-properties",
-        "transform-runtime"
-    ]
+        "transform-decorators-legacy"
+    ],
+    "env": {
+    	"production": {
+      		"presets": ["react-optimize"]
+    	}
+  	}
 }

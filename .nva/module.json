@@ -1,0 +1,30 @@
+{
+  "error": {
+    "html": [
+      "error.html"
+    ],
+    "path": "error/",
+    "compiler": {
+      "js": "babel",
+      "css": "stylus"
+    },
+    "vendor": {
+      "js": "react_base",
+      "css": "common"
+    }
+  },
+  "index": {
+    "html": [
+      "index.html"
+    ],
+    "path": "index/",
+    "compiler": {
+      "js": "babel",
+      "css": "stylus"
+    },
+    "vendor": {
+      "js": "react",
+      "css": "common"
+    }
+  }
+}
