@@ -23790,13 +23790,12 @@
 	    }, {
 	        key: "handleQuery",
 	        value: function handleQuery(e) {
-	            e && e.preventDefault();
-	            var fetchRepo = this.props.fetchRepo;
-	            var weather = this.props.weatherByCityName.weather;
-
-	            fetchRepo({
-	                cityname: weather.city
-	            });
+	            console.log('handleQuery');
+	            // e && e.preventDefault();
+	            // const { fetchRepo } = this.props;
+	            // fetchRepo({
+	            //     repo:this.props.repo
+	            // });
 	        }
 	    }, {
 	        key: "render",
@@ -23816,7 +23815,8 @@
 	                    "h3",
 	                    null,
 	                    "Github Events",
-	                    flag
+	                    flag,
+	                    "1"
 	                ),
 	                _react2.default.createElement(
 	                    "div",

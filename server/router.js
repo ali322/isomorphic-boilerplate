@@ -20,7 +20,6 @@ function applyRoutes(router,...controllers){
             if(Array.isArray(action.middleware)){
                 middlewares = middlewares.concat(action.middleware)
             }
-            console.log('middlewares',middlewares)
             router[action.type](controller.namespace + action.url,...middlewares,action)
         }
     }

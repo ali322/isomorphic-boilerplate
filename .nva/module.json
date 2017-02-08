@@ -26,5 +26,12 @@
       "js": "react",
       "css": "common"
     }
+  },
+  "user": {
+    "name": "user",
+    "path": "user",
+    "html": [
+      "user.html"
+    ]
   }
 }

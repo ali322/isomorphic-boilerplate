@@ -9,12 +9,12 @@ class Events extends Component {
         changeField("repo", e.target.value);
     }
     handleQuery(e) {
-        e && e.preventDefault();
-        const { fetchRepo } = this.props;
-        const { weather } = this.props.weatherByCityName;
-        fetchRepo({
-            cityname: weather.city
-        });
+        console.log('handleQuery')
+        // e && e.preventDefault();
+        // const { fetchRepo } = this.props;
+        // fetchRepo({
+        //     repo:this.props.repo
+        // });
     }
     render() {
         const { events, repo,flag } = this.props;

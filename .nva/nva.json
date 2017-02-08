@@ -1,4 +1,6 @@
 {
 	"type":"isomorphic",
-	"integrated":true
+	"integrated":true,
+    "entryJSExt":".jsx",
+    "entryCSSExt":".styl"
 }
