@@ -20,7 +20,7 @@ export function fetchUser(param){
     return dispatch=>{
         dispatch(requestUser(param))
         axios.get(`/api/user/${param.user}`).then(ret=>{
-            dispatch(responseUser(ret))
+            dispatch(responseUser(ret.data))
         })
     }
 }
