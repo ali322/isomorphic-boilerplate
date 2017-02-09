@@ -39,7 +39,7 @@ client/
         |-- error/  #error page's entry js and css
         |-- index/  #index page's entry js and css
         |-- .../    #more your own page's entry js and css,like index page
-    |-- vendor/     #third party libraries
+    |-- dist/     #compiled client assets
 server/
     |-- controller/ #express routes directory
     |-- lib/        #server libraries,util and helper modules inside

@@ -39,7 +39,7 @@ client/
         |-- index/      #index 页面入口js和css
         |-- error/      #错误页面入口js和css
         |-- .../        #更多的页面入口js和css,类似index
-    |-- vendor/     #第三方库文件
+    |-- dist/     #编译后的静态资源
 server/
     |-- controller/ #express 路由目录
     |-- lib/        #后端库(工具库等等)
