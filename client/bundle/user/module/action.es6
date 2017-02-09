@@ -1,4 +1,4 @@
-import request from '../../../lib/request.es6'
+import axios from 'axios'
 import * as constants from './constant.es6'
 
 function requestUser(param){
@@ -19,7 +19,7 @@ function responseUser(payload){
 export function fetchUser(param){
     return dispatch=>{
         dispatch(requestUser(param))
-        request.get(`/api/user/${param.user}`).then(ret=>{
+        axios.get(`/api/user/${param.user}`).then(ret=>{
             dispatch(responseUser(ret))
         })
     }

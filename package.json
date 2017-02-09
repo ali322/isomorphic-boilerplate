@@ -45,7 +45,6 @@
     "redux-container": "^1.0.16",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
-    "reqwest": "^2.0.5",
     "swig": "^1.4.2",
     "xhr2": "^0.1.4"
   },

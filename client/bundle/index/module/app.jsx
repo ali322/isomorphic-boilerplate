@@ -22,7 +22,6 @@ class Events extends Component {
         const classes = classNames({
             "events-content": true
         })
-        if(!events)return null
         return (
             <div className={classes}>
                 <h3>Github Events</h3>
