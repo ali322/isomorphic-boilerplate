@@ -8,22 +8,21 @@ import * as actions from './action.es6'
 class Events extends Component {
     handleChange(e) {
         e && e.preventDefault();
-        const { changeField } = this.props;
+        const { changeField } = this.props.actions;
         changeField("repo", e.target.value);
     }
     handleQuery(e) {
-        console.log('handleQuery')
-        // e && e.preventDefault();
-        // const { fetchRepo } = this.props;
-        // fetchRepo({
-        //     repo:this.props.repo
-        // });
+        const { fetchRepo } = this.props.actions;
+        fetchRepo({
+            repo:this.props.repo
+        })
     }
     render() {
         const { events, repo,flag } = this.props;
         const classes = classNames({
             "events-content": true
         })
+        if(!events)return null
         return (
             <div className={classes}>
                 <h3>Github Events</h3>

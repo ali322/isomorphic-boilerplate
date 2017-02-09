@@ -1,5 +1,5 @@
 'use strict';
-import request from "../../../lib/request.es6"
+import axios from "axios"
 import {CHANGE_FIELD,REQUEST_REPO,RESPONSE_REPO,FAIL_RESPONSE} from "./constant.es6";
 export function changeField(name,value){
     return {
@@ -33,8 +33,8 @@ function failResponse(err){
 export function fetchRepo(param){
     return (dispatch) => {
         dispatch(requestRepo(param))
-        return request.get("/repo",param)
-        .then(ret=> dispatch(responseRepo(param,ret)))
+        axios.get(`/repo/${param.repo}`)
+        .then(ret=> dispatch(responseRepo(param,ret.data)))
         .catch(err =>dispatch(failResponse(err)))
   }
 }

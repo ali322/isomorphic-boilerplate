@@ -46,16 +46,16 @@ export default new class {
     @route({url:'/repo/:repo'})
     async repo(ctx,next){
         const repo = ctx.params.repo;
-        const ret = await axios.get(`https://api.github.com/repos/${repo}/events`)
-        if (ret.errMsg === "success") {
+        const ret = await axios.get(`https://api.github.com/events`)
+        if (ret.status === 200) {
             ctx.body = {
-                weatherFetched: true,
-                result: ret.retData
+                isFetched: true,
+                result: ret.data
             }
         } else {
             ctx.body = {
-                weatherFetched: false,
-                errMsg: ret.errMsg
+                isFetched: false,
+                errMsg: 'repo not found'
             }
         }
     }
