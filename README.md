@@ -10,12 +10,15 @@ Develop
 ===
 1. clone to your local disk `git clone https://github.com/ali322/isomorphic-boilerplate`
 2. run `npm install`
-4. run `npm start` to start backend develop server
-5. run `npm run hmr` to start frontend develop server
+3. run `npm install nva -g`
+4. run `nva vendor` to build vendor libraries
+5. run `nva dev` to start develop server
+6. run `npm run lint` to lint source code
+7. run `npm test` to run tests
 
 Deploy
 ===
-1. run `npm run release-static` release static source and inject to html
+1. run `nva build` release static source and inject to html
 2. upload your project to deploy environment
 1. run `npm install --production`
 2. run `npm install pm2 -g` (more instructions in [pm2 documention](https://github.com/Unitech/PM2))
@@ -42,30 +45,11 @@ server/
     |-- lib/        #server libraries,util and helper modules inside
     |-- router.js   #server router,all the routes is defined here
     |-- bootstrap.js #initialize application,load middlewares and setup
-shared/
-    |-- common/     #common web components,etc:error
-    |-- lib/        #shared libraries(client and server)
-    |-- component/  #common component,etc alert,selected
-    |-- chunk/
-        |-- common/     #component in common use
-        |-- index/      #index page's web components
-        |-- .../        #more your own page's web components,like index page
-task/
-    |-- config/
-        |-- module.json #define page's path and module config
-        |-- vendor.json #define third party libraries
-    |-- environment.js  #define module's env variables
-    |-- hmr-server.js       #webpack dev server entry file
-    |-- webpack.dll.js   #compile vendor into dll
-    |-- develop-sever.js #backend dev server entry file
-    |-- webpack.production.js #compile modules and vendors for production
-    |-- webpack.hot-update.js #compile modules and vendors for develop in HMR
 view/
     |-- layout.html #global layout template
     |-- index.html  #index page's template
     |-- *.html      #more your own page's template
 app.js      #web application enrty file
-gulpfile.js #task entry file
 ```
 
 ## License
