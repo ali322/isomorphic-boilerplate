@@ -1,11 +1,14 @@
 {
-  "name": "hyena",
+  "name": "isomorphic-boilerplate",
   "version": "1.0.0",
   "description": "isomorphic webapp boilerplate",
   "main": "app.js",
   "scripts": {
     "linter": "esw -w --ext .js,.jsx,.es6 .",
-    "test": "NODE_ENV=test ava --tap | tap-spec"
+    "test": "NODE_ENV=test ava --tap | tap-spec",
+    "lint:js": "eslint client server",
+    "lint:css": "stylelint \"client/bundle/**/*.{css,less,scss,styl}\"",
+    "lint": "npm run lint:js && npm run lint:css"
   },
   "ava": {
     "files": [
@@ -61,6 +64,7 @@
     "enzyme": "^2.7.1",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-css-modules": "^2.2.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
