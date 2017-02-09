@@ -1,27 +1,29 @@
-'use strict';
+import React,{Component} from 'react'
+import {connected} from 'redux-container'
+import * as actions from './action.es6'
 
-import React,{Component} from "react";
-
-class ErrorContent extends Component{
+@connected(actions,state=>({
+    ...state.userReducer
+}))
+class User extends Component{
     render(){
-        const {msg} = this.props.initialState
+        const {user} = this.props
+        if(!user){
+            return null
+        }
         return (
-            <div className="error-content">
-                <div className="error-layer">
-                    <div className="error-panel">
-                        <img src="/client/asset/image/error.png"/>
-                        <p>{msg}</p>
-                    </div>
+            <div className="user-container common-container">
+                <h3><button onClick={()=>history.back()}>&lt;</button>{user.id}</h3>
+                <div className="user-title">
+                    <img src={user.avatar_url} alt=""/>
+                    <span>
+                    <p>{user.login}</p>
+                    <p>{user.created_at}</p>
+                    </span>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-ErrorContent.defaultProps = {
-    error:{
-        msg:""
-    }
-}
-
-export default ErrorContent;
+export default User

@@ -5,9 +5,7 @@ typings/
 .happypack/
 .git/
 .nva/temp/
-# vendor/
-client/**/build/
-# client/**/dist/
+client/dist/
 client/__coverage__/
 # /client/**/stylesheet/
 # /client/**/*.jsx

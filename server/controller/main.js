@@ -1,7 +1,9 @@
 import react, { Component } from "react"
-import { apiRequest, markupForComponent } from "../lib/util"
-import WeatherApp from "../../client/bundle/index/module/app.jsx"
-import ErrorContent from "../../client/bundle/error/module/app.jsx"
+import {markupForComponent } from "../lib/util"
+import axios from 'axios'
+import Index from "../../client/bundle/index/module/container.jsx"
+import Error from "../../client/bundle/error/module/app.jsx"
+import User from '../../client/bundle/user/module/container.jsx'
 import {route,namespace,middleware} from '../lib/util'
 import log from '../middleware/log'
 import test from '../middleware/test'
@@ -18,29 +20,33 @@ export default new class {
 
     @route({url:'/'})
     async index(ctx,next){
-        const ret = await apiRequest("https://api.github.com/events")
-        if (ret.length > 0) {
+        let ret = []
+        try{
+            ret = await axios.get("https://api.github.com/events")
+        }catch(err){
+            await next(err)
+        }
+        if (ret.status === 200) {
             var initialState = {
-                flag:'66',
-                events: ret
+                flag:'6',
+                events: ret.data
             };
-            var markup = markupForComponent(WeatherApp, {
-                initialState: initialState
+            var markup = markupForComponent(Index,{
+                initialState
             });
             await ctx.render("index", {
                 markup: markup,
                 initialState: initialState
             });
-
         } else {
-            next(new Error("no events"))
+           await next(new Error('no evenets'))
         }
     }
 
-    @route({url:'/repo'})
+    @route({url:'/repo/:repo'})
     async repo(ctx,next){
-        var repo = req.body.repo;
-        const ret = await apiRequest(`https://api.github.com/repos/${repo}/events`)
+        const repo = ctx.params.repo;
+        const ret = await axios.get(`https://api.github.com/repos/${repo}/events`)
         if (ret.errMsg === "success") {
             ctx.body = {
                 weatherFetched: true,
@@ -53,6 +59,26 @@ export default new class {
             }
         }
     }
+
+    @route({url:'/user/:user'})
+    async user(ctx,next){
+        const user = ctx.params.user
+        const ret = await axios.get(`https://api.github.com/users/${user}`)
+        if (ret.status === 200) {
+            var initialState = {
+                user: ret.data
+            };
+            var markup = markupForComponent(User,{
+                initialState
+            });
+            await ctx.render("user", {
+                markup: markup,
+                initialState: initialState
+            });
+        } else {
+           await next(new Error('no user'))
+        }
+    }
 }
 
 export async function errorHandler(ctx, next) {
@@ -60,7 +86,7 @@ export async function errorHandler(ctx, next) {
         var initialState = {
             msg: err.message
         }
-        var markup = markupForComponent(ErrorContent, {
+        var markup = markupForComponent(Error, {
             initialState: initialState
         })
 
@@ -77,7 +103,7 @@ export async function notFoundHandler(ctx, next) {
     var initialState = {
         msg: "page not found"
     }
-    var markup = markupForComponent(ErrorContent, {
+    var markup = markupForComponent(Error, {
         initialState: initialState
     })
 

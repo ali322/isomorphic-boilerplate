@@ -2,7 +2,7 @@
 
 import React,{Component} from "react";
 
-class ErrorContent extends Component{
+class Error extends Component{
     render(){
         const {msg} = this.props.initialState
         return (
@@ -18,10 +18,10 @@ class ErrorContent extends Component{
     }
 }
 
-ErrorContent.defaultProps = {
+Error.defaultProps = {
     error:{
         msg:""
     }
 }
 
-export default ErrorContent;
+export default Error

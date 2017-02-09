@@ -7,7 +7,7 @@ import {
 } from "./constant.es6";
 import {combineReducers} from "redux";
 
-export function eventsReducer(state={},action){
+function eventsReducer(state={},action){
     switch(action.type){
         case CHANGE_FIELD:
             const {name,value} = action;
@@ -32,8 +32,4 @@ export function eventsReducer(state={},action){
     }
 }
 
-const rootReducer = combineReducers({
-    eventsReducer
-});
-
-export default rootReducer;
+export default eventsReducer;

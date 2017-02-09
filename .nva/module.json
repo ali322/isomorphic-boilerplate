@@ -4,10 +4,6 @@
       "error.html"
     ],
     "path": "error/",
-    "compiler": {
-      "js": "babel",
-      "css": "stylus"
-    },
     "vendor": {
       "js": "react_base",
       "css": "common"
@@ -18,20 +14,19 @@
       "index.html"
     ],
     "path": "index/",
-    "compiler": {
-      "js": "babel",
-      "css": "stylus"
-    },
     "vendor": {
       "js": "react",
       "css": "common"
     }
   },
   "user": {
-    "name": "user",
-    "path": "user",
     "html": [
       "user.html"
-    ]
+    ],
+    "path": "user/",
+    "vendor": {
+      "js": "react",
+      "css": "common"
+    }
   }
 }

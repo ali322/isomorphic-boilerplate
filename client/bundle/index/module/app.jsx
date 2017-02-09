@@ -1,43 +1,53 @@
 'use strict'
-import React,{Component} from "react";
-import {Provider,connect} from "react-redux";
-import rootReducer from "./reducer.es6";
-import createStoreWithMiddleware,{wrapComponentWithActions} from "../../../lib/redux-helper.es6";
-import Events from "./component.jsx";
-import * as actions from "./action.es6";
+import React, { Component } from "react"
+import classNames from "classnames"
+import {connected} from 'redux-container'
+import * as actions from './action.es6'
 
-let EventsConnected = connect((state)=>{
-    return {...state.eventsReducer};
-})(wrapComponentWithActions(Events,actions));
-
-function configureStore(initialState){
-    const store = createStoreWithMiddleware(rootReducer, initialState)
-    if (module.hot) {
-        module.hot.accept('./reducer.es6', () => {
-            const nextRootReducer = require('./reducer.es6');
-            store.replaceReducer(nextRootReducer);
-        });
+@connected(actions,state=>({...state.eventsReducer}))
+class Events extends Component {
+    handleChange(e) {
+        e && e.preventDefault();
+        const { changeField } = this.props;
+        changeField("repo", e.target.value);
     }
-    return store
-}
-
-class App extends Component{
-    render(){
-        const {events,flag} = this.props.initialState;
-        const initialState = {
-            eventsReducer:{
-                events,
-                flag,
-                repo:''
-            }
-        }
-        const store = configureStore(initialState);
+    handleQuery(e) {
+        console.log('handleQuery')
+        // e && e.preventDefault();
+        // const { fetchRepo } = this.props;
+        // fetchRepo({
+        //     repo:this.props.repo
+        // });
+    }
+    render() {
+        const { events, repo,flag } = this.props;
+        const classes = classNames({
+            "events-content": true
+        })
         return (
-            <Provider store={store}>
-            <EventsConnected/>
-            </Provider>
+            <div className={classes}>
+                <h3>Github Events</h3>
+                <div className="events-form">
+                    <input type="text" name="cityname" value={repo} onChange={this.handleChange.bind(this)}/>
+                    <button onClick={this.handleQuery.bind(this)}><i className="fa fa-search"/></button>
+                </div>
+                <div className="events">
+                    {events.map(event=>(
+                        <div className="event" key={event.id}>
+                        <div className="event-title">
+                            <img src={event.actor.avatar_url} alt=""/>
+                            <span>
+                            <p><a href={`/user/${event.actor.display_login}`}>{event.actor.display_login}</a></p>
+                            <p>{event.created_at}</p>
+                            </span>
+                        </div>
+                        <p>{event.type.replace('Event','').toLowerCase()} In <b>{event.repo.name}1</b></p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         )
     }
 }
 
-export default App;
+export default Events

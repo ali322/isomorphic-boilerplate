@@ -1,11 +1,11 @@
 'use strict';
-import ErrorContent from "./module/app.jsx";
+import Error from "./module/app.jsx";
 import React from "react";
 import ReactDOM from "react-dom";
 
 function bootstrap(){
     var initialState = JSON.parse(document.getElementById("initial-state").textContent);
-        ReactDOM.render(<ErrorContent initialState={initialState} />,document.getElementById('error'));
+        ReactDOM.render(<Error initialState={initialState} />,document.getElementById('app'));
 }
 
 if(typeof window.addEventListener){
