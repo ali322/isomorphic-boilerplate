@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { connected } from 'redux-container'
 import * as actions from './action.es6'
 
-@connected(actions, state => ({
-    ...state.userReducer
-}))
-class User extends Component {
+export class User extends Component {
     static propTypes = {
         user: React.PropTypes.object
     }
@@ -29,4 +26,4 @@ class User extends Component {
     }
 }
 
-export default User
+export default connected(actions, state => ({ ...state.userReducer }))(User)

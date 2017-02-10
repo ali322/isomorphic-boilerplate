@@ -18,29 +18,26 @@ test("should create changeField action", t => {
 
 let mockStore
 
-test.before(()=> {
+test.before(() => {
+    nock.cleanAll()
     mockStore = configureStore([thunkMiddleware]);
 })
 
-test.skip("should RESPONSE_EVENTS when fetched", t => {
-    return new Promise((resolve) => {
-        let ret = [{
-            "isFetched": true,
-            "result": []
-        }]
-        let initialState = {
-            eventsReducer: { events: [] }
-        }
-        const store = mockStore(initialState)
-        let expectedActions = [
-            { type: constants.REQUEST_REPO, param: { repo: "redux" } },
-            { type: constants.RESPONSE_REPO, param: { repo: "redux" }, res: ret }
-        ]
-        nock("http://localhost:3000/").get("/repo/redux").reply(200, ret)
-        store.dispatch(actions.fetchRepo({ repo: "redux" }))
-            .then(() => {
-                t.deepEqual(store.getActions(), expectedActions)
-                resolve()
-            })
+test("should RESPONSE_EVENTS when fetched", t => {
+    let ret = [{
+        "isFetched": true,
+        "result": []
+    }]
+    let initialState = {
+        eventsReducer: { events: [] }
+    }
+    const store = mockStore(initialState)
+    let expectedActions = [
+        { type: constants.REQUEST_REPO, param: { repo: "redux" } },
+        { type: constants.RESPONSE_REPO, param: { repo: "redux" }, res: ret }
+    ]
+    nock("http://localhost").get("/repo/redux").reply(200, ret)
+    return store.dispatch(actions.fetchRepo({ repo: "redux" })).then(() => {
+        t.deepEqual(store.getActions(), expectedActions)
     })
 })

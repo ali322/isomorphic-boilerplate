@@ -1,26 +1,23 @@
-'use strict'
-
 import test from "ava"
 import sinon from "sinon"
 import React from "react";
-import { shallow, mount } from "enzyme"
-import Index from "../../../client/bundle/index/module/container.jsx";
-import initialState from "./initialstate.json"
+import { shallow } from "enzyme"
+import { Events } from "../../../client/bundle/index/module/app.jsx";
 
 let wrapper, el
 
-test.before(t => {
+test.before(() => {
     const props = {
         fetchRepo: sinon.spy(),
         handleChange: sinon.spy(),
-        initialState
+        events: []
     }
-    wrapper = shallow(<Index {...props}/>)
-    el = wrapper.instance()
+    wrapper = shallow(<Events {...props} />)
+    el = wrapper
 })
 
-test.skip("should render correct", t => {
-    t.is(wrapper.find("input").prop("value"), "")
+test("should render correct", t => {
+    t.is(wrapper.find("input").length, 1)
 })
 
 test.skip("should call handleChange once after change value", t => {

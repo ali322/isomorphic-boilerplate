@@ -3,8 +3,7 @@ import classNames from "classnames"
 import { connected } from 'redux-container'
 import * as actions from './action.es6'
 
-@connected(actions, state => ({ ...state.eventsReducer }))
-class Events extends Component {
+export class Events extends Component {
     static propTypes = {
         actions: React.PropTypes.object,
         repo: React.PropTypes.string,
@@ -58,4 +57,4 @@ class Events extends Component {
     }
 }
 
-export default Events
+export default connected(actions, state => ({ ...state.eventsReducer }))(Events)

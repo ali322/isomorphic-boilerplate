@@ -19,7 +19,7 @@ function responseUser(payload) {
 export function fetchUser(param) {
     return dispatch => {
         dispatch(requestUser(param))
-        axios.get(`/api/user/${param.user}`).then(ret => {
+        return axios.get(`/api/user/${param.user}`).then(ret => {
             dispatch(responseUser(ret.data))
         })
     }

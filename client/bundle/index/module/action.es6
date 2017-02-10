@@ -34,7 +34,7 @@ function failResponse(err) {
 export function fetchRepo(param) {
     return (dispatch) => {
         dispatch(requestRepo(param))
-        axios.get(`/repo/${param.repo}`)
+        return axios.get(`/repo/${param.repo}`)
             .then(ret => dispatch(responseRepo(param, ret.data)))
             .catch(err => dispatch(failResponse(err)))
     }
