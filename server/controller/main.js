@@ -1,10 +1,8 @@
-import react, { Component } from "react"
-import {markupForComponent } from "../lib/util"
 import axios from 'axios'
 import Index from "../../client/bundle/index/module/container.jsx"
 import Error from "../../client/bundle/error/module/app.jsx"
 import User from '../../client/bundle/user/module/container.jsx'
-import {route,namespace,middleware} from '../lib/util'
+import { route, namespace, middleware,markupForComponent } from '../lib/util'
 import log from '../middleware/log'
 import test from '../middleware/test'
 import other from '../middleware/other'
@@ -12,40 +10,39 @@ import other from '../middleware/other'
 @middleware(log)
 @namespace('')
 export default new class {
-    @middleware(test,other)
-    @route({type:'get',url:'/test'})
-    test(ctx,next){
+    @middleware(test, other)
+    @route({ type: 'get', url: '/test' })
+    test(ctx) {
         ctx.body = 'im test'
     }
 
-    @route({url:'/'})
-    async index(ctx,next){
+    @route({ url: '/' })
+    async index(ctx, next) {
         let ret = []
-        try{
+        try {
             ret = await axios.get("https://api.github.com/events")
-        }catch(err){
+        } catch (err) {
             await next(err)
         }
         if (ret.status === 200) {
-            var initialState = {
-                flag:'6',
+            let initialState = {
+                flag: '6',
                 events: ret.data
             };
-            var markup = markupForComponent(Index,{
+            let markup = markupForComponent(Index, {
                 initialState
             });
             await ctx.render("index", {
-                markup: markup,
-                initialState: initialState
+                markup,
+                initialState
             });
         } else {
-           await next(new Error('no evenets'))
+            await next(new Error('no evenets'))
         }
     }
 
-    @route({url:'/repo/:repo'})
-    async repo(ctx,next){
-        const repo = ctx.params.repo;
+    @route({ url: '/repo/:repo' })
+    async repo(ctx) {
         const ret = await axios.get(`https://api.github.com/events`)
         if (ret.status === 200) {
             ctx.body = {
@@ -60,55 +57,55 @@ export default new class {
         }
     }
 
-    @route({url:'/user/:user'})
-    async user(ctx,next){
+    @route({ url: '/user/:user' })
+    async user(ctx, next) {
         const user = ctx.params.user
         const ret = await axios.get(`https://api.github.com/users/${user}`)
         if (ret.status === 200) {
-            var initialState = {
+            let initialState = {
                 user: ret.data
             };
-            var markup = markupForComponent(User,{
+            let markup = markupForComponent(User, {
                 initialState
             });
             await ctx.render("user", {
-                markup: markup,
-                initialState: initialState
+                markup,
+                initialState
             });
         } else {
-           await next(new Error('no user'))
+            await next(new Error('no user'))
         }
     }
-}
+}()
 
-export async function errorHandler(ctx, next) {
+export async function errorHandler(ctx,next,err) {
     if (err) {
-        var initialState = {
+        let initialState = {
             msg: err.message
         }
-        var markup = markupForComponent(Error, {
-            initialState: initialState
+        let markup = markupForComponent(Error, {
+            initialState
         })
 
         await ctx.render('error', {
-            markup: markup,
-            initialState: initialState
+            markup,
+            initialState
         })
     } else {
         ctx.res.end()
     }
 }
 
-export async function notFoundHandler(ctx, next) {
-    var initialState = {
+export async function notFoundHandler(ctx) {
+    let initialState = {
         msg: "page not found"
     }
-    var markup = markupForComponent(Error, {
-        initialState: initialState
+    let markup = markupForComponent(Error, {
+        initialState
     })
 
     await ctx.render('error', {
-        markup: markup,
-        initialState: initialState
+        markup,
+        initialState
     })
 }

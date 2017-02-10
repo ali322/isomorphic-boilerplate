@@ -1,25 +1,25 @@
 import axios from 'axios'
 import * as constants from './constant.es6'
 
-function requestUser(param){
+function requestUser(param) {
     return {
-        type:constants.REQUEST_USER,
+        type: constants.REQUEST_USER,
         param
     }
 }
 
-function responseUser(payload){
+function responseUser(payload) {
     return {
-        type:constants.RESPONSE_USER,
+        type: constants.RESPONSE_USER,
         payload,
-        respondAt:Date.now()
+        respondAt: Date.now()
     }
 }
 
-export function fetchUser(param){
-    return dispatch=>{
+export function fetchUser(param) {
+    return dispatch => {
         dispatch(requestUser(param))
-        axios.get(`/api/user/${param.user}`).then(ret=>{
+        axios.get(`/api/user/${param.user}`).then(ret => {
             dispatch(responseUser(ret.data))
         })
     }

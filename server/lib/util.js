@@ -3,7 +3,7 @@ import ReactDOMServer from "react-dom/server"
 import axios from "axios"
 
 export function markupForComponent(RenderComponent, props = {}) {
-    return ReactDOMServer.renderToString(<RenderComponent {...props}/>)
+    return ReactDOMServer.renderToString(<RenderComponent {...props} />)
 }
 
 export function apiRequest(url) {
@@ -11,8 +11,8 @@ export function apiRequest(url) {
 }
 
 export function route(options) {
-    const { type = 'get', url = 'index',middleware =[] } = options
-    return function(target,key,descriptor) {
+    const { type = 'get', url = 'index' } = options
+    return (target, key, descriptor) => {
         target.actions = target.actions || []
         target.actions.push(key)
         const method = descriptor.value
@@ -22,22 +22,21 @@ export function route(options) {
     }
 }
 
-export function namespace(value=''){
-    return function(target){
+export function namespace(value = '') {
+    return (target) => {
         target.prototype.namespace = value
         return target
     }
 }
 
-export function middleware(...value){
-    return function(target,key,descriptor){
-        if(key === undefined){
+export function middleware(...value) {
+    return (target, key, descriptor) => {
+        if (key === undefined) {
             target.prototype.middleware = value || []
             return target
-        }else{
-            const method = descriptor.value
-            method.middleware = value || []
-            return descriptor
         }
+        const method = descriptor.value
+        method.middleware = value || []
+        return descriptor
     }
 }
