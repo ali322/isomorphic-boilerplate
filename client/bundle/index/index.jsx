@@ -1,11 +1,13 @@
-'use strict';
-import Index from "./module/container.jsx"
 import React from "react";
 import ReactDOM from "react-dom";
+import Index from "./module/container.jsx"
 
+if (module.hot) {
+    module.hot.accept()
+}
 
 function bootstrap() {
-    var initialState = JSON.parse(document.getElementById("initial-state").textContent);
+    let initialState = JSON.parse(document.getElementById("initial-state").textContent);
     ReactDOM.render(<Index initialState={initialState} />, document.getElementById('app'));
 }
 

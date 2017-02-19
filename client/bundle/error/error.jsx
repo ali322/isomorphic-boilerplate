@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Error from "./module/app.jsx";
+import Error from "./module/app.jsx"
+
+if (module.hot) {
+    module.hot.accept()
+}
 
 function bootstrap() {
     let initialState = JSON.parse(document.getElementById("initial-state").textContent);
