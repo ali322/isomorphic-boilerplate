@@ -3,7 +3,6 @@ import test from "ava"
 import eventsReducer from "../../../client/bundle/index/module/reducer.es6"
 import * as constants from "../../../client/bundle/index/module/constant.es6"
 
-import initialState from "./initialstate.json"
 
 test("should handle CHANGE_FIELD", t => {
     let action = {
@@ -11,7 +10,7 @@ test("should handle CHANGE_FIELD", t => {
         name: "repo",
         value: "redux"
     }
-    let nextState = eventsReducer(initialState.eventsReducer, action);
+    let nextState = eventsReducer({}, action);
     t.is(nextState.repo, "redux")
 })
 
