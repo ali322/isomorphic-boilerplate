@@ -1,3 +1,4 @@
+import path from 'path'
 import Koa from 'koa'
 import staticServer from 'koa-static'
 import bodyParser from 'koa-bodyparser'
@@ -20,7 +21,9 @@ app.use(convert(session({
     }
 })))
 
-app.use(views(`${__dirname}/../view`, { map: { html: "swig" }, extension: "html" }))
+let viewPath = path.join(process.cwd(),'view')
+
+app.use(views(viewPath, { map: { html: "swig" }, extension: "html" }))
 
 app.use(router.routes())
 app.use(router.allowedMethods())
