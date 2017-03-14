@@ -1,41 +1,25 @@
 import axios from "axios"
-import { CHANGE_FIELD, REQUEST_REPO, RESPONSE_REPO, FAIL_RESPONSE } from "./constant.es6";
+import * as constants from "./constant.es6"
 
-export function changeField(name, value) {
-    return {
-        type: CHANGE_FIELD,
-        name,
-        value
+const actions = {
+    changeField({ commit }, param) {
+        commit(constants.CHANGE_FIELD, param)
+    },
+    requestRepo({ commit }) {
+        commit(constants.REQUEST_REPO)
+    },
+    responseRepo({ commit }, res) {
+        commit(constants.RESPONSE_REPO, { res })
+    },
+    failResponse({ commit }, err) {
+        commit(constants.FAIL_RESPONSE, { err })
+    },
+    fetchRepo({ commit, dispatch }, param) {
+        dispatch("requestRepo", param)
+        return axios.get(`https://api.github.com/events`).then(ret => {
+            dispatch('responseRepo', ret.data)
+        })
     }
 }
 
-function requestRepo(param) {
-    return {
-        type: REQUEST_REPO,
-        param
-    }
-}
-
-function responseRepo(param, res) {
-    return {
-        type: RESPONSE_REPO,
-        param,
-        res
-    }
-}
-
-function failResponse(err) {
-    return {
-        type: FAIL_RESPONSE,
-        err
-    }
-}
-
-export function fetchRepo(param) {
-    return (dispatch) => {
-        dispatch(requestRepo(param))
-        return axios.get(`/repo/${param.repo}`)
-            .then(ret => dispatch(responseRepo(param, ret.data)))
-            .catch(err => dispatch(failResponse(err)))
-    }
-}
+export default actions

@@ -1,10 +1,7 @@
 {
     "js":{
         "react":[
-            "react","redux","react-dom","react-redux","redux-thunk","redux-logger","bluebird"
-        ],
-        "react_base":[
-            "react","react-dom"
+            "vue","vuex","vue-router"
         ]
     },
     "css":{

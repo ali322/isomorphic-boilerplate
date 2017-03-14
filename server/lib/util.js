@@ -1,9 +1,16 @@
-import React from "react"
-import ReactDOMServer from "react-dom/server"
+import { createBundleRenderer } from 'vue-server-renderer'
 import axios from "axios"
+import path from 'path'
 
-export function markupForComponent(RenderComponent, props = {}) {
-    return ReactDOMServer.renderToString(<RenderComponent {...props} />)
+export function markupForComponent(name, ctx) {
+    const bundlePath = path.join(__dirname, '..', 'bundle', name + '.js')
+    const renderer = createBundleRenderer(bundlePath)
+    return new Promise((resolve,reject)=>{
+        renderer.renderToString(ctx, (err, html) => {
+            if(err)reject(err)
+            resolve(html)
+        })
+    })
 }
 
 export function apiRequest(url) {

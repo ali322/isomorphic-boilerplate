@@ -1,6 +1,7 @@
 {
-	"type":"isomorphic",
-	"integrated":true,
-    "entryJSExt":".jsx",
-    "entryCSSExt":".styl"
+    "type": "isomorphic",
+    "integrated": true,
+    "spa": true,
+    "entryJSExt": ".js",
+    "entryCSSExt": ".styl"
 }

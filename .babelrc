@@ -1,5 +1,5 @@
 {
-    "presets":["react","latest"],
+    "presets":["latest"],
     "plugins":[
         "transform-object-rest-spread",
         "transform-decorators-legacy",
@@ -8,7 +8,7 @@
     ],
     "env": {
     	"production": {
-      		"presets": ["react-optimize"]
+      		"presets": ["transform-runtime"]
     	}
   	}
 }

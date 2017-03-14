@@ -1,8 +1,10 @@
 import Router from 'koa-router'
-import main, { notFoundHandler, errorHandler } from './controller/main'
+import {index, notFoundHandler, errorHandler } from './controller/main'
+import api from './controller/api'
 
 const router = new Router()
-applyRoutes(router, main)
+router.use(index)
+applyRoutes(router, api)
 
 router.all("*", notFoundHandler)
 router.use(errorHandler)

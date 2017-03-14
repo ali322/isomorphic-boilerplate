@@ -5,7 +5,7 @@
     ],
     "path": "error/",
     "vendor": {
-      "js": "react_base",
+      "js": "vue",
       "css": "common"
     }
   },
@@ -15,17 +15,7 @@
     ],
     "path": "index/",
     "vendor": {
-      "js": "react",
-      "css": "common"
-    }
-  },
-  "user": {
-    "html": [
-      "user.html"
-    ],
-    "path": "user/",
-    "vendor": {
-      "js": "react",
+      "js": "vue",
       "css": "common"
     }
   }
