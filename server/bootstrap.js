@@ -7,6 +7,7 @@ import convert from 'koa-convert'
 import session from 'koa-generic-session'
 import views from 'koa-views'
 import router from './router'
+import { error } from './controller/main'
 
 const app = new Koa()
 
@@ -21,7 +22,13 @@ app.use(convert(session({
     }
 })))
 
-let viewPath = path.join(process.cwd(),'view')
+app.use(error)
+
+app.on('error', err => {
+    console.log('server error', err)
+})
+
+let viewPath = path.join(process.cwd(), 'view')
 
 app.use(views(viewPath, { map: { html: "swig" }, extension: "html" }))
 

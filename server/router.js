@@ -1,13 +1,12 @@
 import Router from 'koa-router'
-import {index, notFoundHandler, errorHandler } from './controller/main'
+import {index, notFound } from './controller/main'
 import api from './controller/api'
 
 const router = new Router()
 router.use(index)
 applyRoutes(router, api)
 
-router.all("*", notFoundHandler)
-router.use(errorHandler)
+router.all("*", notFound)
 
 function applyRoutes(router, ...controllers) {
     for (let i in controllers) {

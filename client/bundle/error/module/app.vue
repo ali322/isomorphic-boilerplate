@@ -2,8 +2,8 @@
     <div class="error-content">
         <div class="error-layer">
             <div class="error-panel">
-                <img src="/client/asset/image/error.png" alt="" />
-                <p>{{msg}}}</p>
+                <img src="asset/image/500.png" alt="" />
+                <p>{{ msg }}</p>
             </div>
         </div>
     </div>
@@ -11,9 +11,7 @@
 <script>
     export default {
         data(){
-            return {
-                msg:'123'
-            }
+            return {msg:''}
         }
     }
 </script>

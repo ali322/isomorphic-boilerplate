@@ -6,18 +6,19 @@ global.window = document.defaultView;
 global.navigator = window.navigator;
 global.fetch = require('node-fetch')
 
-export default context => {
-    router.push(context.url)
+export default ctx => {
+    router.push(ctx.url)
     const matchedComponents = router.getMatchedComponents()
     if (!matchedComponents.length) {
         return Promise.reject({ code: 404 })
     }
-    return Promise.all(matchedComponents.map(v => {
-        if (v.preFetch) {
-            return v.preFetch
-        }
-    })).then(() => {
-        context.initialState = store.state
+    return Promise.all(matchedComponents).then(() => {
+        let { initialState } = ctx
+        console.log('initialState',ctx)
+        store.replaceState({
+            ...store.state,
+            ...initialState
+        })
         return app
     })
 }
