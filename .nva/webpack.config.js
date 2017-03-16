@@ -1,5 +1,3 @@
-let VueSSRPlugin = require('vue-ssr-webpack-plugin')
-
 module.exports = [{
     name: 'client',
     resolve: {

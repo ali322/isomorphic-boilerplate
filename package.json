@@ -18,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
+    "bootstrap": "^3.3.7",
     "browser-env": "^2.0.25",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
@@ -28,6 +29,7 @@
     "koa-generic-session": "^1.11.4",
     "koa-methodoverride": "^2.0.0",
     "koa-router": "^7.1.0",
+    "koa-session2": "^2.0.3",
     "koa-static": "^2.0.0",
     "koa-views": "^5.2.0",
     "lru-cache": "^4.0.2",
