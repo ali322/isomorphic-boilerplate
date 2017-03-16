@@ -1,7 +1,7 @@
 let spawn = require('cross-spawn')
 let server = require('./server')
 
-process.env.NODE_ENV = 'testing'
+process.env.NODE_ENV = 'production'
 
 /* eslint-disable */
 let opts = process.argv.slice(2)

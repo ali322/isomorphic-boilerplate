@@ -7,6 +7,7 @@
     "start": "NODE_ENV=production node app.js",
     "linter": "esw -w --ext .js,.jsx,.es6 .",
     "test": "NODE_ENV=test karma start ./test/client/unit/karma.conf.js",
+    "test:server": "mocha --require babel-register test/server/spec/**/*.js",
     "e2e": "node ./test/client/e2e/runner.js --config ./test/client/e2e/nightwatch.conf.js --env chrome",
     "lint:js": "eslint client server",
     "lint:css": "stylelint \"client/bundle/**/*.{css,less,scss,styl}\"",
@@ -17,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
+    "browser-env": "^2.0.25",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "jsdom": "^9.12.0",
@@ -37,7 +39,7 @@
     "xhr2": "^0.1.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
+    "babel-cli": "^6.24.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.4.0",
@@ -66,12 +68,12 @@
     "moxios": "^0.3.0",
     "nib": "^1.1.2",
     "nightwatch": "^0.9.13",
-    "nock": "^9.0.4",
     "selenium-server": "^3.3.1",
     "sinon": "^2.0.0-pre.6",
     "sinon-chai": "^2.8.0",
     "stylelint": "^7.8.0",
     "stylelint-config-standard": "^16.0.0",
+    "supertest": "^3.0.0",
     "vue-loader": "^11.1.4",
     "vue-ssr-webpack-plugin": "^1.0.2",
     "vue-template-compiler": "^2.2.3",

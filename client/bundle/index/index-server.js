@@ -1,9 +1,9 @@
 import app, { router, store } from './app'
 
-// const jsdom = require('jsdom').jsdom;
-// global.document = jsdom('<!doctype html><html><body></body></html>');
-// global.window = document.defaultView;
-// global.navigator = window.navigator;
+const jsdom = require('jsdom').jsdom;
+global.document = jsdom('<!doctype html><html><body></body></html>');
+global.window = document.defaultView;
+global.navigator = window.navigator;
 
 export default ctx => {
     router.push(ctx.url)
