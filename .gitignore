@@ -6,8 +6,3 @@ typings/
 .git/
 .nva/temp/
 client/dist/
-client/__coverage__/
-# /client/**/stylesheet/
-# /client/**/*.jsx
-# /client/**/__tests__/
-# /server/**/__tests__/

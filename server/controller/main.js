@@ -2,7 +2,7 @@ import axios from 'axios'
 import Index from "../../client/bundle/index/module/container.jsx"
 import Error from "../../client/bundle/error/module/app.jsx"
 import User from '../../client/bundle/user/module/container.jsx'
-import { route, namespace, middleware,markupForComponent } from '../lib/util'
+import { route, namespace, middleware, markupForComponent } from '../lib/util'
 import log from '../middleware/log'
 import test from '../middleware/test'
 import other from '../middleware/other'
@@ -78,8 +78,10 @@ export default new class {
     }
 }()
 
-export async function errorHandler(ctx,next,err) {
-    if (err) {
+export async function error(ctx, next) {
+    try {
+        await next()
+    } catch (err) {
         let initialState = {
             msg: err.message
         }
@@ -91,12 +93,10 @@ export async function errorHandler(ctx,next,err) {
             markup,
             initialState
         })
-    } else {
-        ctx.res.end()
     }
 }
 
-export async function notFoundHandler(ctx) {
+export async function notFound(ctx) {
     let initialState = {
         msg: "page not found"
     }

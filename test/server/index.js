@@ -1,0 +1,15 @@
+import supertest from 'supertest'
+import 'babel-polyfill'
+import test from 'ava'
+
+process.env.NODE_ENV = 'production'
+
+let app = require('../../server/bootstrap')
+
+function request() {
+    return supertest(app.listen())
+}
+
+test.cb('Routes GET / ', t=>{
+    request().get('/').expect(200, t.end)
+})

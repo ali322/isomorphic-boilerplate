@@ -28,7 +28,7 @@
 ===
 
 ```sh
-__test__/
+test/
     |-- client/ #前端单元测试
     |-- server/ #后端单元测试
 client/

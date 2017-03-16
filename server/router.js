@@ -1,11 +1,10 @@
 import Router from 'koa-router'
-import main, { notFoundHandler, errorHandler } from './controller/main'
+import main, { notFound } from './controller/main'
 
 const router = new Router()
 applyRoutes(router, main)
 
-router.all("*", notFoundHandler)
-router.use(errorHandler)
+router.all("*", notFound)
 
 function applyRoutes(router, ...controllers) {
     for (let i in controllers) {
