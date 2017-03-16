@@ -1,6 +1,6 @@
 {
     "js":{
-        "react":[
+        "vue":[
             "vue","vuex","vue-router"
         ]
     },

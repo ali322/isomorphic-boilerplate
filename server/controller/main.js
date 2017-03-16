@@ -3,15 +3,13 @@ import axios from 'axios'
 import { markupForComponent } from "../lib/util"
 
 export async function index(ctx, next) {
-    let ret = []
-    try {
-        ret = await axios.get("https://api.github.com/events")
-    } catch (err) {
-        throw err
-    }
-
-
-    if (ret.status === 200) {
+    let ret = {data:[]}
+    // try {
+    //     ret = await axios.get("https://api.github.com/events")
+    // } catch (err) {
+    //     throw err
+    // }
+    // if (ret.status === 200) {
         ctx.initialState = {
             index: {
                 flag: "6",
@@ -22,15 +20,15 @@ export async function index(ctx, next) {
         try {
             markup = await markupForComponent('index', ctx)
         } catch (err) {
-            await next(err)
+            throw err
         }
         await ctx.render("index", {
             markup,
             initialState: ctx.initialState
         });
-    } else {
-        throw new Error('no evenets')
-    }
+    // } else {
+    //     throw new Error('no evenets')
+    // }
 }
 
 export async function error(ctx, next) {

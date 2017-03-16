@@ -28,7 +28,7 @@ Directory structure
 ===
 
 ```sh
-__test__/
+test/
     |-- client/ #client unit tests
     |-- server/ #server unit tests
 client/

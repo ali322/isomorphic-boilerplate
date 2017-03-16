@@ -1,10 +1,9 @@
 import app, { router, store } from './app'
 
-const jsdom = require('jsdom').jsdom;
-global.document = jsdom('<!doctype html><html><body></body></html>');
-global.window = document.defaultView;
-global.navigator = window.navigator;
-global.fetch = require('node-fetch')
+// const jsdom = require('jsdom').jsdom;
+// global.document = jsdom('<!doctype html><html><body></body></html>');
+// global.window = document.defaultView;
+// global.navigator = window.navigator;
 
 export default ctx => {
     router.push(ctx.url)
@@ -14,7 +13,6 @@ export default ctx => {
     }
     return Promise.all(matchedComponents).then(() => {
         let { initialState } = ctx
-        console.log('initialState',ctx)
         store.replaceState({
             ...store.state,
             ...initialState
