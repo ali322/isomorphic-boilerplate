@@ -1,9 +1,10 @@
 import Router from 'koa-router'
-import {index, notFound } from './controller/main'
+import { index, user, notFound } from './controller/main'
 import api from './controller/api'
 
 const router = new Router()
-router.use(index)
+router.get('/',index)
+router.get('/user/:user',user)
 applyRoutes(router, api)
 
 router.all("*", notFound)

@@ -18,7 +18,7 @@ const template = `
                 <div class="event-title">
                     <img :src="event.actor.avatar_url" alt="" />
                     <span>
-                    <p><router-link v-bind:to="{path:'/user/' + event.actor.display_login}">{{event.actor.display_login}}</router-link></p>
+                    <p><a v-bind:href="'/user/' + event.actor.display_login">{{event.actor.display_login}}</a></p>
                     <p>{{event.created_at}}</p>
                     </span>
                 </div>
@@ -58,7 +58,6 @@ const Events = Vue.component('events',{
         ...mapState({
             repo: state => state.index.repo,
             events: state => state.index.events,
-            route: "route"
         })
     }
 })

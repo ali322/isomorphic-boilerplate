@@ -3,13 +3,13 @@ import axios from 'axios'
 import { markupForComponent } from "../lib/util"
 
 export async function index(ctx, next) {
-    let ret = {data:[]}
-    // try {
-    //     ret = await axios.get("https://api.github.com/events")
-    // } catch (err) {
-    //     throw err
-    // }
-    // if (ret.status === 200) {
+    let ret = { data: [] }
+    try {
+        ret = await axios.get("https://api.github.com/events")
+    } catch (err) {
+        throw err
+    }
+    if (ret.status === 200) {
         ctx.initialState = {
             index: {
                 flag: "6",
@@ -26,9 +26,34 @@ export async function index(ctx, next) {
             markup,
             initialState: ctx.initialState
         });
-    // } else {
-    //     throw new Error('no evenets')
-    // }
+    } else {
+        throw new Error('no evenets')
+    }
+}
+
+export async function user(ctx, next) {
+    const user = ctx.params.user
+    const ret = await axios.get(`https://api.github.com/users/${user}`)
+    if (ret.status === 200) {
+        ctx.initialState = {
+            index: {
+                flag: "6",
+                user: ret.data
+            }
+        }
+        let markup = ''
+        try {
+            markup = await markupForComponent('user', ctx)
+        } catch (err) {
+            throw err
+        }
+        await ctx.render("user", {
+            markup,
+            initialState: ctx.initialState
+        });
+    } else {
+        throw new Error('no user')
+    }
 }
 
 export async function error(ctx, next) {

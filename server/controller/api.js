@@ -45,20 +45,4 @@ export default new class {
         }
     }
 
-    @route({ url: '/user/:user' })
-    async user(ctx) {
-        const user = ctx.params.user
-        const ret = await axios.get(`https://api.github.com/users/${user}`)
-        if (ret.status === 200) {
-            ctx.body = {
-                isFetched: true,
-                result: ret.data
-            }
-        } else {
-            ctx.body = {
-                isFetched: false,
-                errMsg: 'user not found'
-            }
-        }
-    }
 }()

@@ -1,18 +1,17 @@
 import Vue from 'vue'
-import { sync } from 'vuex-router-sync'
-import router from './router'
 import store from './store'
+import app from './module/app'
 
 let container = Vue.component('container', {
-    template: `<main><router-view></router-view></main>`
+    components: {
+        app
+    },
+    template: `<main><app />></main>`
 })
 
-sync(store, router)
-
-export { store, router }
+export { store }
 
 const app = new Vue({
-    router,
     store,
     render(h) {
         return h('div', { attrs: { id: 'app' } }, [h('container')])
