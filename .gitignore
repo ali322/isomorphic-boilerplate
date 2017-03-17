@@ -6,3 +6,4 @@ typings/
 .git/
 .nva/temp/
 client/dist/
+test/client/unit/coverage
