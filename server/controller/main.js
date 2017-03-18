@@ -36,7 +36,7 @@ export async function user(ctx, next) {
     const ret = await axios.get(`https://api.github.com/users/${user}`)
     if (ret.status === 200) {
         ctx.initialState = {
-            index: {
+            user: {
                 flag: "6",
                 user: ret.data
             }

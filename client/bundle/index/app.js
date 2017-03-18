@@ -11,11 +11,9 @@ let container = Vue.component('container', {
 
 export { store }
 
-const app = new Vue({
+export default new Vue({
     store,
     render(h) {
         return h('div', { attrs: { id: 'app' } }, [h('container')])
     }
 })
-
-export default app

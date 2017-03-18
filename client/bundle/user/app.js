@@ -6,16 +6,14 @@ let container = Vue.component('container', {
     components: {
         app
     },
-    template: `<main><app />></main>`
+    template: `<main><app /></main>`
 })
 
 export { store }
 
-const app = new Vue({
+export default new Vue({
     store,
     render(h) {
         return h('div', { attrs: { id: 'app' } }, [h('container')])
     }
 })
-
-export default app

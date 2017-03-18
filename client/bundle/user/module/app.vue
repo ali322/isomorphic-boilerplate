@@ -5,15 +5,14 @@ import actions from './action.es6'
 export default {
     computed:{
         ...mapState({
-            user:state=>state.user.user,
-            route:"route"
+            user:state=>state.user.user
         })
     },
     methods:{
-        ...mapActions(Object.keys(actions))
-    },
-    created(){
-        this.fetchUser(this.route.params)
+        ...mapActions(Object.keys(actions)),
+        goback(){
+            history.back()
+        }
     }
 }
 </script>
@@ -21,7 +20,7 @@ export default {
 <template>
 <div class="common-container">
     <div class="panel panel-default">
-    <div class="panel-heading common-header"><button class="back-button" @click="$router.back()">&lt;</button>{{user.id}}</div>
+    <div class="panel-heading common-header"><button class="back-button" @click="goback()">&lt;</button>{{user.id}}</div>
     <div class="panel-body">
         <div class="user-title">
         <img :src="user.avatar_url" alt="" />
