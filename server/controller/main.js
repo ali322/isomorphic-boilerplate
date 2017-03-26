@@ -4,12 +4,12 @@ import { markupForComponent } from "../lib/util"
 
 export async function index(ctx, next) {
     let ret = {data:[]}
-    // try {
-    //     ret = await axios.get("https://api.github.com/events")
-    // } catch (err) {
-    //     throw err
-    // }
-    // if (ret.status === 200) {
+    try {
+        ret = await axios.get("https://api.github.com/events")
+    } catch (err) {
+        throw err
+    }
+    if (ret.status === 200) {
         ctx.initialState = {
             index: {
                 flag: "6",
@@ -26,9 +26,9 @@ export async function index(ctx, next) {
             markup,
             initialState: ctx.initialState
         });
-    // } else {
-    //     throw new Error('no evenets')
-    // }
+    } else {
+        throw new Error('no evenets')
+    }
 }
 
 export async function error(ctx, next) {
