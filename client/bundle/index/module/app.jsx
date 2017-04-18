@@ -57,4 +57,4 @@ export class Events extends Component {
     }
 }
 
-export default connected(actions, state => ({ ...state.eventsReducer }))(Events)
+export default connected(state => ({ ...state.eventsReducer }),actions)(Events)

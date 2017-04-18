@@ -26,4 +26,4 @@ export class User extends Component {
     }
 }
 
-export default connected(actions, state => ({ ...state.userReducer }))(User)
+export default connected(state => ({ ...state.userReducer }), actions)(User)
