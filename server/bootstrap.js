@@ -1,6 +1,6 @@
 import path from 'path'
 import Koa from 'koa'
-import staticServer from 'koa-static'
+import serveStatic from 'koa-static'
 import bodyParser from 'koa-bodyparser'
 import methodOverride from 'koa-methodoverride'
 import session from 'koa-session-minimal'
@@ -10,7 +10,7 @@ import { error } from './controller/main'
 
 const app = new Koa()
 
-app.use(staticServer("client"))
+app.use(serveStatic("client"))
 app.use(bodyParser())
 app.use(methodOverride())
 

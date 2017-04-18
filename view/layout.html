@@ -8,12 +8,11 @@
     <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
     <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
     <title>isomorphic boilerplate</title>
-    <title>{% block title %}Hyena{% endblock %}</title>
+    <title>{% block title %}Isomorphic Boilerplate{% endblock %}</title>
     {% block css %}{% endblock %}
 </head>
 
 <body>
-    <iframe style="height:0px;width:0px;visibility:hidden;position:absolute;top:-888em" src="about:blank">this frame prevents back forward cache</iframe>
     {% block content %}{% endblock %} {% block js %}{% endblock %}
 </body>
 

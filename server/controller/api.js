@@ -15,13 +15,14 @@ export default new class {
 
     @route({ url: '/events' })
     async events(ctx) {
-        const ret = await axios.get("https://api.github.com/events")
-        if (ret.length > 0) {
+        let ret
+        try {
+            ret = await axios.get("https://api.github.com/events")
             ctx.body = {
                 isFetched: true,
                 events: ret
             }
-        } else {
+        } catch (err) {
             ctx.body = {
                 isFetched: false,
                 events: []

@@ -12,7 +12,7 @@ export async function index(ctx, next) {
     if (ret.status === 200) {
         ctx.initialState = {
             index: {
-                flag: "6",
+                flag: "1",
                 events: ret.data
             }
         }

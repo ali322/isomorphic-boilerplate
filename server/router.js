@@ -3,8 +3,8 @@ import {index, notFound } from './controller/main'
 import api from './controller/api'
 
 const router = new Router()
-router.use(index)
 applyRoutes(router, api)
+router.use(index)
 
 router.all("*", notFound)
 
