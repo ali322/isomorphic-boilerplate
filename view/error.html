@@ -1,7 +1,6 @@
 {% extends './layout.html' %} {% block title %}List{% endblock %} {% block css %}
 <!-- start:css -->
 <link rel="stylesheet" href="/dist/vendor/common-a74c25ed.css"/>
-<link rel="stylesheet" href="/dist/error/error-79f8de3d.css"/>
 <!-- end:css -->
 {% endblock %} {% block content %}
 <div class="index-container" id='app'>{{ markup|safe }}</div>
@@ -9,9 +8,9 @@
 {% endblock %} {% block js %}
 <!-- start:js -->
 <script src="/dist/vendor/vue-feb5bfbc.js"></script>
-<script src="/dist/error/error-3147fe47.js"></script>
+<script src="http://172.18.4.78:7000/hmr/error.js"></script>
 <!-- end:js -->
 <!-- start:browser-sync -->
-
+<script src="http://172.18.4.78:7000/bs/browser-sync-client.js"></script>
 <!-- end:browser-sync -->
 {% endblock %}
