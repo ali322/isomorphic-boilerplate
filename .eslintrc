@@ -1,7 +1,7 @@
 {
     "parser": "babel-eslint",
     "extends": [
-      "airbnb",
+      "airbnb-base",
       "plugin:css-modules/recommended"
     ],
     "plugins": [
@@ -25,7 +25,6 @@
       "comma-dangle":"off",
       "eol-last":"off",
       "no-unused-expressions":"off",
-      "react/jsx-indent":"off",
       "no-case-declarations":"off",
       "no-use-before-define":"off",
       "no-shadow":"off",
