@@ -8,3 +8,4 @@ typings/
 client/dist
 server/dist
 test/client/unit/coverage
+server/bundle
