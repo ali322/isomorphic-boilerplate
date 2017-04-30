@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import classNames from "classnames"
 import { connected } from 'redux-container'
 import * as actions from './action.es6'
 
@@ -28,15 +27,15 @@ export class Events extends Component {
     }
     render() {
         const { events, repo } = this.props;
-        const classes = classNames({
-            "events-content": true
-        })
         return (
-            <div className={classes}>
-                <h3>Github Events</h3>
-                <div className="events-form">
-                    <input type="text" name="cityname" value={repo} onChange={this.handleChange} />
-                    <button onClick={this.handleQuery}><i className="fa fa-search" /></button>
+            <div className="common-container">
+                <div className="panel panel-default">
+                <div className="panel-heading">Github Events</div>
+                <div className="panel-body">
+                    <div className="input-group">
+                        <input type="text" className="form-control" value={repo} onChange={this.handleChange} />
+                        <span className="input-group-addon" onClick={this.handleQuery}><i className="fa fa-search" /></span>
+                    </div>
                 </div>
                 <div className="events">
                     {events.map(event=>(
@@ -44,7 +43,7 @@ export class Events extends Component {
                         <div className="event-title">
                             <img src={event.actor.avatar_url} alt="" />
                             <span>
-                            <p><a href={`/user/${event.actor.display_login}`}>{event.actor.display_login}</a></p>
+                            <p><a href={'user/'+ event.actor.display_login}>{event.actor.display_login}</a></p>
                             <p>{event.created_at}</p>
                             </span>
                         </div>
@@ -52,9 +51,10 @@ export class Events extends Component {
                         </div>
                     ))}
                 </div>
+                </div>
             </div>
         )
     }
 }
 
-export default connected(state => ({ ...state.eventsReducer }),actions)(Events)
+export default connected(state => ({ ...state.eventsReducer }), actions)(Events)

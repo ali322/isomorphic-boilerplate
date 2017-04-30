@@ -12,14 +12,18 @@ export class User extends Component {
             return null
         }
         return (
-            <div className="user-container common-container">
-                <h3><button onClick={()=>history.back()}>&lt;</button>{user.id}</h3>
-                <div className="user-title">
+            <div className="common-container">
+                <div className="panel panel-default">
+                <div className="panel-heading common-header"><button className="back-button" onClick={()=>window.history.back()}>&lt;</button>{user.id}</div>
+                <div className="panel-body">
+                    <div className="user-title">
                     <img src={user.avatar_url} alt="" />
                     <span>
                     <p>{user.login}</p>
                     <p>{user.created_at}</p>
                     </span>
+                </div>
+                </div>
                 </div>
             </div>
         )
