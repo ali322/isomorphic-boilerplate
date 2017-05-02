@@ -8,5 +8,5 @@ typings/
 client/dist
 server/dist
 server/bundle
-test/client/unit/coverage
-test/client/e2e/reports
+client/test/unit/coverage
+client/test/e2e/reports
