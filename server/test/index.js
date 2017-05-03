@@ -4,7 +4,7 @@ import test from 'ava'
 
 process.env.NODE_ENV = 'production'
 
-let app = require('../../server/bootstrap')
+let app = require('../bootstrap')
 
 function request() {
     return supertest(app.listen())

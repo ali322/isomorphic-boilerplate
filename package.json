@@ -6,14 +6,15 @@
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "test": "NODE_ENV=test ava --tap | tap-spec",
+    "test:e2e":"nva test --e2e -r client/test/e2e/fixture/server.js -c client/test/e2e/fixture/conf.js",
     "lint:js": "eslint client server",
     "lint:css": "stylelint \"client/bundle/**/*.{css,less,scss,styl}\"",
     "lint": "npm run lint:js && npm run lint:css"
   },
   "ava": {
     "files": [
-      "test/client/**/*.js",
-      "test/server/**/*.js"
+      "client/test/unit/**/*.js",
+      "server/test/**/*.js"
     ],
     "failFast": true,
     "require": [

@@ -1,7 +1,7 @@
 import test from "ava"
 
-import eventsReducer from "../../../client/bundle/index/module/reducer.es6"
-import * as constants from "../../../client/bundle/index/module/constant.es6"
+import eventsReducer from "../../../bundle/index/module/reducer.es6"
+import * as constants from "../../../bundle/index/module/constant.es6"
 
 
 test("should handle CHANGE_FIELD", t => {

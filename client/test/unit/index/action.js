@@ -2,8 +2,8 @@ import test from "ava"
 import nock from "nock"
 import configureStore from "redux-mock-store";
 import thunkMiddleware from "redux-thunk";
-import * as actions from "../../../client/bundle/index/module/action.es6";
-import * as constants from "../../../client/bundle/index/module/constant.es6";
+import * as actions from "../../../bundle/index/module/action.es6";
+import * as constants from "../../../bundle/index/module/constant.es6";
 
 test("should create changeField action", t => {
     let name = "repo",
