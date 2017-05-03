@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "test": "npm run test:client && npm run test:server",
-    "test:client": "cd client && nva test",
+    "test:e2e": "nva test --e2e -r client/test/e2e/fixture/server.js -c client/test/e2e/fixture/conf.js",
+    "test:client": "nva test -c client/test/unit/fixture/karma.conf.js",
     "test:server": "mocha --require babel-register test/server/spec/**/*.js",
     "e2e": "node ./test/client/e2e/runner.js --config ./test/client/e2e/nightwatch.conf.js --env chrome",
     "lint:js": "eslint client server",
@@ -65,7 +66,6 @@
     "supertest": "^3.0.0",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.3",
-    "vuex-router-sync": "^4.1.2",
-    "webpack": "^2.2.1"
+    "vuex-router-sync": "^4.1.2"
   }
 }
