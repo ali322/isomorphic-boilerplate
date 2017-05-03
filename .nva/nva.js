@@ -6,7 +6,7 @@ const baseConf = {
     }
 }
 
-export default {
+module.exports = {
     type: "isomorphic",
     spa: false,
     entryJSExt: ".js",

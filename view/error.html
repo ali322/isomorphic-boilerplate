@@ -1,16 +1,17 @@
 {% extends './layout.html' %} {% block title %}List{% endblock %} {% block css %}
 <!-- start:css -->
 <link rel="stylesheet" href="/dist/vendor/common-a74c25ed.css"/>
+<link rel="stylesheet" href="/dist/error/error-79f8de3d.css"/>
 <!-- end:css -->
 {% endblock %} {% block content %}
 <div class="index-container" id='app'>{{ markup|safe }}</div>
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %} {% block js %}
 <!-- start:js -->
-<script src="/dist/vendor/vue-0c7788a1.js"></script>
-<script src="http://192.168.18.190:7000/hmr/error.js"></script>
+<script src="/dist/vendor/vue-66a9b77f.js"></script>
+<script src="/dist/error/error-bab2ea9d.js"></script>
 <!-- end:js -->
 <!-- start:browser-sync -->
-<script src="http://192.168.18.190:7000/bs/browser-sync-client.js"></script>
+
 <!-- end:browser-sync -->
 {% endblock %}
