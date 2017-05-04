@@ -1,14 +1,18 @@
 {
-    "presets":["react","latest"],
-    "plugins":[
+    "presets": [
+        "env",
+        "react"
+    ],
+    "plugins": [
+        "transform-class-properties",
         "transform-object-rest-spread",
         "transform-decorators-legacy",
-        "transform-class-properties",
-        "transform-export-extensions"
+        "transform-export-extensions",
+        "react-hot-loader/babel"
     ],
     "env": {
-    	"production": {
-      		"presets": ["react-optimize"]
-    	}
-  	}
+        "production": {
+            "presets": ["react-optimize"]
+        }
+    }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-    "type": "isomorphic",
-    "entryJSExt": ".jsx",
-    "entryCSSExt": ".styl"
+    type: "isomorphic",
+    entryJSExt: ".jsx",
+    entryCSSExt: ".styl"
 }
