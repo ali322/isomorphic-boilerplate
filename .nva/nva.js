@@ -10,7 +10,7 @@ module.exports = {
     type: "isomorphic",
     spa: true,
     entryJSExt: ".js",
-    mockPath: '.nva/api',
+    mockConf: '.nva/api',
     entryCSSExt: ".styl",
     beforeDev(config) {
         return baseConf
