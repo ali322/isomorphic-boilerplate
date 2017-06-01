@@ -1,15 +1,12 @@
 {
-    "js":{
-        "react":[
-            "react","redux","react-dom","react-redux","redux-thunk","redux-logger","bluebird"
-        ],
-        "react_base":[
-            "react","react-dom"
+    "js": {
+        "base": [
+            "react", "react-dom", "redux", "redux-container", "axios"
         ]
     },
-    "css":{
-        "common":[
-            "bootstrap/dist/css/bootstrap.css",
+    "css": {
+        "base": [
+            "normalize.css",
             "font-awesome/css/font-awesome.css"
         ]
     }

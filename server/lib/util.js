@@ -1,13 +1,8 @@
 import React from "react"
 import ReactDOMServer from "react-dom/server"
-import axios from "axios"
 
 export function markupForComponent(RenderComponent, props = {}) {
     return ReactDOMServer.renderToString(<RenderComponent {...props} />)
-}
-
-export function apiRequest(url) {
-    return axios.get(url)
 }
 
 export function route(options) {

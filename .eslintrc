@@ -1,52 +1,54 @@
 {
     "parser": "babel-eslint",
     "extends": [
-      "airbnb",
-      "plugin:css-modules/recommended"
+        "airbnb",
+        "plugin:css-modules/recommended"
     ],
     "plugins": [
-      "css-modules"
+        "css-modules"
     ],
     "globals": {
-      "__DEV__": true
+        "__DEV__": true
     },
     "env": {
-      "browser": true
+        "browser": true
     },
     "rules": {
-      "quotes":"off",
-      "one-var-declaration-per-line":"off",
-      "one-var":"off",
-      "indent": "off",
-      "prefer-const":"off",
-      "comma-spacing":"off",
-      "arrow-spacing":"off",
-      "arrow-body-style":"off",
-      "comma-dangle":"off",
-      "eol-last":"off",
-      "no-unused-expressions":"off",
-      "react/jsx-indent":"off",
-      "no-case-declarations":"off",
-      "no-use-before-define":"off",
-      "no-shadow":"off",
-      "no-restricted-syntax":"off",
-      "guard-for-in":"off",
-      "no-param-reassign":"off",
-      "class-methods-use-this":"off",
-      "global-require":"off",
-      "semi":"off",
-      "quote-props":"off",
-      "arrow-parens": "off",
-      "generator-star-spacing": "off",
-      "import/extensions": "off",
-      "import/prefer-default-export":"off",
-      "import/no-extraneous-dependencies": "off",
-      "react/forbid-prop-types": "off",
-      "react/jsx-filename-extension": "off",
-      "react/no-array-index-key": "off",
-      "react/no-danger": "off",
-      "react/no-unused-prop-types": "off",
-      "react/prefer-stateless-function": "off",
-      "react/require-default-props": "off"
+        "quotes": "off",
+        "one-var-declaration-per-line": "off",
+        "one-var": "off",
+        "indent": "off",
+        "prefer-const": "off",
+        "comma-spacing": "off",
+        "arrow-spacing": "off",
+        "arrow-body-style": "off",
+        "comma-dangle": "off",
+        "eol-last": "off",
+        "no-unused-expressions": "off",
+        "react/jsx-indent": "off",
+        "no-case-declarations": "off",
+        "no-use-before-define": "off",
+        "no-shadow": "off",
+        "no-restricted-syntax": "off",
+        "guard-for-in": "off",
+        "no-param-reassign": "off",
+        "class-methods-use-this": "off",
+        "global-require": "off",
+        "semi": "off",
+        "no-console": "off",
+        "quote-props": "off",
+        "arrow-parens": "off",
+        "generator-star-spacing": "off",
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/no-dynamic-require": "off",
+        "react/forbid-prop-types": "off",
+        "react/jsx-filename-extension": "off",
+        "react/no-array-index-key": "off",
+        "react/no-danger": "off",
+        "react/no-unused-prop-types": "off",
+        "react/prefer-stateless-function": "off",
+        "react/require-default-props": "off"
     }
 }

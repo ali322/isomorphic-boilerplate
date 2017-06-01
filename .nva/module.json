@@ -3,30 +3,30 @@
     "html": [
       "error.html"
     ],
-    "path": "error/",
+    "path": "error",
     "vendor": {
-      "js": "react_base",
-      "css": "common"
+      "js": "base",
+      "css": "base"
     }
   },
   "index": {
     "html": [
       "index.html"
     ],
-    "path": "index/",
+    "path": "index",
     "vendor": {
-      "js": "react",
-      "css": "common"
+      "js": "base",
+      "css": "base"
     }
   },
-  "user": {
+  "detail": {
     "html": [
-      "user.html"
+      "detail.html"
     ],
-    "path": "user/",
+    "path": "detail",
     "vendor": {
-      "js": "react",
-      "css": "common"
+      "js": "base",
+      "css": "base"
     }
   }
 }

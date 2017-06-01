@@ -1,20 +1,9 @@
 import test from "ava"
 import nock from "nock"
-import configureStore from "redux-mock-store";
-import thunkMiddleware from "redux-thunk";
-import * as actions from "../../../bundle/index/module/action.es6";
-import * as constants from "../../../bundle/index/module/constant.es6";
-
-test("should create changeField action", t => {
-    let name = "repo",
-        value = "react";
-    let expectedAction = {
-        type: constants.CHANGE_FIELD,
-        name: "repo",
-        value: "react",
-    }
-    t.deepEqual(actions.changeField(name, value), expectedAction)
-})
+import configureStore from "redux-mock-store"
+import thunkMiddleware from "redux-thunk"
+import * as actions from "../../../bundle/index/module/action"
+import * as constants from "../../../bundle/index/module/constant"
 
 let mockStore
 
@@ -24,20 +13,20 @@ test.before(() => {
 })
 
 test("should RESPONSE_EVENTS when fetched", t => {
-    let ret = [{
-        "isFetched": true,
-        "result": []
-    }]
+    let ret = {
+        status: 'ok',
+        data: []
+    }
     let initialState = {
-        eventsReducer: { events: [] }
+        eventReducer: { events: [] }
     }
     const store = mockStore(initialState)
     let expectedActions = [
-        { type: constants.REQUEST_REPO, param: { repo: "redux" } },
-        { type: constants.RESPONSE_REPO, param: { repo: "redux" }, res: ret }
+        { type: constants.REQUEST_EVENTS },
+        { type: constants.RESPONSE_EVENTS, payload: ret.data }
     ]
-    nock("http://localhost").get("/repo/redux").reply(200, ret)
-    return store.dispatch(actions.fetchRepo({ repo: "redux" })).then(() => {
+    nock("http://localhost:7000").get("/mock/events").reply(200, ret)
+    return store.dispatch(actions.fetchEvents()).then(() => {
         t.deepEqual(store.getActions(), expectedActions)
     })
 })

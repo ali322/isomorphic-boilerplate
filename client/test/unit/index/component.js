@@ -2,33 +2,26 @@ import test from "ava"
 import sinon from "sinon"
 import React from "react";
 import { shallow } from "enzyme"
-import { Events } from "../../../bundle/index/module/app.jsx"
+import { Index } from "../../../bundle/index/module/app.jsx"
 
 let wrapper, props
 
 test.before(() => {
     props = {
         actions: {
-            fetchRepo: sinon.spy(),
-            changeField: sinon.spy()
+            fetchEvents: sinon.spy()
         },
         events: []
     }
-    wrapper = shallow(<Events {...props} />)
+    wrapper = shallow(<Index {...props} />)
 })
 
 test("should render correct", t => {
-    t.is(wrapper.find("input").length, 1)
+    t.is(wrapper.find(".content").length, 1)
 })
 
-test("should call handleChange once after change value", t => {
-    const input = wrapper.find("input")
-    input.simulate('change', { target: { value: "redux" }, preventDefault: () => {} })
-    t.is(props.actions.changeField.callCount, 1)
-})
-
-test.skip("should call handleQuery once after click", t => {
-    const button = wrapper.find("button")
-    button.simulate("click")
-    t.is(props.actions.fetchRepo.callCount, 1)
+test("should call handleRefresh once after click", t => {
+    const button = wrapper.find(".refresh-btn")
+    button.simulate("click", { target: { value: "" }, preventDefault: () => {} })
+    t.is(props.actions.fetchEvents.callCount, 1)
 })

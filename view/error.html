@@ -2,19 +2,20 @@
 {% block title %}List{% endblock %}
 {% block css %}
 <!-- start:css -->
-<link rel="stylesheet" href="/dist/vendor/common-a74c25ed.css"/>
+<link rel="stylesheet" href="/dist/vendor/base-ccf67f8c.css"/>
+<link rel="stylesheet" href="/dist/error/error-4a9849d2.css"/>
 <!-- end:css -->
 {% endblock %}
 {% block content %}
-<div class="error-container" id='app'>{{ markup|safe }}</div>
+<div id='app'>{{ markup|safe }}</div>
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %}
 {% block js %}
 <!-- start:js -->
-<script src="/dist/vendor/react_base-655897d1.js"></script>
-<script src="http://10.13.13.40:7000/hmr/error.js"></script>
+<script src="/dist/vendor/base-4764608f.js"></script>
+<script src="/dist/error/error-7f2c08f0.js"></script>
 <!-- end:js -->
 <!-- start:browser-sync -->
-<script src="http://10.13.13.40:7000/bs/browser-sync-client.js"></script>
+
 <!-- end:browser-sync -->
 {% endblock %}

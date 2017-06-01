@@ -16,7 +16,7 @@ app.use(methodOverride())
 
 app.use(session({
     key: "isomorphic-boilerplate",
-    cookie:{
+    cookie: {
         maxAge: 1000 * 60 * 60 * 12 // expired 12 hours
     }
 }))
@@ -27,7 +27,7 @@ app.on('error', err => {
     console.log('server error', err)
 })
 
-let viewPath = path.join(process.cwd(),'view')
+let viewPath = path.join(process.cwd(), 'view')
 
 app.use(views(viewPath, { map: { html: "swig" }, extension: "html" }))
 

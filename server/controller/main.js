@@ -1,32 +1,32 @@
 import axios from 'axios'
-import Index from "../../client/bundle/index/module/container.jsx"
-import Error from "../../client/bundle/error/module/app.jsx"
-import User from '../../client/bundle/user/module/container.jsx'
+import Index from "../../client/bundle/index/container.jsx"
+import Error from "../../client/bundle/error/app.jsx"
+import Detail from '../../client/bundle/detail/container.jsx'
 import { route, namespace, middleware, markupForComponent } from '../lib/util'
 import log from '../middleware/log'
-import test from '../middleware/test'
-import other from '../middleware/other'
+import mark from '../middleware/mark'
 
 @middleware(log)
 @namespace('')
 export default new class {
-    @middleware(test, other)
-    @route({ type: 'get', url: '/test' })
+    @middleware(mark)
+    @route({ type: 'get', url: '/todo' })
     test(ctx) {
-        ctx.body = 'im test'
+        ctx.body = 'something need to do'
     }
 
     @route({ url: '/' })
-    async index(ctx, next) {
-        let ret = []
+    async index(ctx) {
+        let ret
         try {
-            ret = await axios.get("https://api.github.com/events")
+            ret = await axios.get("http://127.0.0.1:7000/mock/events")
         } catch (err) {
-            await next(err)
+            throw err
         }
         if (ret.status === 200) {
+            ret = ret.data
             let initialState = {
-                flag: '8',
+                flag: '0',
                 events: ret.data
             };
             let markup = markupForComponent(Index, {
@@ -37,43 +37,33 @@ export default new class {
                 initialState
             });
         } else {
-            await next(new Error('no evenets'))
+            throw new Error('no events')
         }
     }
 
-    @route({ url: '/repo/:repo' })
+    @route({ url: '/detail/:id' })
     async repo(ctx) {
-        const ret = await axios.get(`https://api.github.com/events`)
-        if (ret.status === 200) {
-            ctx.body = {
-                isFetched: true,
-                result: ret.data
-            }
-        } else {
-            ctx.body = {
-                isFetched: false,
-                errMsg: 'repo not found'
-            }
+        const id = ctx.params.id
+        let ret
+        try {
+            ret = await axios.get(`http://127.0.0.1:7000/mock/event/${id}`)
+        } catch (err) {
+            throw err
         }
-    }
-
-    @route({ url: '/user/:user' })
-    async user(ctx, next) {
-        const user = ctx.params.user
-        const ret = await axios.get(`https://api.github.com/users/${user}`)
         if (ret.status === 200) {
+            ret = ret.data
             let initialState = {
-                user: ret.data
-            };
-            let markup = markupForComponent(User, {
+                detail: ret.data
+            }
+            let markup = markupForComponent(Detail, {
                 initialState
-            });
-            await ctx.render("user", {
+            })
+            await ctx.render("detail", {
                 markup,
                 initialState
-            });
+            })
         } else {
-            await next(new Error('no user'))
+            throw new Error('no event')
         }
     }
 }()
@@ -88,7 +78,6 @@ export async function error(ctx, next) {
         let markup = markupForComponent(Error, {
             initialState
         })
-
         await ctx.render('error', {
             markup,
             initialState
@@ -103,7 +92,6 @@ export async function notFound(ctx) {
     let markup = markupForComponent(Error, {
         initialState
     })
-
     await ctx.render('error', {
         markup,
         initialState
