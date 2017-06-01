@@ -25,7 +25,7 @@ test("should RESPONSE_EVENTS when fetched", t => {
         { type: constants.REQUEST_EVENTS },
         { type: constants.RESPONSE_EVENTS, payload: ret.data }
     ]
-    nock("http://localhost:7000").get("/mock/events").reply(200, ret)
+    nock("http://localhost").get("/mock/events").reply(200, ret)
     return store.dispatch(actions.fetchEvents()).then(() => {
         t.deepEqual(store.getActions(), expectedActions)
     })
