@@ -1,5 +1,6 @@
 let app = require(process.env.NODE_ENV === 'production' ? './server/dist/bootstrap' : './server/bootstrap')
 let port = process.env.APP_PORT || 3000
+
 let server = require('nva-server')({
     log: false,
     mockConf: require('./.nva/mock/')

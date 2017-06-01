@@ -30,6 +30,7 @@
         "no-use-before-define": "off",
         "no-shadow": "off",
         "no-restricted-syntax": "off",
+        "no-unused-vars":"off",
         "guard-for-in": "off",
         "no-param-reassign": "off",
         "class-methods-use-this": "off",
