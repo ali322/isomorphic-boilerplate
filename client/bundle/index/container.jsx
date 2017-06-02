@@ -1,27 +1,31 @@
-import { wrapper, configureStore } from 'redux-container'
 import React from 'react'
 import PropTypes from 'prop-types'
-import App from './module/app.jsx'
-import eventReducer from './module/reducer'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { wrapper, configureStore } from 'redux-container'
+import rootReducer from './reducer'
+import routes from './routes'
 
-
-const container = ({ initialState }) => {
-    const { events } = initialState
-    const store = configureStore(eventReducer, {
-        events
-    })
+const Container = props => {
+    const { initialState } = props
+    const store = configureStore(rootReducer, { eventReducer: initialState })
     if (module.hot) {
-        module.hot.accept('./module/reducer', () => {
-            const nextRootReducer = require('./module/reducer')
-            store.replaceReducer(nextRootReducer)
+        module.hot.accept('./reducer', () => {
+            const nextReducer = require('./reducer')
+            store.replaceReducer(nextReducer)
         })
     }
-    const Component = wrapper(store)(App)
-    return <Component />
+
+    const App = wrapper(store)(() => (
+        <BrowserRouter>
+            <Switch>{routes.map((route,i)=><Route {...route} key={i} />)}</Switch>
+        </BrowserRouter>
+    ))
+    return <App />
 }
 
-container.propTypes = {
-    initialState: PropTypes.object
+Container.propTypes = {
+    initialState: PropTypes.object.isRequired
 }
 
-export default container
+
+export default Container

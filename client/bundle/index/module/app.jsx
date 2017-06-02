@@ -43,4 +43,4 @@ export class Index extends Component {
     }
 }
 
-export default connected(state => state, actions)(Index)
+export default connected(state => state.eventReducer, actions)(Index)

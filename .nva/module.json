@@ -18,15 +18,5 @@
       "js": "base",
       "css": "base"
     }
-  },
-  "detail": {
-    "html": [
-      "detail.html"
-    ],
-    "path": "detail",
-    "vendor": {
-      "js": "base",
-      "css": "base"
-    }
   }
 }

@@ -1,72 +1,45 @@
 import axios from 'axios'
-import Index from "../../client/bundle/index/container.jsx"
+import { matchPath } from 'react-router'
+import routes from '../../client/bundle/index/routes'
+import Index from "../../client/bundle/index/server.jsx"
 import Error from "../../client/bundle/error/app.jsx"
-import Detail from '../../client/bundle/detail/container.jsx'
-import { route, namespace, middleware, markupForComponent } from '../lib/util'
-import log from '../middleware/log'
-import mark from '../middleware/mark'
+import { markupForComponent } from '../lib/util'
 
-@middleware(log)
-@namespace('')
-export default new class {
-    @middleware(mark)
-    @route({ type: 'get', url: '/todo' })
-    test(ctx) {
-        ctx.body = 'something need to do'
+export async function index(ctx, next) {
+    let initialState = {}
+    const clientCtx = {}
+    const match = routes.some(route => matchPath(ctx.url, route))
+    if (!match) {
+        await next()
+        return
     }
-
-    @route({ url: '/' })
-    async index(ctx) {
+    if (ctx.url === '/') {
         let ret
         try {
-            ret = await axios.get("http://127.0.0.1:3000/mock/events")
+            ret = await axios.get("http://127.0.0.1:3000/mock/eventss")
         } catch (err) {
             throw err
         }
         if (ret.status === 200) {
             ret = ret.data
-            let initialState = {
+            initialState = {
                 flag: '0',
                 events: ret.data
-            };
-            let markup = markupForComponent(Index, {
-                initialState
-            });
-            await ctx.render("index", {
-                markup,
-                initialState
-            });
+            }
         } else {
             throw new Error('no events')
         }
     }
-
-    @route({ url: '/detail/:id' })
-    async repo(ctx) {
-        const id = ctx.params.id
-        let ret
-        try {
-            ret = await axios.get(`http://127.0.0.1:3000/mock/event/${id}`)
-        } catch (err) {
-            throw err
-        }
-        if (ret.status === 200) {
-            ret = ret.data
-            let initialState = {
-                detail: ret.data
-            }
-            let markup = markupForComponent(Detail, {
-                initialState
-            })
-            await ctx.render("detail", {
-                markup,
-                initialState
-            })
-        } else {
-            throw new Error('no event')
-        }
-    }
-}()
+    let markup = markupForComponent(Index, {
+        location: ctx.url,
+        context: clientCtx,
+        initialState
+    })
+    await ctx.render("index", {
+        markup,
+        initialState
+    })
+}
 
 export async function error(ctx, next) {
     try {

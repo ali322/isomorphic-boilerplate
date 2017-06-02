@@ -8,8 +8,13 @@ export class Detail extends Component {
         actions: PropTypes.object,
         detail: PropTypes.object
     }
+    componentDidMount() {
+        const { fetchDetail } = this.props.actions
+        fetchDetail({})
+    }
     render() {
         const { detail } = this.props
+        console.log('render detail')
         if (!detail) {
             return null
         }
@@ -29,4 +34,4 @@ export class Detail extends Component {
     }
 }
 
-export default connected(state => state, actions)(Detail)
+export default connected(state => state.detailReducer, actions)(Detail)
