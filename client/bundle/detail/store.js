@@ -1,11 +1,11 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import user from './module'
+import detail from './module'
 
 Vue.use(Vuex)
 
 const modules = {
-    user
+    detail
 }
 
 const store = new Vuex.Store({

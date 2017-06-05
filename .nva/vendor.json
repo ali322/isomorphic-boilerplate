@@ -1,12 +1,12 @@
 {
     "js":{
-        "vue":[
+        "base":[
             "vue","vuex","vue-router"
         ]
     },
     "css":{
-        "common":[
-            "bootstrap/dist/css/bootstrap.css",
+        "base":[
+            "normalize.css",
             "font-awesome/css/font-awesome.css"
         ]
     }

@@ -1,80 +1,27 @@
-html,
-body {
-    height: 100%;
-    font-size: 125% !important;
-    font-family: "Helvetica Neue", Helvetica, 'microsoft yahei', sans-serif;
-}
+@import './util'
 
-ul,
-ol,
-dl,
-dd,
-dt,
-h1,
-h2,
-h3,
-h4,
-h5,
-button {
-    padding: 0;
-    margin: 0;
-}
-
-button,
-a,
-input,
-select,
-input:focus {
-    outline: 0 none;
-    -webkit-appearance: none;
-}
-
-li {
-    list-style: none;
-}
-
-body {
-    padding: 0;
-    margin: 0;
-}
-
-a,
-a:visited,
-a:hover {
-    text-decoration: none;
-    color: #333;
-}
-
-.clearfix:after {
-    content: "020";
-    display: block;
-    height: 0;
-    clear: both;
-    font-size: 0;
-}
-
-.clearfix {
-    zoom: 1;
-}
-
-.common-container {
-    font-size: .7rem;
-    max-width: 20rem;
-    margin: 0 auto;
-    background: #FFF;
-}
-
-.common-container .common-header{
-    position:relative;
-    padding-left:2rem;
-}
-
-.back-button {
-    position: absolute;
-    left: .6rem;
-    line-height: .8rem;
-    font-size: .8rem;
-    border: 0 none;
-    background: transparent;
-    cursor: pointer;
+.container{
+    font-dpr(16px)
+    background: #FFF
+    .header{
+        line-height: px2rem(40)
+        text-align: center
+        background: #F5F5F5
+        border-bottom: px2rem(1) solid #DDD
+    }
+    .header-with-btn{
+        position: relative
+        .btn{
+            position: absolute
+            left: px2rem(12)
+            top: px2rem(4)
+            line-height: px2rem(16)
+            font-dpr(16px)
+            width: px2rem(32)
+            height: px2rem(32)
+            border: 0 none
+            background: transparent
+            cursor: pointer
+        }
+    }
 }

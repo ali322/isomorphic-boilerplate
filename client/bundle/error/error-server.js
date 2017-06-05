@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import app from './app'
+import app from './container'
 
 const jsdom = require('jsdom').jsdom;
 global.document = jsdom('<!doctype html><html><body></body></html>');

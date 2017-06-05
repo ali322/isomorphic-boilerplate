@@ -1,9 +1,17 @@
-@import "../common/common.styl"
-$gray-color = #555
+@import '../common/common'
+@import '../common/util'
 
-.error-container {
-    height: 100%;
-    .error-content {
-        height: 100%;
+.error{
+    text-align: center
+    padding-top: px2rem(44)
+    &> p{
+        font-dpr(16)
+    }
+    &> button{
+        border-radius: px2rem(4)
+        padding:px2rem(8) px2rem(12)
+        background: none;
+        border:px2rem(1) solid #DDD
+        font-dpr(12)
     }
 }

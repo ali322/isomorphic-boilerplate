@@ -2,18 +2,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import moxios from 'moxios'
 import sinon from 'sinon'
-import mutations from '@/index/module/mutation.es6'
-import actions from '@/index/module/action.es6'
-import * as constants from '@/index/module/constant.es6'
-import { proto } from '@/index/module/app'
-import { testAction, renderedText } from '../fixture/util'
+import mutations from '@/index/module/mutation'
+import * as actions from '@/index/module/action'
+import * as constants from '@/index/module/constant'
+import app from '@/index/module/app.vue'
+import { testAction, renderedText, createVM, destoryVM, triggerEvent } from '../fixture/util'
 
 describe("mutations", () => {
-    it(constants.CHANGE_FIELD, () => {
+    it(constants.RESPONSE_EVENTS, () => {
         let state = {}
-        let payload = { name: 'repo', value: 'vuejs/vue' }
-        mutations[constants.CHANGE_FIELD](state, payload)
-        expect(state.repo).to.equal('vuejs/vue')
+        mutations[constants.RESPONSE_EVENTS](state)
+        expect(state.eventsFetched).to.equal(true)
     })
 })
 
@@ -24,42 +23,43 @@ describe("actions", () => {
     afterEach(() => {
         moxios.uninstall()
     })
-    it('fetch repo', done => {
-        let response = {
-            "isFetched": true,
-            "result": ['foo', 'bar']
+    it('should RESPONSE_EVENTS when fetched', done => {
+        let ret = {
+            status: 'ok',
+            data: []
         }
         let expectedMutations = [
-            { type: constants.REQUEST_REPO },
-            { type: constants.RESPONSE_REPO, payload: { res: response } }
+            { type: constants.REQUEST_EVENTS },
+            { type: constants.RESPONSE_EVENTS, payload: ret.data }
         ]
 
-        moxios.stubRequest('https://api.github.com/events', {
+        moxios.stubRequest('/mock/events', {
             status: 200,
-            responseText: JSON.stringify(response)
+            responseText: JSON.stringify(ret)
         })
 
-        testAction(actions.fetchRepo, [{ repo: 'redux' }], {}, actions, expectedMutations, done)
+        testAction(actions.fetchEvents, [], {}, actions, expectedMutations, done)
     })
 })
 
 describe("component", () => {
+    let vm, fetchEvents
     beforeEach(() => {
-        Vue.use(VueRouter)
+        fetchEvents = sinon.spy()
+        vm = createVM({ ...app, methods: { ...app.methods, fetchEvents }, computed: {} })
     })
-    it('index route', () => {
-        const fetchRepo = sinon.spy()
-        const rendered = renderedText({ ...proto,
-            data: () => {
-                return {
-                    ...(proto.data ? proto.data() : {}),
-                    repo: '',
-                    events: [],
-                    fetchRepo,
-                }
-            }
-        }, {})
-
-        expect(fetchRepo.callCount).to.equal(1)
+    afterEach(() => {
+        destoryVM(vm)
+    })
+    it('should render correct', () => {
+        expect(vm.$el.querySelectorAll('.content').length).to.equal(1)
+    })
+    it('should call handleRefresh once after click', done => {
+        const button = vm.$el.querySelector('.refresh-btn')
+        triggerEvent(button, 'click')
+        vm.$nextTick(() => {
+            expect(fetchEvents.callCount).to.equal(2)
+            done()
+        })
     })
 })

@@ -1,16 +1,14 @@
-import app,{store} from './app'
+import app, { store } from './container'
+import '../common/responsive'
 
-function bootstrap() {
-    let initialState = JSON.parse(document.getElementById("initial-state").textContent)
-    store.replaceState({
-        ...store.state,
-        ...initialState
-    })
-    app.$mount('#app')
+if (module.hot) {
+    module.hot.accept()
 }
 
-if (typeof window.addEventListener) {
-    window.addEventListener("DOMContentLoaded", bootstrap);
-} else {
-    window.attachEvent('onload', bootstrap);
-}
+const initialState = JSON.parse(document.getElementById("initial-state").textContent)
+
+store.replaceState({
+    ...store.state,
+    ...initialState
+})
+app.$mount('#app')

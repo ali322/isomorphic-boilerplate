@@ -1,32 +1,20 @@
 {
     "error": {
-        "html": [
-            "error.html"
-        ],
-        "path": "error/",
         "vendor": {
-            "js": "vue",
-            "css": "common"
+            "js": "base",
+            "css": "base"
         }
     },
     "index": {
-        "html": [
-            "index.html"
-        ],
-        "path": "index/",
         "vendor": {
-            "js": "vue",
-            "css": "common"
+            "js": "base",
+            "css": "base"
         }
     },
-    "user": {
-        "html": [
-            "user.html"
-        ],
-        "path": "user/",
+    "detail": {
         "vendor": {
-            "js": "vue",
-            "css": "common"
+            "js": "base",
+            "css": "base"
         }
     }
 }

@@ -1,9 +1,9 @@
-import actions from './action'
 import mutations from './mutation'
+import actions from './action'
 
 export default {
     state: {
-        events: []
+        detail: {}
     },
     actions,
     mutations
