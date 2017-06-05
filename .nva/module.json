@@ -1,22 +1,14 @@
 {
-  "error": {
-    "html": [
-      "error.html"
-    ],
-    "path": "error",
-    "vendor": {
-      "js": "base",
-      "css": "base"
+    "error": {
+        "vendor": {
+            "js": "base",
+            "css": "base"
+        }
+    },
+    "index": {
+        "vendor": {
+            "js": "base",
+            "css": "base"
+        }
     }
-  },
-  "index": {
-    "html": [
-      "index.html"
-    ],
-    "path": "index",
-    "vendor": {
-      "js": "base",
-      "css": "base"
-    }
-  }
 }

@@ -10,13 +10,13 @@ export async function index(ctx, next) {
     const clientCtx = {}
     const match = routes.some(route => matchPath(ctx.url, route))
     if (!match) {
-        await next()
-        return
+        // await next()
+        // return
     }
     if (ctx.url === '/') {
         let ret
         try {
-            ret = await axios.get("http://127.0.0.1:3000/mock/eventss")
+            ret = await axios.get("http://127.0.0.1:3000/mock/events")
         } catch (err) {
             throw err
         }

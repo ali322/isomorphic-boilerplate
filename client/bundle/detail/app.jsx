@@ -14,7 +14,6 @@ export class Detail extends Component {
     }
     render() {
         const { detail } = this.props
-        console.log('render detail')
         if (!detail) {
             return null
         }
