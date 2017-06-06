@@ -49,8 +49,7 @@
     "redux-container": "^1.0.26",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
-    "swig": "^1.4.2",
-    "xhr2": "^0.1.4"
+    "swig": "^1.4.2"
   },
   "devDependencies": {
     "autobind-decorator": "^1.4.1",

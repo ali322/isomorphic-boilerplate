@@ -10,12 +10,12 @@ import mark from '../middleware/mark'
 @namespace('')
 export default new class {
     @middleware(mark)
-    @route({ type: 'get', url: '/todo' })
+    @route({ method: 'get', path: '/todo' })
     test(ctx) {
         ctx.body = 'something need to do'
     }
 
-    @route({ url: '/' })
+    @route({ method: 'get', path: '/' })
     async index(ctx) {
         let ret
         try {
@@ -41,7 +41,7 @@ export default new class {
         }
     }
 
-    @route({ url: '/detail/:id' })
+    @route({ method: 'get', path: '/detail/:id' })
     async repo(ctx) {
         const id = ctx.params.id
         let ret
