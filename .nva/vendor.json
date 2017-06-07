@@ -6,7 +6,7 @@
     },
     "css":{
         "common":[
-            "bootstrap/dist/css/bootstrap.css",
+            "normalize.css",
             "font-awesome/css/font-awesome.css"
         ]
     }

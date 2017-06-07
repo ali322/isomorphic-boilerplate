@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Events from './module/app.js'
-import User from '../user/app'
+import Index from './module/app.vue'
+import Detail from '../detail/app.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '/', component: Events },
-    { path: '/user/:user', component: User },
+    { path: '/', component: Index },
+    { path: '/detail/:id', component: Detail },
     { path: '*', component: { template: '<div>not found</div>' } }
 ]
 

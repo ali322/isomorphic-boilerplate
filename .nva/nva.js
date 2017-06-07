@@ -9,9 +9,9 @@ const baseConf = {
 module.exports = {
     type: "isomorphic",
     spa: true,
-    entryJSExt: ".js",
-    mockConf: require('./api/'),
-    entryCSSExt: ".styl",
+    jsExt: ".js",
+    mock: require('./mock/'),
+    cssExt: ".styl",
     beforeDev(config) {
         return baseConf
     },

@@ -1,4 +1,4 @@
-import app, { router, store } from './app'
+import app, { router, store } from './container'
 
 const jsdom = require('jsdom').jsdom;
 global.document = jsdom('<!doctype html><html><body></body></html>');

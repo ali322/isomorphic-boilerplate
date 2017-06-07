@@ -1,64 +1,33 @@
 import axios from 'axios'
-import { route, namespace, middleware } from '../lib/util'
+import { route, namespace, middleware, markupForComponent } from '../lib/util'
 import log from '../middleware/log'
-import test from '../middleware/test'
-import other from '../middleware/other'
 
 @middleware(log)
-@namespace('/api')
+@namespace('/mock')
 export default new class {
-    @middleware(test, other)
-    @route({ type: 'get', url: '/test' })
-    test(ctx) {
-        ctx.body = 'im test'
-    }
-
-    @route({ url: '/events' })
-    async events(ctx) {
+    @route({ method: 'get', path: '/detail/:id' })
+    async detail(ctx) {
+        const id = ctx.params.id
         let ret
         try {
-            ret = await axios.get("https://api.github.com/events")
-            ctx.body = {
-                isFetched: true,
-                events: ret
-            }
+            ret = await axios.get(`http://127.0.0.1:3000/mock/event/${id}`)
         } catch (err) {
             ctx.body = {
-                isFetched: false,
-                events: []
+                status: 'error',
+                errMsg: err.message
             }
+            throw err
         }
-    }
-
-    @route({ url: '/repo/:repo' })
-    async repo(ctx) {
-        const ret = await axios.get(`https://api.github.com/events`)
         if (ret.status === 200) {
+            ret = ret.data
             ctx.body = {
-                isFetched: true,
-                result: ret.data
+                status: 'ok',
+                detail: ret.data
             }
         } else {
             ctx.body = {
-                isFetched: false,
-                errMsg: ret.errMsg
-            }
-        }
-    }
-
-    @route({ url: '/user/:user' })
-    async user(ctx) {
-        const user = ctx.params.user
-        const ret = await axios.get(`https://api.github.com/users/${user}`)
-        if (ret.status === 200) {
-            ctx.body = {
-                isFetched: true,
-                result: ret.data
-            }
-        } else {
-            ctx.body = {
-                isFetched: false,
-                errMsg: 'user not found'
+                status: 'error',
+                errMsg: 'no event'
             }
         }
     }

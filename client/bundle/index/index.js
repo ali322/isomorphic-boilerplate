@@ -1,4 +1,5 @@
-import app,{store} from './app'
+import app, { store } from './container'
+import "../common/responsive"
 
 function bootstrap() {
     let initialState = JSON.parse(document.getElementById("initial-state").textContent)

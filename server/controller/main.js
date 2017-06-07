@@ -1,15 +1,15 @@
-import Vue from 'vue'
 import axios from 'axios'
 import { markupForComponent } from "../lib/util"
 
-export async function index(ctx, next) {
-    let ret = {data:[]}
+export async function index(ctx) {
+    let ret
     try {
-        ret = await axios.get("https://api.github.com/events")
+        ret = await axios.get("http://127.0.0.1:3000/mock/events")
     } catch (err) {
         throw err
     }
     if (ret.status === 200) {
+        ret = ret.data
         ctx.initialState = {
             index: {
                 flag: "1",
@@ -54,7 +54,7 @@ export async function error(ctx, next) {
     }
 }
 
-export async function notFound(ctx, next) {
+export async function notFound(ctx) {
     let initialState = {
         msg: "page not found"
     }

@@ -2,11 +2,11 @@ import { createBundleRenderer } from 'vue-server-renderer'
 import lruCache from 'lru-cache'
 import fs from 'fs'
 import axios from "axios"
-import path from 'path'
+import { resolve } from 'path'
 
 export function markupForComponent(name, ctx) {
-    const bundlePath = path.join(process.cwd(), 'server','bundle', name + '.js')
-    const bundle = fs.readFileSync(bundlePath,'utf-8')
+    const bundlePath = resolve('server', 'bundle', name + '.js')
+    const bundle = fs.readFileSync(bundlePath, 'utf-8')
     const renderer = createBundleRenderer(bundle, {
         cache: lruCache({
             max: 1000,
@@ -19,22 +19,6 @@ export function markupForComponent(name, ctx) {
             resolve(html)
         })
     })
-}
-
-export function apiRequest(url) {
-    return axios.get(url)
-}
-
-export function route(options) {
-    const { type = 'get', url = 'index' } = options
-    return (target, key, descriptor) => {
-        target.actions = target.actions || []
-        target.actions.push(key)
-        const method = descriptor.value
-        method.url = url
-        method.type = type
-        return descriptor
-    }
 }
 
 export function namespace(value = '') {
@@ -53,5 +37,34 @@ export function middleware(...value) {
         const method = descriptor.value
         method.middleware = value || []
         return descriptor
+    }
+}
+
+export function route(options) {
+    const { method = 'get', path = '/' } = options
+    return (target, key, descriptor) => {
+        target.actions = target.actions || []
+        target.actions.push(key)
+        const value = descriptor.value
+        value.path = path
+        value.method = method
+        return descriptor
+    }
+}
+
+export function applyMiddleware(router, ...controllers) {
+    for (let i in controllers) {
+        let controller = controllers[i]
+        for (let k in controller.actions) {
+            let action = controller[controller.actions[k]]
+            let middlewares = []
+            if (Array.isArray(controller.middleware)) {
+                middlewares = middlewares.concat(controller.middleware)
+            }
+            if (Array.isArray(action.middleware)) {
+                middlewares = middlewares.concat(action.middleware)
+            }
+            router[action.method](controller.namespace + action.path, ...middlewares, action)
+        }
     }
 }
