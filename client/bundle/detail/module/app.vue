@@ -18,7 +18,7 @@
     export default {
         computed: {
             ...mapState({
-                event: state => state.detail.detail
+                event: state => state.detail
             })
         },
         methods: {

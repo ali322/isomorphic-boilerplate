@@ -1,16 +1,16 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import index from './module'
+import * as actions from './module/action'
+import mutations from './module/mutation'
 
 Vue.use(Vuex)
 
-const modules = {
-    index
-}
-
 const store = new Vuex.Store({
-    state: {},
-    modules
+    state: {
+        events: []
+    },
+    mutations,
+    actions
 })
 
 export default store

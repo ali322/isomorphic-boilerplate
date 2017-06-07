@@ -1,6 +1,11 @@
 let http = require('http')
 let app = require('../../../../server/dist/bootstrap')
 
-let server = http.createServer(app.callback()).listen(3000)
+let server = require('nva-server')({
+    log: false,
+    mock: require('../../../../.nva/mock/')
+})
 
-module.exports = server
+server.use(app.callback())
+
+module.exports = server.listen(3000)

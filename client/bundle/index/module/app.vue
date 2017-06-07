@@ -30,7 +30,7 @@
         },
         computed:{
             ...mapState({
-                events: state => state.index.events
+                events: state => state.events
             })
         }
     }

@@ -58,7 +58,7 @@ describe("component", () => {
         const button = vm.$el.querySelector('.refresh-btn')
         triggerEvent(button, 'click')
         vm.$nextTick(() => {
-            expect(fetchEvents.callCount).to.equal(2)
+            expect(fetchEvents.callCount).to.equal(1)
             done()
         })
     })
