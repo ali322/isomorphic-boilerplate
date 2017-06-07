@@ -33,7 +33,6 @@
     "normalize.css": "^7.0.0",
     "swig": "^1.4.2",
     "vue": "^2.2.2",
-    "vue-router": "^2.3.0",
     "vue-server-renderer": "^2.2.2",
     "vuex": "^2.2.1"
   },
@@ -63,7 +62,6 @@
     "stylelint-config-standard": "^16.0.0",
     "supertest": "^3.0.0",
     "vue-loader": "^11.1.4",
-    "vue-template-compiler": "^2.2.3",
-    "vuex-router-sync": "^4.1.2"
+    "vue-template-compiler": "^2.2.3"
   }
 }
