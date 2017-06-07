@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import axios from 'axios'
-import { markupForComponent, namespace, middleware } from "../lib/util"
+import { markupForComponent, namespace, middleware, route } from "../lib/util"
+import log from '../middleware/log'
+import mark from '../middleware/mark'
 
 @middleware(log)
 @namespace('')
 export default new class {
     @middleware(mark)
-    @route({ type: 'get', url: '/todo' })
+    @route({ method: 'get', path: '/todo' })
     test(ctx) {
         ctx.body = 'something need to do'
     }
 
-    @route({ url: '/' })
+    @route({ method: 'get', path: '/' })
     async index(ctx) {
         let ret
         try {
@@ -40,22 +42,23 @@ export default new class {
         }
     }
 
-    @route({ url: '/detail/:id' })
+    @route({ method: 'get', path: '/detail/:id' })
     async detail(ctx) {
         const id = ctx.params.id
         let ret = await axios.get(`http://127.0.0.1:3000/mock/event/${id}`)
         if (ret.status === 200) {
             ret = ret.data
             ctx.initialState = {
-                detail: ret.data
+                detail: ret.data,
+                flag: 1
             }
             let markup = ''
             try {
-                markup = await markupForComponent('user', ctx)
+                markup = await markupForComponent('detail', ctx)
             } catch (err) {
                 throw err
             }
-            await ctx.render("user", {
+            await ctx.render("detail", {
                 markup,
                 initialState: ctx.initialState
             });

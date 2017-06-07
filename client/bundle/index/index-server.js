@@ -9,7 +9,7 @@ export default ctx => {
     let { initialState } = ctx
     store.replaceState({
         ...store.state,
-        ...initialState
+        index: initialState
     })
     return Promise.resolve(app)
 }

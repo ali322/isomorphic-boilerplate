@@ -1,12 +1,12 @@
 <template>
 <div class="container">
-    <div class="header header-with-btn"><button class="btn" @click="goBack"><i class="fa fa-arrow-left" /></button>{{detail.name}}</div>
+    <div class="header header-with-btn"><button class="btn" @click="goBack"><i class="fa fa-arrow-left" /></button>{{event.name}}</div>
     <div class="content">
         <div class="detail">
-            <img :src="detail.avatar" alt="" />
-            <p>Title: {{detail.title}}</p>
-            <p>Created at: {{detail.created_at}}</p>
-            <p>{{detail.message}}</p>
+            <img :src="event.avatar" alt="" />
+            <p>Title: {{event.title}}</p>
+            <p>Created at: {{event.created_at}}</p>
+            <p>{{event.message}}</p>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
     export default {
         computed: {
             ...mapState({
-                detail: state => state.detail.detail
+                event: state => state.detail.detail
             })
         },
         methods: {
@@ -26,9 +26,6 @@
                 window.history.back()
             },
             ...mapActions(Object.keys(actions))
-        },
-        created() {
-            this.fetchDetail()
         }
     }
 </script>

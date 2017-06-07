@@ -3,7 +3,7 @@
     <div class="header">Github Events <button class="refresh-btn refresh-icon" @click="handleRefresh"></button></div>
     <div class="content">
         <div class="event" v-for="event in events" key="event.id">
-            <a :href="'/detail/detail.html?id='+event.id">
+            <a :href="'/detail/'+event.id">
                 <div class="event-title">
                     <img :src="event.avatar" alt="" />
                     <span>
@@ -32,9 +32,6 @@
             ...mapState({
                 events: state => state.index.events
             })
-        },
-        created() {
-            this.fetchEvents()
         }
     }
 </script>

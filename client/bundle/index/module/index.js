@@ -1,4 +1,4 @@
-import actions from './action'
+import * as actions from './action'
 import mutations from './mutation'
 
 export default {

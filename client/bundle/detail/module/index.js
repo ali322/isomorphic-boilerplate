@@ -1,5 +1,5 @@
 import mutations from './mutation'
-import actions from './action'
+import * as actions from './action'
 
 export default {
     state: {

@@ -9,6 +9,7 @@ const initialState = JSON.parse(document.getElementById("initial-state").textCon
 
 store.replaceState({
     ...store.state,
-    ...initialState
+    detail:initialState
 })
+
 app.$mount('#app')
