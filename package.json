@@ -19,7 +19,6 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
-    "bootstrap": "^3.3.7",
     "browser-env": "^2.0.25",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
@@ -32,6 +31,7 @@
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.0",
     "lru-cache": "^4.0.2",
+    "normalize.css": "^7.0.0",
     "swig": "^1.4.2",
     "vue": "^2.2.2",
     "vue-router": "^2.3.0",
@@ -61,7 +61,6 @@
     "moxios": "^0.3.0",
     "nva-server": "^0.3.9",
     "nva-test": "^0.3.9",
-    "nva-test-e2e": "^0.3.9",
     "sinon": "^2.0.0-pre.6",
     "sinon-chai": "^2.8.0",
     "stylelint": "^7.8.0",
