@@ -26,7 +26,7 @@ export default new class {
         if (ret.status === 200) {
             ret = ret.data
             let initialState = {
-                flag: '0',
+                flag: '1',
                 events: ret.data
             };
             let markup = markupForComponent(Index, {
