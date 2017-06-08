@@ -37,7 +37,7 @@
     "vue-router": "^2.3.0",
     "vue-server-renderer": "^2.2.2",
     "vuex": "^2.2.1",
-    "xhr2": "^0.1.4"
+    "vuex-router-sync": "^4.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
@@ -67,7 +67,6 @@
     "stylelint-config-standard": "^16.0.0",
     "supertest": "^3.0.0",
     "vue-loader": "^11.1.4",
-    "vue-template-compiler": "^2.2.3",
-    "vuex-router-sync": "^4.1.2"
+    "vue-template-compiler": "^2.2.3"
   }
 }
