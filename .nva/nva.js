@@ -8,7 +8,6 @@ const baseConf = {
 
 module.exports = {
     type: "isomorphic",
-    spa: true,
     jsExt: ".js",
     cssExt: ".styl",
     beforeDev(config) {
