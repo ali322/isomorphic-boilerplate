@@ -1,7 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import index from './module'
-import detail from '../detail/module'
+import index from './index/store'
+import detail from './detail/store'
 
 Vue.use(Vuex)
 

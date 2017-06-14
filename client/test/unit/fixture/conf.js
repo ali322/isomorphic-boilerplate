@@ -15,7 +15,7 @@ let webpackConfig = {
     },
     resolve: {
         alias: {
-            "@": resolve('client', 'bundle')
+            "@": resolve('client')
         }
     }
 }

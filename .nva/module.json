@@ -1,14 +1,19 @@
 {
-  "error": {
-    "vendor": {
-      "js": "vue",
-      "css": "common"
+    "error": {
+        "vendor": {
+            "js": "base",
+            "css": "base"
+        }
+    },
+    "index": {
+        "input": {
+            "js": "client/index.js",
+            "css": "client/index.styl"
+        },
+        "serverBundle": "client/index-server.js",
+        "vendor": {
+            "js": "base",
+            "css": "base"
+        }
     }
-  },
-  "index": {
-    "vendor": {
-      "js": "vue",
-      "css": "common"
-    }
-  }
 }
