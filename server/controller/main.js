@@ -1,7 +1,7 @@
 import axios from 'axios'
-import Index from "../../client/bundle/index/container.jsx"
-import Error from "../../client/bundle/error/app.jsx"
-import Detail from '../../client/bundle/detail/container.jsx'
+import Index from "../../client/index/container.jsx"
+import Error from "../../client/error/app.jsx"
+import Detail from '../../client/detail/container.jsx'
 import { route, namespace, middleware, markupForComponent } from '../lib/util'
 import log from '../middleware/log'
 import mark from '../middleware/mark'
@@ -19,7 +19,7 @@ export default new class {
     async index(ctx) {
         let ret
         try {
-            ret = await axios.get("http://127.0.0.1:3000/mock/events")
+            ret = await axios.get("http://127.0.0.1:7000/mock/events")
         } catch (err) {
             throw err
         }
@@ -46,7 +46,7 @@ export default new class {
         const id = ctx.params.id
         let ret
         try {
-            ret = await axios.get(`http://127.0.0.1:3000/mock/event/${id}`)
+            ret = await axios.get(`http://127.0.0.1:7000/mock/event/${id}`)
         } catch (err) {
             throw err
         }
