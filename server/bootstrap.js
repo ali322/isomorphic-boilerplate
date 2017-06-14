@@ -11,7 +11,7 @@ import pkg from '../package'
 
 const app = new Koa()
 
-app.use(staticServer("client"))
+app.use(staticServer(path.join("dist", "client")))
 app.use(bodyParser())
 app.use(methodOverride())
 

@@ -5,8 +5,6 @@ typings/
 .happypack/
 .git/
 .nva/temp/
-client/dist
-server/dist
-server/bundle
-test/client/unit/coverage
-test/client/e2e/reports
+dist/
+client/test/unit/coverage
+client/test/e2e/reports
