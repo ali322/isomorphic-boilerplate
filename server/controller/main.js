@@ -19,7 +19,7 @@ export default new class {
     async index(ctx) {
         let ret
         try {
-            ret = await axios.get("http://127.0.0.1:7000/mock/events")
+            ret = await axios.get("http://127.0.0.1:3000/mock/events")
         } catch (err) {
             throw err
         }
@@ -46,7 +46,7 @@ export default new class {
         const id = ctx.params.id
         let ret
         try {
-            ret = await axios.get(`http://127.0.0.1:7000/mock/event/${id}`)
+            ret = await axios.get(`http://127.0.0.1:3000/mock/event/${id}`)
         } catch (err) {
             throw err
         }

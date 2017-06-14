@@ -1,6 +1,6 @@
 module.exports = {
     type: "isomorphic",
+    spa: false,
     jsExt: ".jsx",
-    cssExt: ".styl",
-    mock: require('./mock')
+    cssExt: ".styl"
 }
