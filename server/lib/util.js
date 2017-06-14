@@ -5,7 +5,7 @@ import axios from "axios"
 import { resolve } from 'path'
 
 export function markupForComponent(name, ctx) {
-    const bundlePath = resolve('server', 'bundle', name + '.js')
+    const bundlePath = resolve('server', 'dist', 'bundle', name + '.js')
     const bundle = fs.readFileSync(bundlePath, 'utf-8')
     const renderer = createBundleRenderer(bundle, {
         cache: lruCache({
