@@ -1,5 +1,5 @@
-import Index from './module/app.jsx'
-import Detail from '../detail/app.jsx'
+import Index from './index/app.jsx'
+import Detail from './detail/app.jsx'
 
 export default [
     { path: '/', component: Index, exact: true },

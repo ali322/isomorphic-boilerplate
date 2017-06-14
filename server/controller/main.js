@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { matchPath } from 'react-router'
-import routes from '../../client/bundle/index/routes'
-import Index from "../../client/bundle/index/server.jsx"
-import Error from "../../client/bundle/error/app.jsx"
+import routes from '../../client/routes'
+import Index from "../../client/server.jsx"
+import Error from "../../client/error/app.jsx"
 import { markupForComponent } from '../lib/util'
 
 export async function index(ctx, next) {

@@ -1,7 +1,7 @@
 import test from "ava"
 
-import eventReducer from "../../../bundle/index/module/reducer"
-import * as constants from "../../../bundle/index/module/constant"
+import eventReducer from "../../../index/reducer"
+import * as constants from "../../../index/constant"
 
 test("should handle RESPONSE_EVENTS", t => {
     let action = {

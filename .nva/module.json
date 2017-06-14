@@ -6,6 +6,10 @@
         }
     },
     "index": {
+        "input":{
+            "js":"client/index.jsx",
+            "css":"client/index.styl"
+        },
         "vendor": {
             "js": "base",
             "css": "base"
