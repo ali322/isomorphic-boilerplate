@@ -10,7 +10,6 @@ module.exports = {
     type: "isomorphic",
     spa: true,
     jsExt: ".js",
-    mock: require('./mock/'),
     cssExt: ".styl",
     beforeDev(config) {
         return baseConf
