@@ -2,7 +2,7 @@ import test from "ava"
 import sinon from "sinon"
 import React from "react";
 import { shallow } from "enzyme"
-import { Index } from "../../../bundle/index/module/app.jsx"
+import { Index } from "../../../index/module/app.jsx"
 
 let wrapper, props
 
