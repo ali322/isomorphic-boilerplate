@@ -1,4 +1,4 @@
-let app = require('../../../../server/dist/bootstrap')
+let app = require('../../../../dist/server/bootstrap')
 
 let server = require('nva-server')({
     log: false,
