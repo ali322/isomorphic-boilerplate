@@ -12,7 +12,7 @@ export async function index(ctx) {
         ret = ret.data
         ctx.initialState = {
             index: {
-                flag: "1",
+                flag: "0",
                 events: ret.data
             }
         }

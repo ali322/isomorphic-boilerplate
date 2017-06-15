@@ -1,19 +1,19 @@
 {
-    "error": {
-        "vendor": {
-            "js": "base",
-            "css": "base"
-        }
-    },
-    "index": {
-        "input": {
-            "js": "client/index.js",
-            "css": "client/index.styl"
-        },
-        "serverBundle": "client/index-server.js",
-        "vendor": {
-            "js": "base",
-            "css": "base"
-        }
+  "error": {
+    "vendor": {
+      "js": "base",
+      "css": "base"
     }
+  },
+  "index": {
+    "input": {
+      "js": "client/index.js",
+      "css": "client/index.styl"
+    },
+    "serverBundle": "client/index-server.js",
+    "vendor": {
+      "js": "base",
+      "css": "base"
+    }
+  }
 }
