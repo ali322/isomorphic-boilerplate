@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import moxios from 'moxios'
 import sinon from 'sinon'
 import mutations from '@/index/module/mutation'
