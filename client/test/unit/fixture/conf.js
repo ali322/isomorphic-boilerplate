@@ -1,7 +1,7 @@
 let { resolve } = require('path')
 
 let entry = resolve('client', 'test', 'unit', 'fixture', 'setup.js')
-let reportFolder = resolve('client', 'test', 'unit', 'coverage')
+let reportPath = resolve('client', 'test', 'unit', 'coverage')
 
 let webpackConfig = {
     module: {
@@ -22,6 +22,6 @@ let webpackConfig = {
 
 module.exports = {
     entry,
-    reportFolder,
+    reportPath,
     webpack: webpackConfig
 }
