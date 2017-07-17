@@ -9,6 +9,7 @@ const baseConf = {
 module.exports = {
     type: "isomorphic",
     spa: false,
+    autocheck: ["vue", "vuex"],
     jsExt: ".js",
     cssExt: ".styl",
     beforeDev(config) {
