@@ -14,5 +14,6 @@ let webpackConfig = {
 module.exports = {
     entry,
     reportPath,
+    sourcePath: resolve('client'),
     webpack: webpackConfig
 }
