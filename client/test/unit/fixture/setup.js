@@ -9,5 +9,5 @@ Function.prototype.bind = require('function-bind')
 const testContext = require.context('../spec',true,/\.js$/)
 testContext.keys().forEach(testContext)
 
-const srcContext = require.context('../../../',true,/\/\w\.(js|vue)$/)
+const srcContext = require.context('../../../index',true,/\/\w+\.(js|vue)$/)
 srcContext.keys().forEach(srcContext)
