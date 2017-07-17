@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "mock": "nva-server --mock-path .nva/mock",
     "test": "BABEL_ENV=test ava --tap | tap-spec",
     "test:e2e": "nva-test-e2e -r client/test/e2e/fixture/server.js -c client/test/e2e/fixture/conf.js",
     "lint:js": "eslint client server",
