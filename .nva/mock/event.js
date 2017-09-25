@@ -1,4 +1,4 @@
-[{
+module.exports = [{
         "url": "/mock/events",
         "method": "get",
         "type": "jsf",
@@ -59,7 +59,7 @@
         }
     },
     {
-        "url": "/mock/event",
+        "url": /mock\/event\/\d+/,
         "method": "get",
         "type": "jsf",
         "response": {
