@@ -57,7 +57,7 @@
     "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0",
     "moxios": "^0.3.0",
-    "nva-server": "^0.3.60",
+    "nva-server": "^0.3.140",
     "nva-test": "^0.3.90",
     "sinon": "^2.0.0-pre.6",
     "sinon-chai": "^2.8.0",
