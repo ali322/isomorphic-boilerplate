@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "test": "npm run test:client && npm run test:server",
-    "test:e2e": "nva-test-e2e -r client/test/e2e/fixture/server.js -c client/test/e2e/fixture/conf.js",
+    "test:e2e": "nva-test-e2e -s client/test/e2e/fixture/server.js -c client/test/e2e/fixture/conf.js",
     "test:client": "nva-test -c client/test/unit/fixture/conf.js",
     "test:server": "mocha --require babel-register server/test/spec/**/*.js",
     "e2e": "node ./test/client/e2e/runner.js --config ./test/client/e2e/nightwatch.conf.js --env chrome",
