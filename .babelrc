@@ -1,14 +1,17 @@
 {
-    "presets":["env"],
-    "plugins":[
-        "transform-object-rest-spread",
-        "transform-decorators-legacy",
-        "transform-class-properties",
-        "transform-export-extensions"
-    ],
-    "env": {
-    	"production": {
-      		"plugins": ["transform-runtime"]
-    	}
-  	}
+  "presets": ["env"],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-export-extensions"
+  ],
+  "env": {
+    "production": {
+      "plugins": ["transform-runtime"]
+    },
+    "test": {
+      "presets": [["env", { "targets": { "node": "current" } }]]
+    }
+  }
 }
