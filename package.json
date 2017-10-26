@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "test": "npm run test:client",
+    "test": "npm run test:client && npm run test:server",
     "test:client": "jest",
-    "test:server": "mocha --require babel-register server/test/spec/**/*.js",
+    "test:server": "BABEL_ENV=test ava --tap | tap-spec",
     "test:e2e": "nva-test-e2e -s client/test/e2e/fixture/server.js -c client/test/e2e/fixture/conf.js",
     "lint:js": "eslint client server",
     "lint:css": "stylelint \"client/bundle/**/*.{css,less,scss,styl}\"",
@@ -27,6 +27,16 @@
     "collectCoverage": true,
     "coverageDirectory": "<rootDir>/client/test/unit/coverage",
     "mapCoverage": true
+  },
+  "ava": {
+    "files": [
+      "server/test/spec/**/*.js"
+    ],
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   },
   "keywords": [
     "isomorphic boilerplate"
@@ -59,6 +69,7 @@
   },
   "devDependencies": {
     "autobind-decorator": "^1.4.1",
+    "ava": "^0.23.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-jest": "^21.2.0",
@@ -79,14 +90,14 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "jest": "^21.2.1",
-    "mocha": "^4.0.1",
     "moxios": "^0.4.0",
     "nva-server": "^0.3.140",
-    "react-test-renderer": "^15.5.4",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-test-renderer": "^15.5.4",
     "redux-mock-store": "^1.2.2",
     "stylelint": "^7.8.0",
     "stylelint-config-standard": "^16.0.0",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "tap-spec": "^4.1.1"
   }
 }
