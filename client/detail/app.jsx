@@ -10,7 +10,7 @@ export class Detail extends Component {
     }
     componentDidMount() {
         const { fetchDetail } = this.props.actions
-        fetchDetail({})
+        fetchDetail({ id: this.props.match.params.id })
     }
     render() {
         const { detail } = this.props

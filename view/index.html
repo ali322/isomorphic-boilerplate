@@ -1,17 +1,16 @@
 {% extends "./layout.html" %} {% block title %}Detail{% endblock %} {% block css %}
 <!-- start:css -->
-<link rel="stylesheet" href="/vendor/base-81bb9e51.css"/>
-<link rel="stylesheet" href="/index/index-7d887927.css"/>
+<link rel="stylesheet" href="/vendor/base-48ebcc7f.css"/>
 <!-- end:css -->
 {% endblock %} {% block content %}
 <div id='app'>{{ markup|safe }}</div>
 <script type="application/json" id="initial-state">{{ initialState|json|safe }}</script>
 {% endblock %} {% block js %}
 <!-- start:js -->
-<script src="/vendor/base-7bee9ac1.js"></script>
-<script src="/index/index-7d887927.js"></script>
+<script src="/vendor/base-db555c51.js"></script>
+<script src="http://10.13.13.22:7000/hmr/index.js"></script>
 <!-- end:js -->
 <!-- start:browser-sync -->
-
+<script src="http://10.13.13.22:7000/bs/browser-sync-client.js"></script>
 <!-- end:browser-sync -->
 {% endblock %}
