@@ -9,9 +9,9 @@ export function responseDetail({ commit }, payload) {
     commit(constants.RESPONSE_DETAIL, payload)
 }
 
-export function fetchDetail({ dispatch, commit }, param) {
+export function fetchDetail({ dispatch, commit }, id) {
     dispatch('requestDetail')
-    return axios.get('/mock/event').then(ret => {
+    return axios.get(`/mock/event/${id}`).then(ret => {
         ret = ret.data
         dispatch('responseDetail', ret.data)
     })

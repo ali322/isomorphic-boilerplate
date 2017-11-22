@@ -66,9 +66,9 @@
     "lru-cache": "^4.0.2",
     "normalize.css": "^7.0.0",
     "swig": "^1.4.2",
-    "vue": "^2.2.2",
+    "vue": "^2.5.8",
     "vue-router": "^2.3.0",
-    "vue-server-renderer": "^2.2.2",
+    "vue-server-renderer": "^2.5.8",
     "vuex": "^2.2.1",
     "vuex-router-sync": "^4.1.2"
   },
@@ -98,8 +98,8 @@
     "stylelint-config-standard": "^16.0.0",
     "supertest": "^3.0.0",
     "tap-spec": "^4.1.1",
-    "vue-loader": "^11.1.4",
-    "vue-template-compiler": "^2.2.3",
+    "vue-loader": "^13.5.0",
+    "vue-template-compiler": "^2.5.8",
     "vue-test-utils": "^1.0.0-beta.3"
   }
 }

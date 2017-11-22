@@ -2,7 +2,7 @@
 <div class="container">
     <div class="header">Github Events <button class="refresh-btn refresh-icon" @click="handleRefresh"></button></div>
     <div class="content">
-        <div class="event" v-for="event in events" key="event.id">
+        <div class="event" v-for="event in events" :key="event.id">
             <router-link :to="{path:'/detail/'+event.id}">
                 <div class="event-title">
                     <img :src="event.avatar" alt="" />
@@ -23,6 +23,7 @@
     import * as actions from './action'
 
     export default {
+        name: 'Index',
         methods: {
             handleRefresh() {
                 this.fetchEvents()

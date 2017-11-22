@@ -15,10 +15,13 @@
 <script>
     import { mapState, mapActions } from 'vuex'
     import * as actions from './action'
+
     export default {
+        name: 'Detail',
         computed: {
             ...mapState({
-                detail: state => state.detail.detail
+                detail: state => state.detail.detail,
+                route: 'route'
             })
         },
         methods: {
@@ -28,7 +31,7 @@
             ...mapActions(Object.keys(actions))
         },
         mounted() {
-            this.fetchDetail()
+            this.fetchDetail(this.route.params.id)
         }
     }
 </script>
